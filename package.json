@@ -1,0 +1,48 @@
+{
+  "name": "learn4js",
+  "version": "0.1.0",
+  "description": "Machine Learning for JavaScript",
+  "main": "dist/learn4js.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tensor"
+  ],
+  "author": {
+    "name": "Guangmiao Luan",
+    "email": "luangm@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luangm/learn4ts.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.2",
+    "ts-loader": "^4.1.0",
+    "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "dependencies": {
+    "tensor4js": "^0.1.3"
+  }
+}

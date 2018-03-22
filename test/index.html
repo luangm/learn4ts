@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../dist/index.js"></script>
+</head>
+<body>
+<script>
+    var xVal = Tensor.create([1, 2]);
+    var yVal = Tensor.create([2, 3]);
+
+    var x = Learn4js.constant(xVal, "x");
+    var y = Learn4js.constant(yVal, "y");
+    var sum = Learn4js.add(x, y, "add");
+
+    console.log(sum);
+</script>
+</body>
+</html>
