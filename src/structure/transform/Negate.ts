@@ -4,24 +4,23 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Absolute extends TransformExpression {
+export default class Negate extends TransformExpression {
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
   get type() {
-    return ExpressionTypes.Absolute;
+    return ExpressionTypes.Negate;
   }
 
-  static evaluate(node: Absolute): Tensor {
+  static evaluate(node: Negate): Tensor {
     let base = node.graph.session.getValue(node.base);
-    return TensorMath.abs(base);
+    return TensorMath.negate(base);
   }
 
-  static gradients(node: Absolute, grad: Expression): Expression[] {
-    let sign = node.factory.sign(node.base);
-    let result = node.factory.multiply(grad, sign);
+  static gradients(node: Negate, grad: Expression): Expression[] {
+    let result = node.factory.negate(grad);
     return [result];
   }
 }

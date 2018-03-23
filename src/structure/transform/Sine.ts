@@ -4,24 +4,24 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Absolute extends TransformExpression {
+export default class Sine extends TransformExpression {
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
   get type() {
-    return ExpressionTypes.Absolute;
+    return ExpressionTypes.Sine;
   }
 
-  static evaluate(node: Absolute): Tensor {
+  static evaluate(node: Sine): Tensor {
     let base = node.graph.session.getValue(node.base);
-    return TensorMath.abs(base);
+    return TensorMath.sin(base);
   }
 
-  static gradients(node: Absolute, grad: Expression): Expression[] {
-    let sign = node.factory.sign(node.base);
-    let result = node.factory.multiply(grad, sign);
+  static gradients(node: Sine, grad: Expression): Expression[] {
+    let cos = node.factory.cos(node.base);
+    let result = node.factory.multiply(grad, cos);
     return [result];
   }
 }

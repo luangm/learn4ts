@@ -1,10 +1,9 @@
-import Expression from "../Expression";
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
+import Expression from "../Expression";
+import ExpressionTypes from "../ExpressionTypes";
 
 export default class Constant extends Expression {
-
-  static TYPE = "Constant";
 
   private _value: Tensor;
 
@@ -18,7 +17,7 @@ export default class Constant extends Expression {
   }
 
   get type() {
-    return Constant.TYPE;
+    return ExpressionTypes.Constant;
   }
 
   get value() {
@@ -27,6 +26,10 @@ export default class Constant extends Expression {
 
   set value(val) {
     throw new Error('Cannot set constant');
+  }
+
+  static evaluate(node: Constant): Tensor {
+    return node.value;
   }
 
 }

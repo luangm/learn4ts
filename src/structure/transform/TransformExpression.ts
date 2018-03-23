@@ -1,5 +1,5 @@
-import Expression from "../Expression";
 import Graph from "../../Graph";
+import Expression from "../Expression";
 
 export default abstract class TransformExpression extends Expression {
 
@@ -12,6 +12,10 @@ export default abstract class TransformExpression extends Expression {
 
   get base() {
     return this._base;
+  }
+
+  get dependencies() {
+    return [this.base];
   }
 
   get shape() {

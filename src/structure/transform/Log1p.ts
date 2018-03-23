@@ -4,24 +4,19 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Absolute extends TransformExpression {
+export default class Log1p extends TransformExpression {
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
   get type() {
-    return ExpressionTypes.Absolute;
+    return ExpressionTypes.Log1p;
   }
 
-  static evaluate(node: Absolute): Tensor {
+  static evaluate(node: Log1p): Tensor {
     let base = node.graph.session.getValue(node.base);
-    return TensorMath.abs(base);
+    return TensorMath.log1p(base);
   }
 
-  static gradients(node: Absolute, grad: Expression): Expression[] {
-    let sign = node.factory.sign(node.base);
-    let result = node.factory.multiply(grad, sign);
-    return [result];
-  }
 }

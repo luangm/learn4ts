@@ -1,8 +1,10 @@
 import Expression from "./structure/Expression";
 import Session from "./Session";
+import ExpressionFactory from "./structure/ExpressionFactory";
 
 export default class Graph {
 
+  private _factory: ExpressionFactory;
   private _name: string;
   private _nodes: Map<number, Expression>;
   private _session: Session;
@@ -10,6 +12,11 @@ export default class Graph {
   constructor(name: string) {
     this._name = name;
     this._nodes = new Map<number, Expression>();
+    this._factory = new ExpressionFactory(this);
+  }
+
+  get factory() {
+    return this._factory;
   }
 
   get name() {

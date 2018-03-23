@@ -7,6 +7,8 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "removeComments": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
     "allowJs": true,
     "lib": ["DOM","ES6","DOM.Iterable","ScriptHost"]
   },

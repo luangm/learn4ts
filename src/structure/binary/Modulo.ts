@@ -4,7 +4,7 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import BinaryExpression from "./BinaryExpression";
 
-export default class Add extends BinaryExpression {
+export default class Modulo extends BinaryExpression {
 
   private _shape: number[];
 
@@ -18,19 +18,13 @@ export default class Add extends BinaryExpression {
   }
 
   get type() {
-    return ExpressionTypes.Add;
+    return ExpressionTypes.Modulo;
   }
 
-  static evaluate(node: Add): Tensor {
+  static evaluate(node: Modulo): Tensor {
     let left = node.graph.session.getValue(node.left);
     let right = node.graph.session.getValue(node.right);
-    return TensorMath.add(left, right);
+    return TensorMath.mod(left, right);
   }
 
-  static gradients(node: Add, grad: Expression): Expression[] {
-    let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = node.factory.reduceSum(grad, pair.left);
-    let rightGrad = node.factory.reduceSum(grad, pair.right);
-    return [leftGrad, rightGrad];
-  }
 }

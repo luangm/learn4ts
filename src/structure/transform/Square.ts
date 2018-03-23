@@ -4,24 +4,25 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Absolute extends TransformExpression {
+export default class Square extends TransformExpression {
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
   get type() {
-    return ExpressionTypes.Absolute;
+    return ExpressionTypes.Square;
   }
 
-  static evaluate(node: Absolute): Tensor {
+  static evaluate(node: Square): Tensor {
     let base = node.graph.session.getValue(node.base);
-    return TensorMath.abs(base);
+    return TensorMath.square(base);
   }
 
-  static gradients(node: Absolute, grad: Expression): Expression[] {
-    let sign = node.factory.sign(node.base);
-    let result = node.factory.multiply(grad, sign);
+  static gradients(node: Square, grad: Expression): Expression[] {
+    let two = node.factory.constant(Tensor.scalar(2), 'TWO');
+    let mul = node.factory.multiply(two, node.base);
+    let result = node.factory.multiply(grad, mul);
     return [result];
   }
 }

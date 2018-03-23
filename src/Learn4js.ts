@@ -1,7 +1,5 @@
 import Expression from "./structure/Expression";
 import {Tensor} from "tensor4js";
-import Add from "./structure/binary/Add";
-import Constant from "./structure/core/Constant";
 import Graph from "./Graph";
 import Session from "./Session";
 
@@ -26,12 +24,20 @@ class Learn4js {
     return this._session;
   }
 
+  get factory() {
+    return this._graph.factory;
+  }
+
+  abs(base: Expression, name?: string): Expression {
+    return this.factory.abs(base, name);
+  }
+
   add(left: Expression, right: Expression, name?: string): Expression {
-    return new Add(left, right, this.activeGraph, name);
+    return this.factory.add(left, right, name);
   }
 
   constant(value: Tensor, name?: string): Expression {
-    return new Constant(value, this.activeGraph, name);
+    return this.factory.constant(value, name);
   }
 
   create(array: number): Tensor;

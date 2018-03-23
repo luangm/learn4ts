@@ -1,5 +1,5 @@
-import Expression from "../Expression";
 import Graph from "../../Graph";
+import Expression from "../Expression";
 
 export default abstract class BinaryExpression extends Expression {
 
@@ -12,6 +12,10 @@ export default abstract class BinaryExpression extends Expression {
     this._right = right;
   }
 
+  get dependencies() {
+    return [this.left, this.right];
+  }
+
   get left() {
     return this._left;
   }
@@ -19,5 +23,4 @@ export default abstract class BinaryExpression extends Expression {
   get right() {
     return this._right;
   }
-
 }

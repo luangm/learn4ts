@@ -8,13 +8,21 @@ export default abstract class Expression {
   private _graph: Graph;
   private _id: number;
   private _name: string;
-  private _observers: Map<number, Expression>;
+  private _observers: Expression[];
 
   constructor(graph: Graph, name?: string) {
-    this._id = Expression.ID_COUNTER++;
+    this._id = ++Expression.ID_COUNTER;
     this._graph = graph;
     this._name = name;
-    this._observers = new Map<number, Expression>();
+    this._observers = [];
+  }
+
+  get dependencies(): Expression[] {
+    return [];
+  }
+
+  get factory() {
+    return this._graph.factory;
   }
 
   get graph() {
@@ -29,16 +37,28 @@ export default abstract class Expression {
     return this._name;
   }
 
+  get observers(): Expression[] {
+    return this._observers;
+  }
+
   abstract get shape(): number[];
 
   abstract get type(): string;
+
+  get value() {
+    let session = this.graph.session;
+    if (!session.isValid(this)) {
+      return session.eval(this);
+    }
+    return session.getValue(this);
+  }
 
   accept(visitor: Visitor, params?: any): void {
     visitor.visit(this, params);
   }
 
   addObserver(observer: Expression): void {
-    this._observers.set(observer.id, observer);
+    this._observers.push(observer);
   }
 
 }

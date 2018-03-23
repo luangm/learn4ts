@@ -1,6 +1,6 @@
 import Expression from "../structure/Expression";
 
-export type VisitFunc = (node: Expression, visitor: Visitor, params?: any) => void;
+export type VisitFunc = (node: Expression, params?: any) => any;
 
 export default interface Visitor {
 
@@ -9,4 +9,5 @@ export default interface Visitor {
   register(type: string, method: VisitFunc): void;
 
   visit(node: Expression, params?: any): void;
+
 }
