@@ -2,7 +2,7 @@
   "name": "learn4js",
   "version": "0.1.0",
   "description": "Machine Learning for JavaScript",
-  "main": "dist/learn4js.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
