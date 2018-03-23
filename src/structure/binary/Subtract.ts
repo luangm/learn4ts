@@ -29,9 +29,11 @@ export default class Subtract extends BinaryExpression {
 
   static gradients(node: Subtract, grad: Expression): Expression[] {
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = node.factory.reduceSum(grad, pair.left);
-    let rightGrad = node.factory.reduceSum(grad, pair.right);
-    let rightNeg = node.factory.negate(rightGrad);
-    return [leftGrad, rightNeg];
+    let leftSum = node.factory.reduceSum(grad, pair.left);
+    let rightSum = node.factory.reduceSum(grad, pair.right);
+    let rightNeg = node.factory.negate(rightSum);
+    let leftGrad = node.factory.reshape(leftSum, node.left.shape);
+    let rightGrad = node.factory.reshape(rightNeg, node.right.shape);
+    return [leftGrad, rightGrad];
   }
 }

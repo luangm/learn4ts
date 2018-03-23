@@ -31,8 +31,10 @@ export default class Multiply extends BinaryExpression {
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
     let leftMul = node.factory.multiply(grad, node.right);
     let rightMul = node.factory.multiply(node.left, grad);
-    let leftGrad = node.factory.reduceSum(leftMul, pair.left);
-    let rightGrad = node.factory.reduceSum(rightMul, pair.right);
+    let leftSum = node.factory.reduceSum(leftMul, pair.left);
+    let rightSum = node.factory.reduceSum(rightMul, pair.right);
+    let leftGrad = node.factory.reshape(leftSum, node.left.shape);
+    let rightGrad = node.factory.reshape(rightSum, node.right.shape);
     return [leftGrad, rightGrad];
   }
 }

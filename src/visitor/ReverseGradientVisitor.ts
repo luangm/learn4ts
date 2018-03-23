@@ -24,11 +24,11 @@ export default class ReverseGradientVisitor implements Visitor {
   private _gradMap: Map<number, Expression[]>;
   private _graph: Graph;
   private _registry: Map<string, VisitFunc>;
+  private _startId: number; // if not 0, the visit already started
 
   constructor(graph: Graph) {
     this._graph = graph;
     this._registry = new Map<string, VisitFunc>();
-    this._gradMap = new Map<number, Expression[]>();
     this.init();
   }
 
@@ -45,7 +45,13 @@ export default class ReverseGradientVisitor implements Visitor {
   }
 
   visit(node: Expression, params?: any): void {
+    // initialize
+    if (!this._startId) {
+      this._startId = node.id;
+      this._gradMap = new Map<number, Expression[]>();
+    }
 
+    // body
     let grad = this._graph.addNode(params || this.factory.fill(1, node.shape));
     this.addGradient(node, grad);
 
@@ -58,15 +64,27 @@ export default class ReverseGradientVisitor implements Visitor {
         dependency.accept(this, grads[i]);
       }
     }
+
+    // finalize
+    if (this._startId === node.id) {
+      this._startId = 0;
+      for (let key of this._gradMap.keys()) {
+        let list = this._gradMap.get(key);
+        if (list.length === 1) {
+          node.setGradient(key, list[0]);
+        } else {
+          let addN = this.factory.addN(list);
+          node.setGradient(key, addN);
+        }
+      }
+      this._gradMap = null;
+    }
   }
 
   private addGradient(target: Expression, grad: Expression) {
-    let list = this._gradMap.get(target.id);
-    if (!list) {
-      list = [];
-      this._gradMap.set(target.id, list);
-    }
+    let list = this._gradMap.get(target.id) || [];
     list.push(grad);
+    this._gradMap.set(target.id, list);
   }
 
   private init() {

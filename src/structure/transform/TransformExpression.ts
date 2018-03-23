@@ -15,11 +15,11 @@ export default abstract class TransformExpression extends Expression {
   }
 
   get dependencies() {
-    return [this.base];
+    return [this._base];
   }
 
   get shape() {
-    return this.base.shape;
+    return this._base.shape;
   }
 
 }

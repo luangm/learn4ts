@@ -29,8 +29,10 @@ export default class Add extends BinaryExpression {
 
   static gradients(node: Add, grad: Expression): Expression[] {
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = node.factory.reduceSum(grad, pair.left);
-    let rightGrad = node.factory.reduceSum(grad, pair.right);
+    let leftSum = node.factory.reduceSum(grad, pair.left);
+    let rightSum = node.factory.reduceSum(grad, pair.right);
+    let leftGrad = node.factory.reshape(leftSum, node.left.shape);
+    let rightGrad = node.factory.reshape(rightSum, node.right.shape);
     return [leftGrad, rightGrad];
   }
 }

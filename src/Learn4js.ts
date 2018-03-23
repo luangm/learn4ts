@@ -1,7 +1,8 @@
-import Expression from "./structure/Expression";
 import {Tensor} from "tensor4js";
 import Graph from "./Graph";
 import Session from "./Session";
+import Expression from "./structure/Expression";
+import ReverseGradientVisitor from "./visitor/ReverseGradientVisitor";
 
 class Learn4js {
 
@@ -41,26 +42,73 @@ class Learn4js {
   }
 
   create(array: number): Tensor;
+
   create(array: number[]): Tensor;
+
   create(array: number[][]): Tensor;
+
   create(array: number[][][]): Tensor;
+
   create(array: number[][][][]): Tensor;
+
   create(array: any): Tensor {
     return Tensor.create(array);
+  }
+
+  gradients(target: Expression, nodes: Expression[]): Expression[] {
+    let visitor = new ReverseGradientVisitor(this.activeGraph);
+    visitor.visit(target);
+
+    let grads: Expression[] = [];
+    for (let node of nodes) {
+      let grad = target.getGradient(node);
+      // if (this.interactive) {
+      //   grad.eval();
+      // }
+      grads.push(grad);
+    }
+    return grads;
+  }
+
+  linspace(start: number, stop: number, num?: number): Tensor {
+    return Tensor.linspace(start, stop, num);
+  }
+
+  negate(base: Expression, name?: string): Expression {
+    return this.factory.negate(base, name);
   }
 
   ones(shape: number[]): Tensor {
     return Tensor.ones(shape);
   }
 
+  parameter(value: Tensor, name?: string): Expression {
+    return this.factory.parameter(value, name);
+  }
+
+  round(base: Expression, name?: string): Expression {
+    return this.factory.round(base, name);
+  }
+
+  rsqrt(base: Expression, name?: string): Expression {
+    return this.factory.rsqrt(base, name);
+  }
+
   scalar(scalar: number): Tensor {
     return Tensor.scalar(scalar);
+  }
+
+  sigmoid(base: Expression, name?: string): Expression {
+    return this.factory.sigmoid(base, name);
+  }
+
+  sign(base: Expression, name?: string): Expression {
+    return this.factory.sign(base, name);
   }
 
   zeros(shape: number[]): Tensor {
     return Tensor.zeros(shape);
   }
-
 }
 
 export default new Learn4js();

@@ -1,4 +1,4 @@
-import {Tensor} from "tensor4js";
+import {ShapeUtils, Tensor} from "tensor4js";
 import Graph from "../Graph";
 import Add from "./binary/Add";
 import Divide from "./binary/Divide";
@@ -13,13 +13,16 @@ import Parameter from "./core/Parameter";
 import Variable from "./core/Variable";
 import Expression from "./Expression";
 import ReduceSum from "./reduction/ReduceSum";
+import AddN from "./special/AddN";
 import Assign from "./special/Assign";
 import Fill from "./special/Fill";
 import Group from "./special/Group";
+import Reshape from "./special/Reshape";
 import Absolute from "./transform/Absolute";
 import Cosine from "./transform/Cosine";
 import Expm1 from "./transform/Expm1";
 import Exponential from "./transform/Exponential";
+import Log1p from "./transform/Log1p";
 import Logarithm from "./transform/Logarithm";
 import Negate from "./transform/Negate";
 import Reciprocal from "./transform/Reciprocal";
@@ -60,6 +63,10 @@ export default class ExpressionFactory {
     return this.addNode(new Add(left, right, this.graph, name), left, right);
   }
 
+  addN(list: Expression[], name?: string): Expression {
+    return this.addNode(new AddN(list, this.graph, name), ...list);
+  }
+
   assign(ref: Expression, source: Expression, name?: string): Expression {
     return this.addNode(new Assign(ref, source, this.graph, name), source);
   }
@@ -96,6 +103,14 @@ export default class ExpressionFactory {
     return this.addNode(new Logarithm(base, this.graph, name), base);
   }
 
+  log1p(base: Expression, name?: string): Expression {
+    return this.addNode(new Log1p(base, this.graph, name), base);
+  }
+
+  matmul(left: Expression, right: Expression, transposeLeft: boolean, transposeRight: boolean, name?: string): Expression {
+    return this.addNode(new MatMul(left, right, transposeLeft, transposeRight, this.graph, name), left, right);
+  }
+
   max(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Maximum(left, right, this.graph, name), left, right);
   }
@@ -106,9 +121,6 @@ export default class ExpressionFactory {
 
   mod(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Modulo(left, right, this.graph, name), left, right);
-  }
-  matmul(left: Expression, right: Expression, transposeLeft: boolean, transposeRight: boolean, name?: string): Expression {
-    return this.addNode(new MatMul(left, right, transposeLeft, transposeRight, this.graph, name), left, right);
   }
 
   multiply(left: Expression, right: Expression, name?: string): Expression {
@@ -133,6 +145,13 @@ export default class ExpressionFactory {
 
   relu(base: Expression, name?: string): Expression {
     return this.addNode(new Relu(base, this.graph, name), base);
+  }
+
+  reshape(base: Expression, shape: number[], name?: string): Expression {
+    if (ShapeUtils.shapeEquals(base.shape, shape)) {
+      return base;
+    }
+    return this.addNode(new Reshape(base, shape, this.graph, name), base);
   }
 
   round(base: Expression, name?: string): Expression {

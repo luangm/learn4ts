@@ -48,6 +48,8 @@ export default {
 
   Fill: "Fill",
   Assign: "Assign",
-  Group: "Group"
+  Group: "Group",
+  AddN: "AddN",
+  Reshape: "Reshape",
 
 }

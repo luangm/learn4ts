@@ -14,6 +14,7 @@ import ExpressionTypes from "../structure/ExpressionTypes";
 import ReduceSum from "../structure/reduction/ReduceSum";
 import Assign from "../structure/special/Assign";
 import Fill from "../structure/special/Fill";
+import Reshape from "../structure/special/Reshape";
 import Absolute from "../structure/transform/Absolute";
 import Cosine from "../structure/transform/Cosine";
 import Expm1 from "../structure/transform/Expm1";
@@ -96,6 +97,8 @@ export default class EvaluationVisitor implements Visitor {
 
     this.register(ExpressionTypes.Assign, Assign.evaluate);
     this.register(ExpressionTypes.Fill, Fill.evaluate);
+    // this.register(ExpressionTypes.AddN, AddN.evaluate);
+    this.register(ExpressionTypes.Reshape, Reshape.evaluate);
 
     this.register(ExpressionTypes.Absolute, Absolute.evaluate);
     this.register(ExpressionTypes.Cosine, Cosine.evaluate);
