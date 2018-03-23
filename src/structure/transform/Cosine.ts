@@ -20,9 +20,7 @@ export default class Cosine extends TransformExpression {
   }
 
   static gradients(node: Cosine, grad: Expression): Expression[] {
-    let sine = node.factory.sin(node.base);
-    let neg = node.factory.negate(sine);
-    let result = node.factory.multiply(grad, neg);
-    return [result];
+    let baseGrad = node.base.sin().negate().multiply(grad);
+    return [baseGrad];
   }
 }

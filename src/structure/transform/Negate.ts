@@ -20,7 +20,7 @@ export default class Negate extends TransformExpression {
   }
 
   static gradients(node: Negate, grad: Expression): Expression[] {
-    let result = node.factory.negate(grad);
-    return [result];
+    let baseGrad = grad.negate();
+    return [baseGrad];
   }
 }

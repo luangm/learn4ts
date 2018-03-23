@@ -20,8 +20,7 @@ export default class Sigmoid extends TransformExpression {
   }
 
   static gradients(node: Sigmoid, grad: Expression): Expression[] {
-    let sigmoidGrad = node.factory.sigmoidGrad(node.base);
-    let result = node.factory.multiply(grad, sigmoidGrad);
-    return [result];
+    let baseGrad = node.base.sigmoidGrad().multiply(grad);
+    return [baseGrad];
   }
 }

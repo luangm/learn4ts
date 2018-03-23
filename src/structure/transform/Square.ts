@@ -21,8 +21,7 @@ export default class Square extends TransformExpression {
 
   static gradients(node: Square, grad: Expression): Expression[] {
     let two = node.factory.constant(Tensor.scalar(2), 'TWO');
-    let mul = node.factory.multiply(two, node.base);
-    let result = node.factory.multiply(grad, mul);
-    return [result];
+    let baseGrad = two.multiply(node.base).multiply(grad);
+    return [baseGrad];
   }
 }

@@ -20,8 +20,7 @@ export default class Sqrt extends TransformExpression {
   }
 
   static gradients(node: Sqrt, grad: Expression): Expression[] {
-    let sqrtGrad = node.factory.sqrtGrad(node.base);
-    let result = node.factory.multiply(grad, sqrtGrad);
-    return [result];
+    let baseGrad = node.base.sqrtGrad().multiply(grad);
+    return [baseGrad];
   }
 }

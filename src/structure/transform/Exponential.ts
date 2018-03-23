@@ -20,7 +20,7 @@ export default class Exponential extends TransformExpression {
   }
 
   static gradients(node: Exponential, grad: Expression): Expression[] {
-    let result = node.factory.multiply(grad, node);
-    return [result];
+    let baseGrad = node.multiply(grad);
+    return [baseGrad];
   }
 }

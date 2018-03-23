@@ -20,7 +20,7 @@ export default class Logarithm extends TransformExpression {
   }
 
   static gradients(node: Logarithm, grad: Expression): Expression[] {
-    let result = node.factory.divide(grad, node.base);
-    return [result];
+    let baseGrad = grad.divide(node.base);
+    return [baseGrad];
   }
 }

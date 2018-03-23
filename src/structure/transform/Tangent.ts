@@ -20,8 +20,7 @@ export default class Tangent extends TransformExpression {
   }
 
   static gradients(node: Tangent, grad: Expression): Expression[] {
-    let tanGrad = node.factory.tanGrad(node.base);
-    let result = node.factory.multiply(grad, tanGrad);
-    return [result];
+    let baseGrad = node.base.tanGrad().multiply(grad);
+    return [baseGrad];
   }
 }

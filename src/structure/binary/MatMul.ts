@@ -43,8 +43,8 @@ export default class MatMul extends BinaryExpression {
   }
 
   static gradients(node: MatMul, grad: Expression): Expression[] {
-    let leftGrad = node.factory.matmul(grad, node.right, false, true);
-    let rightGrad = node.factory.matmul(node.left, grad, true, false);
+    let leftGrad = grad.matmul(node.right, false, true);
+    let rightGrad = node.left.matmul(grad, true, false);
     return [leftGrad, rightGrad];
   }
 

@@ -106,6 +106,10 @@ export default abstract class Expression {
     return this.factory.log1p(this);
   }
 
+  matmul(other: Expression, transposeLeft: boolean, transposeRight: boolean): Expression {
+    return this.factory.matmul(this, other, transposeLeft, transposeRight);
+  }
+
   max(other: Expression): Expression {
     return this.factory.max(this, other);
   }
@@ -130,8 +134,16 @@ export default abstract class Expression {
     return this.factory.reciprocal(this);
   }
 
+  reduceSum(dims: number | number[] = -1): Expression {
+    return this.factory.reduceSum(this, dims);
+  }
+
   relu(): Expression {
     return this.factory.relu(this);
+  }
+
+  reshape(shape: number[]): Expression {
+    return this.factory.reshape(this, shape);
   }
 
   round(): Expression {
@@ -149,6 +161,14 @@ export default abstract class Expression {
     this._gradMap.set(targetId, grad);
   }
 
+  sigmoid(): Expression {
+    return this.factory.sigmoid(this);
+  }
+
+  sigmoidGrad(): Expression {
+    return this.factory.sigmoidGrad(this);
+  }
+
   sign(): Expression {
     return this.factory.sign(this);
   }
@@ -159,6 +179,10 @@ export default abstract class Expression {
 
   sqrt(): Expression {
     return this.factory.sqrt(this);
+  }
+
+  sqrtGrad(): Expression {
+    return this.factory.sqrtGrad(this);
   }
 
   square(): Expression {
@@ -175,6 +199,10 @@ export default abstract class Expression {
 
   tan(): Expression {
     return this.factory.tan(this);
+  }
+
+  tanGrad(): Expression {
+    return this.factory.tanGrad(this);
   }
 
   tanh(): Expression {

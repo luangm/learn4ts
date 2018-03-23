@@ -20,8 +20,7 @@ export default class Relu extends TransformExpression {
   }
 
   static gradients(node: Relu, grad: Expression): Expression[] {
-    let step = node.factory.step(node.base);
-    let result = node.factory.multiply(grad, step);
-    return [result];
+    let baseGrad = node.base.step().multiply(grad);
+    return [baseGrad];
   }
 }

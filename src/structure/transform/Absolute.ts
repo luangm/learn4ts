@@ -20,8 +20,7 @@ export default class Absolute extends TransformExpression {
   }
 
   static gradients(node: Absolute, grad: Expression): Expression[] {
-    let sign = node.factory.sign(node.base);
-    let result = node.factory.multiply(grad, sign);
-    return [result];
+    let baseGrad = node.base.sign().multiply(grad);
+    return [baseGrad];
   }
 }
