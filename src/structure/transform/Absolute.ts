@@ -15,7 +15,7 @@ export default class Absolute extends TransformExpression {
   }
 
   static evaluate(node: Absolute): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.abs(base);
   }
 

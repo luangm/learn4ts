@@ -15,7 +15,7 @@ export default class Sine extends TransformExpression {
   }
 
   static evaluate(node: Sine): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.sin(base);
   }
 

@@ -22,8 +22,8 @@ export default class Divide extends BinaryExpression {
   }
 
   static evaluate(node: Divide): Tensor {
-    let left = node.graph.session.getValue(node.left);
-    let right = node.graph.session.getValue(node.right);
+    let left = node.left.value;
+    let right = node.right.value;
     return TensorMath.divide(left, right);
   }
 

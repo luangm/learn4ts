@@ -37,8 +37,8 @@ export default class MatMul extends BinaryExpression {
   }
 
   static evaluate(node: MatMul): Tensor {
-    let left = node.graph.session.getValue(node.left);
-    let right = node.graph.session.getValue(node.right);
+    let left = node.left.value;
+    let right = node.right.value;
     return TensorMath.matmul(left, right, node.transposeLeft, node.transposeRight);
   }
 

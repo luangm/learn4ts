@@ -15,7 +15,7 @@ export default class Negate extends TransformExpression {
   }
 
   static evaluate(node: Negate): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.negate(base);
   }
 

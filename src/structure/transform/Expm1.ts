@@ -15,7 +15,7 @@ export default class Expm1 extends TransformExpression {
   }
 
   static evaluate(node: Expm1): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.expm1(base);
   }
 

@@ -15,7 +15,7 @@ export default class Sign extends TransformExpression {
   }
 
   static evaluate(node: Sign): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.sign(base);
   }
 

@@ -22,8 +22,8 @@ export default class Modulo extends BinaryExpression {
   }
 
   static evaluate(node: Modulo): Tensor {
-    let left = node.graph.session.getValue(node.left);
-    let right = node.graph.session.getValue(node.right);
+    let left = node.left.value;
+    let right = node.right.value;
     return TensorMath.mod(left, right);
   }
 

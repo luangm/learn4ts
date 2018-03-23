@@ -15,7 +15,7 @@ export default class SqrtGrad extends TransformExpression {
   }
 
   static evaluate(node: SqrtGrad): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.sqrtGrad(base);
   }
 

@@ -15,7 +15,7 @@ export default class Cosine extends TransformExpression {
   }
 
   static evaluate(node: Cosine): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.cos(base);
   }
 

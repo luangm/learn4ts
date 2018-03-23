@@ -35,7 +35,7 @@ export default class Assign extends Expression {
   }
 
   static evaluate(node: Assign): Tensor {
-    let newValue = node.graph.session.getValue(node.source);
+    let newValue = node.source.value;
     node.graph.session.setValue(node.ref, newValue);
     return newValue;
   }

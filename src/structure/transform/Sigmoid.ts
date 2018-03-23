@@ -15,7 +15,7 @@ export default class Sigmoid extends TransformExpression {
   }
 
   static evaluate(node: Sigmoid): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.sigmoid(base);
   }
 

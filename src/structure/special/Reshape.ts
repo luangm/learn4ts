@@ -31,7 +31,7 @@ export default class Reshape extends Expression {
   }
 
   static evaluate(node: Reshape): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return base.reshape(node.shape);
   }
 }

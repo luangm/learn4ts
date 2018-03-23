@@ -1,3 +1,4 @@
+import Tensor from "tensor4js/dist/types/Tensor";
 import Graph from "../Graph";
 import Visitor from "../visitor/Visitor";
 
@@ -45,12 +46,16 @@ export default abstract class Expression {
 
   abstract get type(): string;
 
-  get value() {
-    let session = this.graph.session;
-    if (!session.isValid(this)) {
-      return session.eval(this);
+  get value(): Tensor {
+    let result = this.graph.session.getValue(this);
+    if (!result) {
+      return this.eval();
     }
-    return session.getValue(this);
+    return result;
+  }
+
+  set value(val: Tensor) {
+    this.graph.session.setValue(this, val);
   }
 
   abs(): Expression {
@@ -75,6 +80,10 @@ export default abstract class Expression {
 
   divide(other: Expression): Expression {
     return this.factory.divide(this, other);
+  }
+
+  eval(): Tensor {
+    return this.graph.session.eval(this);
   }
 
   exp(): Expression {

@@ -10,7 +10,7 @@ export default class ReduceSum extends ReductionExpression {
   }
 
   static evaluate(node: ReduceSum): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.reduceSum(base, node.dims);
   }
 

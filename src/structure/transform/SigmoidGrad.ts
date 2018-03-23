@@ -15,7 +15,7 @@ export default class SigmoidGrad extends TransformExpression {
   }
 
   static evaluate(node: SigmoidGrad): Tensor {
-    let base = node.graph.session.getValue(node.base);
+    let base = node.base.value;
     return TensorMath.sigmoidGrad(base);
   }
 

@@ -22,8 +22,8 @@ export default class Maximum extends BinaryExpression {
   }
 
   static evaluate(node: Maximum): Tensor {
-    let left = node.graph.session.getValue(node.left);
-    let right = node.graph.session.getValue(node.right);
+    let left = node.left.value;
+    let right = node.right.value;
     return TensorMath.max(left, right);
   }
 
