@@ -44,20 +44,19 @@ import Visitor, {VisitFunc} from "./Visitor";
 export default class EvaluationVisitor implements Visitor {
 
   private _registry: Map<string, VisitFunc>;
+  get registry() {
+    return this._registry;
+  }
+
   private _session: Session;
+  get session() {
+    return this._session;
+  }
 
   constructor(session: Session) {
     this._session = session;
     this._registry = new Map<string, VisitFunc>();
     this.init();
-  }
-
-  get registry() {
-    return this._registry;
-  }
-
-  get session() {
-    return this._session;
   }
 
   register(type: string, method: VisitFunc): void {

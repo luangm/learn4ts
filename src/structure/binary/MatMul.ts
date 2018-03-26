@@ -7,8 +7,23 @@ import BinaryExpression from "./BinaryExpression";
 export default class MatMul extends BinaryExpression {
 
   private _shape: number[];
+  get shape() {
+    return this._shape;
+  }
+
   private _transposeLeft: boolean;
+  get transposeLeft() {
+    return this._transposeLeft;
+  }
+
   private _transposeRight: boolean;
+  get transposeRight() {
+    return this._transposeRight;
+  }
+
+  get type() {
+    return ExpressionTypes.MatMul;
+  }
 
   constructor(left: Expression, right: Expression, transposeLeft: boolean, transposeRight: boolean, graph: Graph, name?: string) {
     super(left, right, graph, name);
@@ -18,22 +33,6 @@ export default class MatMul extends BinaryExpression {
     this._shape = [0, 0];
     this._shape[0] = transposeLeft ? left.shape[1] : left.shape[0];
     this._shape[1] = transposeRight ? right.shape[0] : right.shape[1];
-  }
-
-  get shape() {
-    return this._shape;
-  }
-
-  get transposeLeft() {
-    return this._transposeLeft;
-  }
-
-  get transposeRight() {
-    return this._transposeRight;
-  }
-
-  get type() {
-    return ExpressionTypes.MatMul;
   }
 
   static evaluate(node: MatMul): Tensor {

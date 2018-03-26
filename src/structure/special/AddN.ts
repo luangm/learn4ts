@@ -10,13 +10,11 @@ import ExpressionTypes from "../ExpressionTypes";
 export default class AddN extends Expression {
 
   private _list: Expression[];
-
-  constructor(list: Expression[], graph: Graph, name?: string) {
-    super(graph, name);
-    this._list = list;
+  get list() {
+    return this._list;
   }
 
-  get list() {
+  get dependencies(): Expression[] {
     return this._list;
   }
 
@@ -26,6 +24,11 @@ export default class AddN extends Expression {
 
   get type() {
     return ExpressionTypes.AddN;
+  }
+
+  constructor(list: Expression[], graph: Graph, name?: string) {
+    super(graph, name);
+    this._list = list;
   }
 
 }

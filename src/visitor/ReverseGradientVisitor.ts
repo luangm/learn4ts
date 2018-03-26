@@ -70,12 +70,8 @@ export default class ReverseGradientVisitor implements Visitor {
       this._startId = 0;
       for (let key of this._gradMap.keys()) {
         let list = this._gradMap.get(key);
-        if (list.length === 1) {
-          node.setGradient(key, list[0]);
-        } else {
-          let addN = this.factory.addN(list);
-          node.setGradient(key, addN);
-        }
+        let addN = this.factory.addN(list);
+        node.setGradient(key, addN);
       }
       this._gradMap = null;
     }

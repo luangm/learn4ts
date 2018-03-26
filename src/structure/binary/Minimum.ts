@@ -8,17 +8,17 @@ export default class Minimum extends BinaryExpression {
 
   private _shape: number[];
 
-  constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
-    super(left, right, graph, name);
-    this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
-  }
-
   get shape() {
     return this._shape;
   }
 
   get type() {
     return ExpressionTypes.Minimum;
+  }
+
+  constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
+    super(left, right, graph, name);
+    this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
   static evaluate(node: Minimum): Tensor {

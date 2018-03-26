@@ -64,6 +64,9 @@ export default class ExpressionFactory {
   }
 
   addN(list: Expression[], name?: string): Expression {
+    if (list.length === 1) {
+      return list[0];
+    }
     return this.addNode(new AddN(list, this.graph, name), ...list);
   }
 

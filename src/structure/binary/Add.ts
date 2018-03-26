@@ -7,18 +7,17 @@ import BinaryExpression from "./BinaryExpression";
 export default class Add extends BinaryExpression {
 
   private _shape: number[];
-
-  constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
-    super(left, right, graph, name);
-    this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
-  }
-
   get shape() {
     return this._shape;
   }
 
   get type() {
     return ExpressionTypes.Add;
+  }
+
+  constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
+    super(left, right, graph, name);
+    this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
   static evaluate(node: Add): Tensor {

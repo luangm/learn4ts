@@ -6,6 +6,7 @@ test("AA", function () {
   let xVal = Learn4js.create([-1, 2]);
   let yVal = Learn4js.create([-2, 3]);
 
+  console.log(xVal.toString());
   let x = Learn4js.constant(xVal, "x");
   let y = Learn4js.constant(yVal, "y");
   let sum = Learn4js.add(x, y, "add");
