@@ -4,23 +4,23 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Expm1 extends TransformExpression {
+export default class Cosh extends TransformExpression {
 
   get type() {
-    return ExpressionTypes.Expm1;
+    return ExpressionTypes.Cosh;
   }
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
-  static evaluate(node: Expm1): Tensor {
+  static evaluate(node: Cosh): Tensor {
     let base = node.base.value;
-    return TensorMath.expm1(base);
+    return TensorMath.cosh(base);
   }
 
-  static gradients(node: Expm1, grad: Expression): Expression[] {
-    let baseGrad = node.base.exp().multiply(grad);
+  static gradients(node: Cosh, grad: Expression): Expression[] {
+    let baseGrad = node.base.sinh().multiply(grad);
     return [baseGrad];
   }
 }

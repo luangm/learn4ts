@@ -6,12 +6,12 @@ import TransformExpression from "./TransformExpression";
 
 export default class Reciprocal extends TransformExpression {
 
-  constructor(base: Expression, graph: Graph, name?: string) {
-    super(base, graph, name);
-  }
-
   get type() {
     return ExpressionTypes.Reciprocal;
+  }
+
+  constructor(base: Expression, graph: Graph, name?: string) {
+    super(base, graph, name);
   }
 
   static evaluate(node: Reciprocal): Tensor {
@@ -19,4 +19,8 @@ export default class Reciprocal extends TransformExpression {
     return TensorMath.reciprocal(base);
   }
 
+  static gradients(node: Reciprocal, grad: Expression): Expression[] {
+    let baseGrad = node.base.reciprocalGrad().multiply(grad);
+    return [baseGrad];
+  }
 }

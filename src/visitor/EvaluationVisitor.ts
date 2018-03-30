@@ -16,6 +16,7 @@ import Assign from "../structure/special/Assign";
 import Fill from "../structure/special/Fill";
 import Reshape from "../structure/special/Reshape";
 import Absolute from "../structure/transform/Absolute";
+import Cosh from "../structure/transform/Cosh";
 import Cosine from "../structure/transform/Cosine";
 import Expm1 from "../structure/transform/Expm1";
 import Exponential from "../structure/transform/Exponential";
@@ -23,6 +24,7 @@ import Log1p from "../structure/transform/Log1p";
 import Logarithm from "../structure/transform/Logarithm";
 import Negate from "../structure/transform/Negate";
 import Reciprocal from "../structure/transform/Reciprocal";
+import ReciprocalGrad from "../structure/transform/ReciprocalGrad";
 import Relu from "../structure/transform/Relu";
 import Round from "../structure/transform/Round";
 import RSqrt from "../structure/transform/RSqrt";
@@ -30,6 +32,7 @@ import Sigmoid from "../structure/transform/Sigmoid";
 import SigmoidGrad from "../structure/transform/SigmoidGrad";
 import Sign from "../structure/transform/Sign";
 import Sine from "../structure/transform/Sine";
+import Sinh from "../structure/transform/Sinh";
 import Softmax from "../structure/transform/Softmax";
 import SoftmaxGrad from "../structure/transform/SoftmaxGrad";
 import Sqrt from "../structure/transform/Sqrt";
@@ -39,6 +42,7 @@ import Step from "../structure/transform/Step";
 import Tangent from "../structure/transform/Tangent";
 import TangentGrad from "../structure/transform/TangentGrad";
 import Tanh from "../structure/transform/Tanh";
+import TanhGrad from "../structure/transform/TanhGrad";
 import Visitor, {VisitFunc} from "./Visitor";
 
 export default class EvaluationVisitor implements Visitor {
@@ -101,12 +105,14 @@ export default class EvaluationVisitor implements Visitor {
 
     this.register(ExpressionTypes.Absolute, Absolute.evaluate);
     this.register(ExpressionTypes.Cosine, Cosine.evaluate);
+    this.register(ExpressionTypes.Cosh, Cosh.evaluate);
     this.register(ExpressionTypes.Expm1, Expm1.evaluate);
     this.register(ExpressionTypes.Exponential, Exponential.evaluate);
     this.register(ExpressionTypes.Log1p, Log1p.evaluate);
     this.register(ExpressionTypes.Logarithm, Logarithm.evaluate);
     this.register(ExpressionTypes.Negate, Negate.evaluate);
     this.register(ExpressionTypes.Reciprocal, Reciprocal.evaluate);
+    this.register(ExpressionTypes.ReciprocalGrad, ReciprocalGrad.evaluate);
     this.register(ExpressionTypes.Relu, Relu.evaluate);
     this.register(ExpressionTypes.Round, Round.evaluate);
     this.register(ExpressionTypes.RSqrt, RSqrt.evaluate);
@@ -114,6 +120,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.SigmoidGrad, SigmoidGrad.evaluate);
     this.register(ExpressionTypes.Sign, Sign.evaluate);
     this.register(ExpressionTypes.Sine, Sine.evaluate);
+    this.register(ExpressionTypes.Sinh, Sinh.evaluate);
     this.register(ExpressionTypes.Softmax, Softmax.evaluate);
     this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.evaluate);
     this.register(ExpressionTypes.Sqrt, Sqrt.evaluate);
@@ -123,6 +130,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Tangent, Tangent.evaluate);
     this.register(ExpressionTypes.TangentGrad, TangentGrad.evaluate);
     this.register(ExpressionTypes.Tanh, Tanh.evaluate);
+    this.register(ExpressionTypes.TanhGrad, TanhGrad.evaluate);
   }
 
 }

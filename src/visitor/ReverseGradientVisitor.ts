@@ -6,38 +6,46 @@ import Multiply from "../structure/binary/Multiply";
 import Subtract from "../structure/binary/Subtract";
 import Expression from "../structure/Expression";
 import ExpressionTypes from "../structure/ExpressionTypes";
+import Reshape from "../structure/special/Reshape";
 import Absolute from "../structure/transform/Absolute";
+import Cosh from "../structure/transform/Cosh";
 import Cosine from "../structure/transform/Cosine";
+import Expm1 from "../structure/transform/Expm1";
 import Exponential from "../structure/transform/Exponential";
+import Log1p from "../structure/transform/Log1p";
 import Logarithm from "../structure/transform/Logarithm";
 import Negate from "../structure/transform/Negate";
+import Reciprocal from "../structure/transform/Reciprocal";
 import Relu from "../structure/transform/Relu";
 import Sigmoid from "../structure/transform/Sigmoid";
 import Sine from "../structure/transform/Sine";
+import Sinh from "../structure/transform/Sinh";
 import Sqrt from "../structure/transform/Sqrt";
 import Square from "../structure/transform/Square";
 import Tangent from "../structure/transform/Tangent";
+import Tanh from "../structure/transform/Tanh";
 import Visitor, {VisitFunc} from "./Visitor";
 
 export default class ReverseGradientVisitor implements Visitor {
 
   private _gradMap: Map<number, Expression[]>;
   private _graph: Graph;
-  private _registry: Map<string, VisitFunc>;
   private _startId: number; // if not 0, the visit already started
 
-  constructor(graph: Graph) {
-    this._graph = graph;
-    this._registry = new Map<string, VisitFunc>();
-    this.init();
+  private _registry: Map<string, VisitFunc>;
+
+  get registry() {
+    return this._registry;
   }
 
   get factory() {
     return this._graph.factory;
   }
 
-  get registry() {
-    return this._registry;
+  constructor(graph: Graph) {
+    this._graph = graph;
+    this._registry = new Map<string, VisitFunc>();
+    this.init();
   }
 
   register(type: string, method: VisitFunc): void {
@@ -103,12 +111,13 @@ export default class ReverseGradientVisitor implements Visitor {
 
     this.register(ExpressionTypes.Absolute, Absolute.gradients);
     this.register(ExpressionTypes.Cosine, Cosine.gradients);
-    // this.register(ExpressionTypes.Expm1, Expm1.gradients);
+    this.register(ExpressionTypes.Cosh, Cosh.gradients);
+    this.register(ExpressionTypes.Expm1, Expm1.gradients);
     this.register(ExpressionTypes.Exponential, Exponential.gradients);
-    // this.register(ExpressionTypes.Log1p, Log1p.gradients);
+    this.register(ExpressionTypes.Log1p, Log1p.gradients);
     this.register(ExpressionTypes.Logarithm, Logarithm.gradients);
     this.register(ExpressionTypes.Negate, Negate.gradients);
-    // this.register(ExpressionTypes.Reciprocal, Reciprocal.gradients);
+    this.register(ExpressionTypes.Reciprocal, Reciprocal.gradients);
     this.register(ExpressionTypes.Relu, Relu.gradients);
     // this.register(ExpressionTypes.Round, Round.gradients);
     // this.register(ExpressionTypes.RSqrt, RSqrt.gradients);
@@ -116,6 +125,7 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.SigmoidGrad, SigmoidGrad.gradients);
     // this.register(ExpressionTypes.Sign, Sign.gradients);
     this.register(ExpressionTypes.Sine, Sine.gradients);
+    this.register(ExpressionTypes.Sinh, Sinh.gradients);
     // this.register(ExpressionTypes.Softmax, Softmax.gradients);
     // this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.gradients);
     this.register(ExpressionTypes.Sqrt, Sqrt.gradients);
@@ -124,7 +134,9 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Step, Step.gradients);
     this.register(ExpressionTypes.Tangent, Tangent.gradients);
     // this.register(ExpressionTypes.TangentGrad, TangentGrad.gradients);
-    // this.register(ExpressionTypes.Tanh, Tanh.gradients);
+    this.register(ExpressionTypes.Tanh, Tanh.gradients);
+
+    this.register(ExpressionTypes.Reshape, Reshape.gradients);
   }
 
 }

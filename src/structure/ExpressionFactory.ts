@@ -19,6 +19,7 @@ import Fill from "./special/Fill";
 import Group from "./special/Group";
 import Reshape from "./special/Reshape";
 import Absolute from "./transform/Absolute";
+import Cosh from "./transform/Cosh";
 import Cosine from "./transform/Cosine";
 import Expm1 from "./transform/Expm1";
 import Exponential from "./transform/Exponential";
@@ -26,6 +27,7 @@ import Log1p from "./transform/Log1p";
 import Logarithm from "./transform/Logarithm";
 import Negate from "./transform/Negate";
 import Reciprocal from "./transform/Reciprocal";
+import ReciprocalGrad from "./transform/ReciprocalGrad";
 import Relu from "./transform/Relu";
 import Round from "./transform/Round";
 import RSqrt from "./transform/RSqrt";
@@ -33,6 +35,7 @@ import Sigmoid from "./transform/Sigmoid";
 import SigmoidGrad from "./transform/SigmoidGrad";
 import Sign from "./transform/Sign";
 import Sine from "./transform/Sine";
+import Sinh from "./transform/Sinh";
 import Softmax from "./transform/Softmax";
 import SoftmaxGrad from "./transform/SoftmaxGrad";
 import Sqrt from "./transform/Sqrt";
@@ -42,17 +45,18 @@ import Step from "./transform/Step";
 import Tangent from "./transform/Tangent";
 import TangentGrad from "./transform/TangentGrad";
 import Tanh from "./transform/Tanh";
+import TanhGrad from "./transform/TanhGrad";
 
 export default class ExpressionFactory {
 
   private _graph: Graph;
 
-  constructor(graph: Graph) {
-    this._graph = graph;
-  }
-
   get graph() {
     return this._graph;
+  }
+
+  constructor(graph: Graph) {
+    this._graph = graph;
   }
 
   abs(base: Expression, name?: string): Expression {
@@ -80,6 +84,10 @@ export default class ExpressionFactory {
 
   cos(base: Expression, name?: string): Expression {
     return this.addNode(new Cosine(base, this.graph, name), base);
+  }
+
+  cosh(base: Expression, name?: string): Expression {
+    return this.addNode(new Cosh(base, this.graph, name), base);
   }
 
   divide(left: Expression, right: Expression, name?: string): Expression {
@@ -142,6 +150,10 @@ export default class ExpressionFactory {
     return this.addNode(new Reciprocal(base, this.graph, name), base);
   }
 
+  reciprocalGrad(base: Expression, name?: string): Expression {
+    return this.addNode(new ReciprocalGrad(base, this.graph, name), base);
+  }
+
   reduceSum(base: Expression, dims: number | number[], name?: string) {
     return dims == null ? base : this.addNode(new ReduceSum(base, dims, this.graph, name), base);
   }
@@ -179,6 +191,10 @@ export default class ExpressionFactory {
 
   sin(base: Expression, name?: string): Expression {
     return this.addNode(new Sine(base, this.graph, name), base);
+  }
+
+  sinh(base: Expression, name?: string): Expression {
+    return this.addNode(new Sinh(base, this.graph, name), base);
   }
 
   softmax(base: Expression, name?: string): Expression {
@@ -219,6 +235,10 @@ export default class ExpressionFactory {
 
   tanh(base: Expression, name?: string): Expression {
     return this.addNode(new Tanh(base, this.graph, name), base);
+  }
+
+  tanhGrad(base: Expression, name?: string): Expression {
+    return this.addNode(new TanhGrad(base, this.graph, name), base);
   }
 
   variable(shape: number[], name?: string): Expression {

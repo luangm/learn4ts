@@ -2,6 +2,7 @@ import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
+import Tangent from "../transform/Tangent";
 
 export default class Reshape extends Expression {
 
@@ -33,5 +34,10 @@ export default class Reshape extends Expression {
   static evaluate(node: Reshape): Tensor {
     let base = node.base.value;
     return base.reshape(node.shape);
+  }
+
+  static gradients(node: Reshape, grad: Expression): Expression[] {
+    let baseGrad = grad.reshape(node.base.shape);
+    return [baseGrad];
   }
 }

@@ -7,15 +7,27 @@ export default abstract class Expression {
   static ID_COUNTER: number = 0;
   private _gradMap: Map<number, Expression>;
   private _graph: Graph;
+
+  get graph() {
+    return this._graph;
+  }
+
   private _id: number;
+
+  get id() {
+    return this._id;
+  }
+
   private _name: string;
+
+  get name() {
+    return this._name;
+  }
+
   private _observers: Expression[];
 
-  constructor(graph: Graph, name?: string) {
-    this._id = ++Expression.ID_COUNTER;
-    this._graph = graph;
-    this._name = name;
-    this._observers = [];
+  get observers(): Expression[] {
+    return this._observers;
   }
 
   get dependencies(): Expression[] {
@@ -24,22 +36,6 @@ export default abstract class Expression {
 
   get factory() {
     return this._graph.factory;
-  }
-
-  get graph() {
-    return this._graph;
-  }
-
-  get id() {
-    return this._id;
-  }
-
-  get name() {
-    return this._name;
-  }
-
-  get observers(): Expression[] {
-    return this._observers;
   }
 
   abstract get shape(): number[];
@@ -56,6 +52,13 @@ export default abstract class Expression {
 
   set value(val: Tensor) {
     this.graph.session.setValue(this, val);
+  }
+
+  constructor(graph: Graph, name?: string) {
+    this._id = ++Expression.ID_COUNTER;
+    this._graph = graph;
+    this._name = name;
+    this._observers = [];
   }
 
   abs(): Expression {
@@ -76,6 +79,10 @@ export default abstract class Expression {
 
   cos(): Expression {
     return this.factory.cos(this);
+  }
+
+  cosh(): Expression {
+    return this.factory.cosh(this);
   }
 
   divide(other: Expression): Expression {
@@ -134,6 +141,10 @@ export default abstract class Expression {
     return this.factory.reciprocal(this);
   }
 
+  reciprocalGrad(): Expression {
+    return this.factory.reciprocalGrad(this);
+  }
+
   reduceSum(dims: number | number[] = -1): Expression {
     return this.factory.reduceSum(this, dims);
   }
@@ -177,6 +188,10 @@ export default abstract class Expression {
     return this.factory.sin(this);
   }
 
+  sinh(): Expression {
+    return this.factory.sinh(this);
+  }
+
   sqrt(): Expression {
     return this.factory.sqrt(this);
   }
@@ -207,5 +222,9 @@ export default abstract class Expression {
 
   tanh(): Expression {
     return this.factory.tanh(this);
+  }
+
+  tanhGrad(): Expression {
+    return this.factory.tanhGrad(this);
   }
 }

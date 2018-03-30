@@ -4,23 +4,19 @@ import Expression from "../Expression";
 import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
 
-export default class Expm1 extends TransformExpression {
+export default class ReciprocalGrad extends TransformExpression {
 
   get type() {
-    return ExpressionTypes.Expm1;
+    return ExpressionTypes.ReciprocalGrad;
   }
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
-  static evaluate(node: Expm1): Tensor {
+  static evaluate(node: ReciprocalGrad): Tensor {
     let base = node.base.value;
-    return TensorMath.expm1(base);
+    return TensorMath.reciprocalGrad(base);
   }
 
-  static gradients(node: Expm1, grad: Expression): Expression[] {
-    let baseGrad = node.base.exp().multiply(grad);
-    return [baseGrad];
-  }
 }

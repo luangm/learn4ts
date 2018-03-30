@@ -29,6 +29,7 @@ export default {
   Logarithm: "Logarithm",
   Negate: "Negate",
   Reciprocal: "Reciprocal",
+  ReciprocalGrad: "ReciprocalGrad",
   Relu: "Relu",
   Round: "Round",
   RSqrt: "RSqrt",
@@ -45,6 +46,9 @@ export default {
   Tangent: "Tangent",
   TangentGrad: "TangentGrad",
   Tanh: "Tanh",
+  TanhGrad: "TanhGrad",
+  Cosh: "Cosh",
+  Sinh: "Sinh",
 
   Fill: "Fill",
   Assign: "Assign",
