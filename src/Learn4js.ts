@@ -1,7 +1,7 @@
 import {Tensor} from "tensor4js";
 import Graph from "./Graph";
 import Session from "./Session";
-import Expression from "./structure/Expression";
+import Expression from "./expression/Expression";
 import ReverseGradientVisitor from "./visitor/ReverseGradientVisitor";
 
 class Learn4js {

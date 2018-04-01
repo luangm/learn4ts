@@ -5,30 +5,12 @@ import Visitor from "../visitor/Visitor";
 export default abstract class Expression {
 
   static ID_COUNTER: number = 0;
+
   private _gradMap: Map<number, Expression>;
   private _graph: Graph;
-
-  get graph() {
-    return this._graph;
-  }
-
   private _id: number;
-
-  get id() {
-    return this._id;
-  }
-
   private _name: string;
-
-  get name() {
-    return this._name;
-  }
-
   private _observers: Expression[];
-
-  get observers(): Expression[] {
-    return this._observers;
-  }
 
   get dependencies(): Expression[] {
     return [];
@@ -36,6 +18,22 @@ export default abstract class Expression {
 
   get factory() {
     return this._graph.factory;
+  }
+
+  get graph() {
+    return this._graph;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get observers(): Expression[] {
+    return this._observers;
   }
 
   abstract get shape(): number[];

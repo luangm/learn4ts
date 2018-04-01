@@ -1,6 +1,6 @@
-import Expression from "./structure/Expression";
+import Expression from "./expression/Expression";
 import Session from "./Session";
-import ExpressionFactory from "./structure/ExpressionFactory";
+import ExpressionFactory from "./expression/ExpressionFactory";
 
 export default class Graph {
 

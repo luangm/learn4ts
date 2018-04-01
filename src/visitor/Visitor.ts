@@ -1,4 +1,4 @@
-import Expression from "../structure/Expression";
+import Expression from "../expression/Expression";
 
 export type VisitFunc = (node: Expression, params?: any) => any;
 

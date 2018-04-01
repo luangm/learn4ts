@@ -1,5 +1,5 @@
 import Graph from "./Graph";
-import Expression from "./structure/Expression";
+import Expression from "./expression/Expression";
 import {Tensor} from "tensor4js";
 import EvaluationVisitor from "./visitor/EvaluationVisitor";
 

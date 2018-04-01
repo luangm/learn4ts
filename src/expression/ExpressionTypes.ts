@@ -55,5 +55,8 @@ export default {
   Group: "Group",
   AddN: "AddN",
   Reshape: "Reshape",
+  Repeat: "Repeat",
+  Tile: "Tile",
+  Slice: "Slice"
 
 }
