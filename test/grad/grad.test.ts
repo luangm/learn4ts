@@ -114,7 +114,7 @@ test('tanh', function () {
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
 
-  console.log(gradA.value.toString());
+  // console.log(gradA.value.toString());
 
   let expected = Tensor.create([
     [1 / Math.cosh(1) / Math.cosh(1), 1 / Math.cosh(2) / Math.cosh(2), 1 / Math.cosh(3) / Math.cosh(3)],
