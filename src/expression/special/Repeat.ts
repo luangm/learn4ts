@@ -31,7 +31,7 @@ export default class Repeat extends Expression {
   }
 
   get type() {
-    return ExpressionTypes.Reshape;
+    return ExpressionTypes.Repeat;
   }
 
   constructor(base: Expression, multiple: number, dimension: number, graph: Graph, name?: string) {

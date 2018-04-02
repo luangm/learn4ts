@@ -9,12 +9,12 @@ This will replace learn4js.
 | ---               | ---           | :---: | :---: | :---: |
 | Add               | Arithmetic    | Y     | Y     | Y     |
 | Subtract          | Arithmetic    | Y     | Y     | Y     |
-| Multiply          | Arithmetic    | Y     | Y     |       |
-| Divide            | Arithmetic    | Y     | Y     |       |
+| Multiply          | Arithmetic    | Y     | Y     | Y     |
+| Divide            | Arithmetic    | Y     | Y     | Y     |
 | Maximum           | Arithmetic    | Y     |       |       |
 | Minimum           | Arithmetic    | Y     |       |       |
 | Modulo            | Arithmetic    | Y     |       |       |
-| MatMul            | Arithmetic    | Y     | Y     |       |
+| MatMul            | Arithmetic    | Y     | Y     | Y     |
 | Constant          | Core          | Y     |       |       |
 | Parameter         | Core          | Y     |       |       |
 | Variable          | Core          | Y     |       |       |
@@ -32,36 +32,36 @@ This will replace learn4js.
 | Assign            | Special       | Y     |       |       |
 | Fill              | Special       | Y     |       |       |
 | Group             | Special       | Y     |       |       |
-| Repeat            | Special       | Y     |       |       |
+| Repeat            | Special       | Y     |       | E     |
 | Reshape           | Special       | Y     | Y     | Y     |
-| Tile              | Special       |       |       |       |
+| Tile              | Special       | Y     |       | E     |
 | Slice             | Special       |       |       |       |
 | Concat            | Special       |       |       |       |
 | Stack             | Special       |       |       |       |
-| Absolute          | Transform     | Y     | Y     |       |
-| Exponential       | Transform     | Y     | Y     |       |
+| Absolute          | Transform     | Y     | Y     | Y     |
+| Exponential       | Transform     | Y     | Y     | Y     |
 | Expm1             | Transform     | Y     | Y     | Y     |
-| Logarithm         | Transform     | Y     | Y     |       |
+| Logarithm         | Transform     | Y     | Y     | Y     |
 | Log1p             | Transform     | Y     | Y     | Y     |
-| Negate            | Transform     | Y     | Y     |       |
+| Negate            | Transform     | Y     | Y     | Y     |
 | Reciprocal        | Transform     | Y     | Y     | Y     |
 | ReciprocalGrad    | Transform     | Y     |       |       |
-| Relu              | Transform     | Y     | Y     |       |
-| Elu               | Transform     |       |       |       |
-| Round             | Transform     | Y     |       |       |
-| Floor             | Transform     |       |       |       |
-| Ceil              | Transform     |       |       |       |
+| Relu              | Transform     | Y     | Y     | Y     |
+| Elu               | Transform     | Y     |       | E     |
+| Round             | Transform     | Y     |       | E     |
+| Floor             | Transform     | Y     |       | E     |
+| Ceil              | Transform     | Y     |       | E     |
 | Power             | Transform     |       |       |       |
 | RSqrt             | Transform     | Y     |       |       |
-| Sigmoid           | Transform     | Y     | Y     |       |
+| Sigmoid           | Transform     | Y     | Y     | Y     |
 | SigmoidGrad       | Transform     | Y     |       |       |
 | Sign              | Transform     | Y     |       |       |
 | Softmax           | Transform     | Y     |       |       |
 | SoftmaxGrad       | Transform     | Y     |       |       |
-| Softplus          | Transform     |       |       |       |
-| Sqrt              | Transform     | Y     | Y     |       |
+| Softplus          | Transform     | Y     |       | E     |
+| Sqrt              | Transform     | Y     | Y     | Y     |
 | SqrtGrad          | Transform     | Y     |       |       |
-| Square            | Transform     | Y     | Y     |       |
+| Square            | Transform     | Y     | Y     | Y     |
 | Step              | Transform     | Y     |       |       |
 | Sine              | Trigonometry  | Y     | Y     | Y     |
 | Cosine            | Trigonometry  | Y     | Y     | Y     |

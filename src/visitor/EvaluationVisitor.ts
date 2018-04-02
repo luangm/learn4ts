@@ -45,6 +45,11 @@ import Tanh from "../expression/transform/Tanh";
 import TanhGrad from "../expression/transform/TanhGrad";
 import Visitor, {VisitFunc} from "./Visitor";
 import {ExpressionTypes} from "../expression/ExpressionTypes";
+import Elu from "../expression/transform/Elu";
+import Ceil from "../expression/transform/Ceil";
+import Floor from "../expression/transform/Floor";
+import Softplus from "../expression/transform/Softplus";
+import Tile from "../expression/special/Tile";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -105,6 +110,7 @@ export default class EvaluationVisitor implements Visitor {
     // this.register(ExpressionTypes.AddN, AddN.evaluate);
     this.register(ExpressionTypes.Reshape, Reshape.evaluate);
     this.register(ExpressionTypes.Repeat, Repeat.evaluate);
+    this.register(ExpressionTypes.Tile, Tile.evaluate);
 
     this.register(ExpressionTypes.Absolute, Absolute.evaluate);
     this.register(ExpressionTypes.Cosine, Cosine.evaluate);
@@ -117,13 +123,17 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Reciprocal, Reciprocal.evaluate);
     this.register(ExpressionTypes.ReciprocalGrad, ReciprocalGrad.evaluate);
     this.register(ExpressionTypes.Relu, Relu.evaluate);
+    this.register(ExpressionTypes.Elu, Elu.evaluate);
     this.register(ExpressionTypes.Round, Round.evaluate);
+    this.register(ExpressionTypes.Floor, Floor.evaluate);
+    this.register(ExpressionTypes.Ceil, Ceil.evaluate);
     this.register(ExpressionTypes.RSqrt, RSqrt.evaluate);
     this.register(ExpressionTypes.Sigmoid, Sigmoid.evaluate);
     this.register(ExpressionTypes.SigmoidGrad, SigmoidGrad.evaluate);
     this.register(ExpressionTypes.Sign, Sign.evaluate);
     this.register(ExpressionTypes.Sine, Sine.evaluate);
     this.register(ExpressionTypes.Sinh, Sinh.evaluate);
+    this.register(ExpressionTypes.Softplus, Softplus.evaluate);
     this.register(ExpressionTypes.Softmax, Softmax.evaluate);
     this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.evaluate);
     this.register(ExpressionTypes.Sqrt, Sqrt.evaluate);

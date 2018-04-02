@@ -103,8 +103,20 @@ export default abstract class Expression {
     return this._gradMap ? this._gradMap.get(target.id) : null;
   }
 
+  softplus(): Expression {
+    return this.factory.softplus(this);
+  }
+
   log(): Expression {
     return this.factory.log(this);
+  }
+
+  tile(repeats: number[]): Expression {
+    return this.factory.tile(this, repeats);
+  }
+
+  repeat(multiple: number, dimension: number = -1) {
+    return this.factory.repeat(this, multiple, dimension);
   }
 
   log1p(): Expression {
@@ -151,8 +163,20 @@ export default abstract class Expression {
     return this.factory.relu(this);
   }
 
+  elu(): Expression {
+    return this.factory.elu(this);
+  }
+
   reshape(shape: number[]): Expression {
     return this.factory.reshape(this, shape);
+  }
+
+  floor(): Expression {
+    return this.factory.floor(this);
+  }
+
+  ceil(): Expression {
+    return this.factory.ceil(this);
   }
 
   round(): Expression {

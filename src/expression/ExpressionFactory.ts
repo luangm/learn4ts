@@ -46,6 +46,12 @@ import Tangent from "./transform/Tangent";
 import TangentGrad from "./transform/TangentGrad";
 import Tanh from "./transform/Tanh";
 import TanhGrad from "./transform/TanhGrad";
+import Elu from "./transform/Elu";
+import Floor from "./transform/Floor";
+import Ceil from "./transform/Ceil";
+import Softplus from "./transform/Softplus";
+import Repeat from "./special/Repeat";
+import Tile from "./special/Tile";
 
 export default class ExpressionFactory {
 
@@ -158,6 +164,18 @@ export default class ExpressionFactory {
     return dims == null ? base : this.addNode(new ReduceSum(base, dims, this.graph, name), base);
   }
 
+  elu(base: Expression, name?: string): Expression {
+    return this.addNode(new Elu(base, this.graph, name), base);
+  }
+
+  tile(base: Expression, repeats: number[], name?: string): Expression {
+    return this.addNode(new Tile(base, repeats, this.graph, name), base);
+  }
+
+  repeat(base: Expression, multiple: number, dimension: number = -1, name?: string): Expression {
+    return this.addNode(new Repeat(base, multiple, dimension, this.graph, name), base);
+  }
+
   relu(base: Expression, name?: string): Expression {
     return this.addNode(new Relu(base, this.graph, name), base);
   }
@@ -167,6 +185,14 @@ export default class ExpressionFactory {
       return base;
     }
     return this.addNode(new Reshape(base, shape, this.graph, name), base);
+  }
+
+  floor(base: Expression, name?: string): Expression {
+    return this.addNode(new Floor(base, this.graph, name), base);
+  }
+
+  ceil(base: Expression, name?: string): Expression {
+    return this.addNode(new Ceil(base, this.graph, name), base);
   }
 
   round(base: Expression, name?: string): Expression {
@@ -195,6 +221,10 @@ export default class ExpressionFactory {
 
   sinh(base: Expression, name?: string): Expression {
     return this.addNode(new Sinh(base, this.graph, name), base);
+  }
+
+  softplus(base: Expression, name?: string): Expression {
+    return this.addNode(new Softplus(base, this.graph, name), base);
   }
 
   softmax(base: Expression, name?: string): Expression {
