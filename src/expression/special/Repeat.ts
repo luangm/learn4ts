@@ -1,14 +1,14 @@
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Repeat extends Expression {
 
-  private _base: Expression;
-  private _dimension: number;
-  private _multiple: number;
-  private _shape: number[];
+  private readonly _base: Expression;
+  private readonly _dimension: number;
+  private readonly _multiple: number;
+  private readonly _shape: number[];
 
   get base() {
     return this._base;

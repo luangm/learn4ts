@@ -1,8 +1,8 @@
 import {Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Log1p extends TransformExpression {
 
@@ -20,7 +20,7 @@ export default class Log1p extends TransformExpression {
   }
 
   static gradients(node: Log1p, grad: Expression): Expression[] {
-    let one = node.factory.constant(Tensor.scalar(1), 'ONE');
+    let one = node.factory.constant(Tensor.scalar(1), "ONE");
     let baseGrad = node.base.add(one).reciprocal().multiply(grad);
     return [baseGrad];
   }

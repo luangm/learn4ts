@@ -24,3 +24,7 @@ test("AA", function () {
 
   console.log(abs.graph);
 });
+
+test("bb", function () {
+ console.log("ABC");
+});

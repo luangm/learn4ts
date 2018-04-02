@@ -1,12 +1,12 @@
 import {ShapeUtils, Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
 import BinaryExpression from "./BinaryExpression";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Minimum extends BinaryExpression {
 
-  private _shape: number[];
+  private readonly _shape: number[];
 
   get shape() {
     return this._shape;

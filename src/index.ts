@@ -10,6 +10,6 @@ export {
   Graph,
   Session,
   Learn4js
-}
+};
 
 export default Learn4js;

@@ -49,7 +49,7 @@ import TanhGrad from "./transform/TanhGrad";
 
 export default class ExpressionFactory {
 
-  private _graph: Graph;
+  private readonly _graph: Graph;
 
   get graph() {
     return this._graph;

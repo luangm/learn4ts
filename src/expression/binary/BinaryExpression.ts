@@ -3,21 +3,22 @@ import Expression from "../Expression";
 
 export default abstract class BinaryExpression extends Expression {
 
-  private _left: Expression;
-  get left() {
-    return this._left;
-  }
-
-  private _right: Expression;
-  get right() {
-    return this._right;
-  }
+  private readonly _left: Expression;
+  private readonly _right: Expression;
 
   get dependencies() {
     return [this.left, this.right];
   }
 
-  constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
+  get left() {
+    return this._left;
+  }
+
+  get right() {
+    return this._right;
+  }
+
+  protected constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
     super(graph, name);
     this._left = left;
     this._right = right;

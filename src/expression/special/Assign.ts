@@ -1,18 +1,12 @@
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Assign extends Expression {
 
-  private _ref: Expression;
-  private _source: Expression;
-
-  constructor(ref: Expression, source: Expression, graph: Graph, name?: string) {
-    super(graph, name);
-    this._ref = ref;
-    this._source = source;
-  }
+  private readonly _ref: Expression;
+  private readonly _source: Expression;
 
   get dependencies() {
     return [this._source];
@@ -32,6 +26,12 @@ export default class Assign extends Expression {
 
   get type() {
     return ExpressionTypes.Assign;
+  }
+
+  constructor(ref: Expression, source: Expression, graph: Graph, name?: string) {
+    super(graph, name);
+    this._ref = ref;
+    this._source = source;
   }
 
   static evaluate(node: Assign): Tensor {

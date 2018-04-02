@@ -5,7 +5,6 @@ import MatMul from "../expression/binary/MatMul";
 import Multiply from "../expression/binary/Multiply";
 import Subtract from "../expression/binary/Subtract";
 import Expression from "../expression/Expression";
-import ExpressionTypes from "../expression/ExpressionTypes";
 import Reshape from "../expression/special/Reshape";
 import Absolute from "../expression/transform/Absolute";
 import Cosh from "../expression/transform/Cosh";
@@ -25,21 +24,25 @@ import Square from "../expression/transform/Square";
 import Tangent from "../expression/transform/Tangent";
 import Tanh from "../expression/transform/Tanh";
 import Visitor, {VisitFunc} from "./Visitor";
+import {ExpressionTypes} from "../expression/ExpressionTypes";
 
 export default class ReverseGradientVisitor implements Visitor {
 
   private _gradMap: Map<number, Expression[]>;
-  private _graph: Graph;
+  private readonly _graph: Graph;
+  private readonly _registry: Map<string, VisitFunc>;
   private _startId: number; // if not 0, the visit already started
 
-  private _registry: Map<string, VisitFunc>;
+  get factory() {
+    return this.graph.factory;
+  }
+
+  get graph() {
+    return this._graph;
+  }
 
   get registry() {
     return this._registry;
-  }
-
-  get factory() {
-    return this._graph.factory;
   }
 
   constructor(graph: Graph) {

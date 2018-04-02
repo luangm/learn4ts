@@ -5,20 +5,20 @@ import EvaluationVisitor from "./visitor/EvaluationVisitor";
 
 export default class Session {
 
-  private _graph: Graph;
+  private readonly _graph: Graph;
   private _stateMap: Map<number, boolean>;
   private _valueMap: Map<number, Tensor>;
   private _visitor: EvaluationVisitor;
+
+  get graph() {
+    return this._graph;
+  }
 
   constructor(graph: Graph) {
     this._graph = graph;
     this._valueMap = new Map<number, Tensor>();
     this._stateMap = new Map<number, boolean>();
     this._visitor = new EvaluationVisitor(this);
-  }
-
-  get graph() {
-    return this._graph;
   }
 
   eval(node: Expression): Tensor {

@@ -7,10 +7,10 @@ export default abstract class Expression {
   static ID_COUNTER: number = 0;
 
   private _gradMap: Map<number, Expression>;
-  private _graph: Graph;
-  private _id: number;
-  private _name: string;
-  private _observers: Expression[];
+  private readonly _graph: Graph;
+  private readonly _id: number;
+  private readonly _name: string;
+  private readonly _observers: Expression[];
 
   get dependencies(): Expression[] {
     return [];
@@ -52,7 +52,7 @@ export default abstract class Expression {
     this.graph.session.setValue(this, val);
   }
 
-  constructor(graph: Graph, name?: string) {
+  protected constructor(graph: Graph, name?: string) {
     this._id = ++Expression.ID_COUNTER;
     this._graph = graph;
     this._name = name;

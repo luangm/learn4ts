@@ -1,16 +1,11 @@
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Parameter extends Expression {
 
-  private _initialValue: Tensor;
-
-  constructor(initialValue: Tensor, graph: Graph, name?: string) {
-    super(graph, name);
-    this._initialValue = initialValue;
-  }
+  private readonly _initialValue: Tensor;
 
   get initialValue() {
     return this._initialValue;
@@ -22,6 +17,11 @@ export default class Parameter extends Expression {
 
   get type() {
     return ExpressionTypes.Parameter;
+  }
+
+  constructor(initialValue: Tensor, graph: Graph, name?: string) {
+    super(graph, name);
+    this._initialValue = initialValue;
   }
 
   static evaluate(node: Parameter): Tensor {

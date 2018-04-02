@@ -1,19 +1,12 @@
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
-import Tangent from "../transform/Tangent";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Reshape extends Expression {
 
-  private _base: Expression;
-  private _shape: number[];
-
-  constructor(base: Expression, shape: number[], graph: Graph, name?: string) {
-    super(graph, name);
-    this._base = base;
-    this._shape = shape;
-  }
+  private readonly _base: Expression;
+  private readonly _shape: number[];
 
   get base() {
     return this._base;
@@ -29,6 +22,12 @@ export default class Reshape extends Expression {
 
   get type() {
     return ExpressionTypes.Reshape;
+  }
+
+  constructor(base: Expression, shape: number[], graph: Graph, name?: string) {
+    super(graph, name);
+    this._base = base;
+    this._shape = shape;
   }
 
   static evaluate(node: Reshape): Tensor {

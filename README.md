@@ -33,18 +33,18 @@ This will replace learn4js.
 | Fill              | Special       | Y     |       |       |
 | Group             | Special       | Y     |       |       |
 | Repeat            | Special       | Y     |       |       |
-| Reshape           | Special       | Y     |       |       |
+| Reshape           | Special       | Y     | Y     | Y     |
 | Tile              | Special       |       |       |       |
 | Slice             | Special       |       |       |       |
 | Concat            | Special       |       |       |       |
 | Stack             | Special       |       |       |       |
 | Absolute          | Transform     | Y     | Y     |       |
 | Exponential       | Transform     | Y     | Y     |       |
-| Expm1             | Transform     | Y     | Y     |       |
+| Expm1             | Transform     | Y     | Y     | Y     |
 | Logarithm         | Transform     | Y     | Y     |       |
-| Log1p             | Transform     | Y     | Y     |       |
+| Log1p             | Transform     | Y     | Y     | Y     |
 | Negate            | Transform     | Y     | Y     |       |
-| Reciprocal        | Transform     | Y     | Y     |       |
+| Reciprocal        | Transform     | Y     | Y     | Y     |
 | ReciprocalGrad    | Transform     | Y     |       |       |
 | Relu              | Transform     | Y     | Y     |       |
 | Elu               | Transform     |       |       |       |
@@ -66,9 +66,9 @@ This will replace learn4js.
 | Sine              | Trigonometry  | Y     | Y     |       |
 | Cosine            | Trigonometry  | Y     | Y     |       |
 | Tangent           | Trigonometry  | Y     | Y     |       |
-| Sinh              | Trigonometry  | Y     | Y     |       |
-| Cosh              | Trigonometry  | Y     | Y     |       |
-| Tanh              | Trigonometry  | Y     | Y     |       |
+| Sinh              | Trigonometry  | Y     | Y     | Y     |
+| Cosh              | Trigonometry  | Y     | Y     | Y     |
+| Tanh              | Trigonometry  | Y     | Y     | Y     |
 | TangentGrad       | Trigonometry  | Y     |       |       |
 | TanhGrad          | Trigonometry  | Y     |       |       |
 | Asin              | Trigonometry  |       |       |       |

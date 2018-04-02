@@ -1,18 +1,12 @@
 import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Fill extends Expression {
 
-  private _scalar: number;
-  private _shape: number[];
-
-  constructor(scalar: number, shape: number[], graph: Graph, name?: string) {
-    super(graph, name);
-    this._scalar = scalar;
-    this._shape = shape;
-  }
+  private readonly _scalar: number;
+  private readonly _shape: number[];
 
   get scalar() {
     return this._scalar;
@@ -24,6 +18,12 @@ export default class Fill extends Expression {
 
   get type() {
     return ExpressionTypes.Fill;
+  }
+
+  constructor(scalar: number, shape: number[], graph: Graph, name?: string) {
+    super(graph, name);
+    this._scalar = scalar;
+    this._shape = shape;
   }
 
   static evaluate(node: Fill): Tensor {

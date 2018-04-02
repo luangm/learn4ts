@@ -1,6 +1,6 @@
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 /**
  * AddN node is trying to add up multiple nodes at the same time.
@@ -9,12 +9,13 @@ import ExpressionTypes from "../ExpressionTypes";
  */
 export default class AddN extends Expression {
 
-  private _list: Expression[];
-  get list() {
+  private readonly _list: Expression[];
+
+  get dependencies(): Expression[] {
     return this._list;
   }
 
-  get dependencies(): Expression[] {
+  get list() {
     return this._list;
   }
 

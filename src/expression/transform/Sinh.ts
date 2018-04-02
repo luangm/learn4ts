@@ -1,8 +1,8 @@
 import {Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Sinh extends TransformExpression {
 

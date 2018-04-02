@@ -1,17 +1,17 @@
 import {Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
 import TransformExpression from "./TransformExpression";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class Square extends TransformExpression {
 
-  constructor(base: Expression, graph: Graph, name?: string) {
-    super(base, graph, name);
-  }
-
   get type() {
     return ExpressionTypes.Square;
+  }
+
+  constructor(base: Expression, graph: Graph, name?: string) {
+    super(base, graph, name);
   }
 
   static evaluate(node: Square): Tensor {
@@ -20,7 +20,7 @@ export default class Square extends TransformExpression {
   }
 
   static gradients(node: Square, grad: Expression): Expression[] {
-    let two = node.factory.constant(Tensor.scalar(2), 'TWO');
+    let two = node.factory.constant(Tensor.scalar(2), "TWO");
     let baseGrad = two.multiply(node.base).multiply(grad);
     return [baseGrad];
   }

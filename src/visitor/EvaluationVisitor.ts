@@ -11,7 +11,6 @@ import Subtract from "../expression/binary/Subtract";
 import Constant from "../expression/core/Constant";
 import Parameter from "../expression/core/Parameter";
 import Expression from "../expression/Expression";
-import ExpressionTypes from "../expression/ExpressionTypes";
 import ReduceSum from "../expression/reduction/ReduceSum";
 import Assign from "../expression/special/Assign";
 import Fill from "../expression/special/Fill";
@@ -45,15 +44,17 @@ import TangentGrad from "../expression/transform/TangentGrad";
 import Tanh from "../expression/transform/Tanh";
 import TanhGrad from "../expression/transform/TanhGrad";
 import Visitor, {VisitFunc} from "./Visitor";
+import {ExpressionTypes} from "../expression/ExpressionTypes";
 
 export default class EvaluationVisitor implements Visitor {
 
-  private _registry: Map<string, VisitFunc>;
+  private readonly _registry: Map<string, VisitFunc>;
+  private readonly _session: Session;
+
   get registry() {
     return this._registry;
   }
 
-  private _session: Session;
   get session() {
     return this._session;
   }

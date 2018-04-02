@@ -1,22 +1,23 @@
 import {Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import ExpressionTypes from "../ExpressionTypes";
 import BinaryExpression from "./BinaryExpression";
+import {ExpressionTypes} from "../ExpressionTypes";
 
 export default class MatMul extends BinaryExpression {
 
-  private _shape: number[];
+  private readonly _shape: number[];
+  private readonly _transposeLeft: boolean;
+  private readonly _transposeRight: boolean;
+
   get shape() {
     return this._shape;
   }
 
-  private _transposeLeft: boolean;
   get transposeLeft() {
     return this._transposeLeft;
   }
 
-  private _transposeRight: boolean;
   get transposeRight() {
     return this._transposeRight;
   }

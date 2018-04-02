@@ -1,6 +1,6 @@
-import Learn4js, {Tensor} from '../../src/index';
+import Learn4js, {Tensor} from "../../src/index";
 
-test('expm1', function () {
+test("expm1", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
@@ -17,7 +17,7 @@ test('expm1', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('log1p', function () {
+test("log1p", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
@@ -34,7 +34,7 @@ test('log1p', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('reshape', function () {
+test("reshape", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   // console.log(tensorA.toString());
@@ -53,7 +53,7 @@ test('reshape', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('reciprocal', function () {
+test("reciprocal", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
@@ -70,7 +70,7 @@ test('reciprocal', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('sinh', function () {
+test("sinh", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
@@ -87,7 +87,7 @@ test('sinh', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('cosh', function () {
+test("cosh", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
@@ -104,7 +104,7 @@ test('cosh', function () {
   expect(gradA.value).toEqual(expected);
 });
 
-test('tanh', function () {
+test("tanh", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);

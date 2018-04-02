@@ -6,16 +6,9 @@ import ReverseGradientVisitor from "./visitor/ReverseGradientVisitor";
 
 class Learn4js {
 
-  private _graph: Graph;
+  private readonly _graph: Graph;
   private _interactive: boolean;
-  private _session: Session;
-
-  constructor() {
-    this._interactive = false;
-    this._graph = new Graph("DEFAULT");
-    this._session = new Session(this._graph);
-    this._graph.session = this._session;
-  }
+  private readonly _session: Session;
 
   get activeGraph() {
     return this._graph;
@@ -27,6 +20,13 @@ class Learn4js {
 
   get factory() {
     return this._graph.factory;
+  }
+
+  constructor() {
+    this._interactive = false;
+    this._graph = new Graph("DEFAULT");
+    this._session = new Session(this._graph);
+    this._graph.session = this._session;
   }
 
   abs(base: Expression, name?: string): Expression {
