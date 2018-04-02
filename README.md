@@ -7,8 +7,8 @@ This will replace learn4js.
 
 | Op                | Type          | Eval  | Grad  | Test  |
 | ---               | ---           | :---: | :---: | :---: |
-| Add               | Arithmetic    | Y     | Y     |       |
-| Subtract          | Arithmetic    | Y     | Y     |       |
+| Add               | Arithmetic    | Y     | Y     | Y     |
+| Subtract          | Arithmetic    | Y     | Y     | Y     |
 | Multiply          | Arithmetic    | Y     | Y     |       |
 | Divide            | Arithmetic    | Y     | Y     |       |
 | Maximum           | Arithmetic    | Y     |       |       |
@@ -63,9 +63,9 @@ This will replace learn4js.
 | SqrtGrad          | Transform     | Y     |       |       |
 | Square            | Transform     | Y     | Y     |       |
 | Step              | Transform     | Y     |       |       |
-| Sine              | Trigonometry  | Y     | Y     |       |
-| Cosine            | Trigonometry  | Y     | Y     |       |
-| Tangent           | Trigonometry  | Y     | Y     |       |
+| Sine              | Trigonometry  | Y     | Y     | Y     |
+| Cosine            | Trigonometry  | Y     | Y     | Y     |
+| Tangent           | Trigonometry  | Y     | Y     | Y     |
 | Sinh              | Trigonometry  | Y     | Y     | Y     |
 | Cosh              | Trigonometry  | Y     | Y     | Y     |
 | Tanh              | Trigonometry  | Y     | Y     | Y     |

@@ -1,27 +1,30 @@
 import Learn4js, {Tensor} from "../../src/index";
 
-test("expm1", function () {
+test("sin", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
-  let result = a.expm1();
+  let result = a.sin();
   // console.log(result.value.toString());
 
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
-
+  
   // console.log(gradA.value.toString());
 
-  let expected = Tensor.create([[Math.exp(1), Math.exp(2), Math.exp(3)], [Math.exp(4), Math.exp(5), Math.exp(6)]]);
+  let expected = Tensor.create([
+    [Math.cos(1), Math.cos(2), Math.cos(3)],
+    [Math.cos(4), Math.cos(5), Math.cos(6)]
+  ]);
 
   expect(gradA.value).toEqual(expected);
 });
 
-test("log1p", function () {
+test("cos", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
   let a = Learn4js.constant(tensorA);
-  let result = a.log1p();
+  let result = a.cos();
   // console.log(result.value.toString());
 
   let grads = Learn4js.gradients(result, [a]);
@@ -29,18 +32,19 @@ test("log1p", function () {
 
   // console.log(gradA.value.toString());
 
-  let expected = Tensor.create([[1 / 2, 1 / 3, 1 / 4], [1 / 5, 1 / 6, 1 / 7]]);
+  let expected = Tensor.create([
+    [-Math.sin(1), -Math.sin(2), -Math.sin(3)],
+    [-Math.sin(4), -Math.sin(5), -Math.sin(6)]
+  ]);
 
   expect(gradA.value).toEqual(expected);
 });
 
-test("reshape", function () {
+test("tan", function () {
 
   let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
-  // console.log(tensorA.toString());
-
   let a = Learn4js.constant(tensorA);
-  let result = a.reshape([1, 6]);
+  let result = a.tan();
   // console.log(result.value.toString());
 
   let grads = Learn4js.gradients(result, [a]);
@@ -48,24 +52,10 @@ test("reshape", function () {
 
   // console.log(gradA.value.toString());
 
-  let expected = Tensor.create([[1, 1, 1], [1, 1, 1]]);
-
-  expect(gradA.value).toEqual(expected);
-});
-
-test("reciprocal", function () {
-
-  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
-  let a = Learn4js.constant(tensorA);
-  let result = a.reciprocal();
-  // console.log(result.value.toString());
-
-  let grads = Learn4js.gradients(result, [a]);
-  let gradA = grads[0];
-
-  // console.log(gradA.value.toString());
-
-  let expected = Tensor.create([[-1, -1 / 4, -1 / 9], [-1 / 16, -1 / 25, -1 / 36]]);
+  let expected = Tensor.create([
+    [1/Math.cos(1)**2, 1/Math.cos(2)**2, 1/Math.cos(3)**2],
+    [1/Math.cos(4)**2, 1/Math.cos(5)**2, 1/Math.cos(6)**2]
+  ]);
 
   expect(gradA.value).toEqual(expected);
 });
