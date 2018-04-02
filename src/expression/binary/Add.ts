@@ -21,13 +21,15 @@ export default class Add extends BinaryExpression {
     this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
-  static evaluate(node: Add): Tensor {
+  static evaluate(myNode: Expression): Tensor {
+    let node = myNode as Add;
     let left = node.left.value;
     let right = node.right.value;
     return TensorMath.add(left, right);
   }
 
-  static gradients(node: Add, grad: Expression): Expression[] {
+  static gradients(myNode: Expression, grad: Expression): Expression[] {
+    let node = myNode as Add;
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
     let leftGrad = grad.reduceSum(pair.left).reshape(node.left.shape);
     let rightGrad = grad.reduceSum(pair.right).reshape(node.right.shape);

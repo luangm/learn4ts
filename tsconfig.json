@@ -10,6 +10,7 @@
     "downlevelIteration": true,
     "importHelpers": true,
     "allowJs": true,
+//    "strict": true,
     "lib": ["DOM","ES6","DOM.Iterable","ScriptHost"]
   },
   "exclude": [

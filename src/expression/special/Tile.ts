@@ -34,6 +34,7 @@ export default class Tile extends Expression {
     super(graph, name);
     this._base = base;
     this._repeats = repeats;
+    this._shape = [];
     // if (dimension === -1) {
     //   let length = multiple;
     //   let baseShape = base.shape;

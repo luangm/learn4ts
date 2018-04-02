@@ -62,15 +62,17 @@ class Learn4js {
     let grads: Expression[] = [];
     for (let node of nodes) {
       let grad = target.getGradient(node);
-      // if (this.interactive) {
-      //   grad.eval();
-      // }
-      grads.push(grad);
+      if (grad) {
+        // if (this.interactive) {
+        //   grad.eval();
+        // }
+        grads.push(grad);
+      }
     }
     return grads;
   }
 
-  linspace(start: number, stop: number, num?: number): Tensor {
+  linspace(start: number, stop: number, num: number): Tensor {
     return Tensor.linspace(start, stop, num);
   }
 

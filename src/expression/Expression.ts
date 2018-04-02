@@ -6,10 +6,10 @@ export default abstract class Expression {
 
   static ID_COUNTER: number = 0;
 
-  private _gradMap: Map<number, Expression>;
+  private readonly _gradMap: Map<number, Expression>;
   private readonly _graph: Graph;
   private readonly _id: number;
-  private readonly _name: string;
+  private readonly _name?: string;
   private readonly _observers: Expression[];
 
   get dependencies(): Expression[] {
@@ -57,6 +57,7 @@ export default abstract class Expression {
     this._graph = graph;
     this._name = name;
     this._observers = [];
+    this._gradMap = new Map<number, Expression>();
   }
 
   abs(): Expression {
@@ -99,8 +100,8 @@ export default abstract class Expression {
     return this.factory.expm1(this);
   }
 
-  getGradient(target: Expression) {
-    return this._gradMap ? this._gradMap.get(target.id) : null;
+  getGradient(target: Expression): Expression | undefined {
+    return this._gradMap.get(target.id);
   }
 
   softplus(): Expression {
@@ -188,9 +189,6 @@ export default abstract class Expression {
   }
 
   setGradient(targetId: number, grad: Expression) {
-    if (!this._gradMap) {
-      this._gradMap = new Map<number, Expression>();
-    }
     this._gradMap.set(targetId, grad);
   }
 
