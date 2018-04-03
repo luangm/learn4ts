@@ -26,6 +26,10 @@ import Tanh from "../expression/transform/Tanh";
 import Visitor, {VisitFunc} from "./Visitor";
 import {ExpressionTypes} from "../expression/ExpressionTypes";
 import Elu from "../expression/transform/Elu";
+import Softplus from "../expression/transform/Softplus";
+import Maximum from "../expression/binary/Maximum";
+import Minimum from "../expression/binary/Minimum";
+import FloorMod from "../expression/binary/FloorMod";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -102,9 +106,9 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.Add, Add.gradients);
     this.register(ExpressionTypes.Divide, Divide.gradients);
     this.register(ExpressionTypes.MatMul, MatMul.gradients);
-    // this.register(ExpressionTypes.Maximum, Maximum.gradients);
-    // this.register(ExpressionTypes.Minimum, Minimum.gradients);
-    // this.register(ExpressionTypes.Modulo, Modulo.gradients);
+    this.register(ExpressionTypes.Maximum, Maximum.gradients);
+    this.register(ExpressionTypes.Minimum, Minimum.gradients);
+    this.register(ExpressionTypes.FloorMod, FloorMod.gradients);
     this.register(ExpressionTypes.Multiply, Multiply.gradients);
     this.register(ExpressionTypes.Subtract, Subtract.gradients);
 
@@ -134,6 +138,7 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Sign, Sign.gradients);
     this.register(ExpressionTypes.Sine, Sine.gradients);
     this.register(ExpressionTypes.Sinh, Sinh.gradients);
+    this.register(ExpressionTypes.Softplus, Softplus.gradients);
     // this.register(ExpressionTypes.Softmax, Softmax.gradients);
     // this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.gradients);
     this.register(ExpressionTypes.Sqrt, Sqrt.gradients);

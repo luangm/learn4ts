@@ -60,7 +60,6 @@ test("abs", function () {
   let expectedVal = Learn4js.create([[1, 2, 1], [1, 3, 0]]);
   expect(result.value).toEqual(expectedVal);
 
-
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
 
@@ -77,7 +76,6 @@ test("exp", function () {
   let expectedVal = Learn4js.create([[Math.exp(-1), Math.exp(-2), Math.exp(1)],
     [Math.exp(1), Math.exp(-3), Math.exp(0)]]);
   expect(result.value).toEqual(expectedVal);
-
 
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
@@ -97,7 +95,6 @@ test("log", function () {
     [Math.log(1), Math.log(-3), Math.log(0)]]);
   expect(result.value).toEqual(expectedVal);
 
-
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
 
@@ -114,7 +111,6 @@ test("negate", function () {
 
   let expectedVal = Learn4js.create([[1, 2, -1], [-1, 3, -0]]);
   expect(result.value).toEqual(expectedVal);
-
 
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
@@ -133,31 +129,37 @@ test("relu", function () {
   let expectedVal = Learn4js.create([[0, 0, 2], [4, 0, 0]]);
   expect(result.value).toEqual(expectedVal);
 
-
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
 
-  let expectedGrad = Tensor.create([[0, 0, 1],
-    [1, 0, 0]]);
+  let expectedGrad = Tensor.create([
+    [0, 0, 1],
+    [1, 0, 0]
+  ]);
   expect(gradA.value).toEqual(expectedGrad);
 });
 
 test("elu", function () {
 
-  let tensorA = Learn4js.create([[-1, -2, 2], [4, -3, 0]]);
+  let tensorA = Learn4js.create([[1, -2, 3], [-5, 4, 0]]);
   let a = Learn4js.constant(tensorA);
   let result = a.elu();
 
-  let expectedVal = Learn4js.create([[Math.expm1(-1), Math.expm1(-2), 2], [4, Math.expm1(-3), 0]]);
+  let expectedVal = Learn4js.create([[1, Math.expm1(-2), 3], [Math.expm1(-5), 4, 0]]);
   expect(result.value).toEqual(expectedVal);
 
+  console.log(result.value.toString());
   //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
   //
-  // let expectedGrad = Tensor.create([[0, 0, 1],
-  //     [1, 0, 0]]);
-  // expect(gradA.value).toEqual(expectedGrad);
+  let expectedGrad = Tensor.create([
+    [1, Math.exp(-2), 1],
+    [Math.exp(-5), 1, 1]
+  ]);
+  expect(gradA.value).toEqual(expectedGrad);
+  console.log(gradA.value.toString());
 });
 
 test("round", function () {
@@ -247,7 +249,6 @@ test("square", function () {
   let result = a.square();
   // console.log(result.value.toString());
 
-
   let expectedVal = Learn4js.create([
     [1, 4, 9], [0, 1, 4]
   ]);
@@ -293,26 +294,34 @@ test("sqrt", function () {
 
 test("softplus", function () {
 
-  let tensorA = Learn4js.create([[1, 2, 3], [0, -1, -2]]);
+  let tensorA = Learn4js.create([[1, 2, 3], [4, 5, 6]]);
   let a = Learn4js.constant(tensorA);
   let result = a.softplus();
-  // console.log(result.value.toString());
+  console.log(result.value.toString());
 
   let expectedVal = Learn4js.create([
-    [Math.log(Math.exp(1) + 1),Math.log(Math.exp(2) + 1), Math.log(Math.exp(3) + 1)],
-    [Math.log(Math.exp(0) + 1), Math.log(Math.exp(-1) + 1), Math.log(Math.exp(-2) + 1)]
+    [Math.log(Math.exp(1) + 1), Math.log(Math.exp(2) + 1), Math.log(Math.exp(3) + 1)],
+    [Math.log(Math.exp(4) + 1), Math.log(Math.exp(5) + 1), Math.log(Math.exp(6) + 1)]
   ]);
   expect(result.value).toEqual(expectedVal);
   //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
+  // let k = a.sigmoid();
+  // console.log(k.value.toString());
+
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  // console.log(gradA.value.toString());
   //
-  // // console.log(gradA.value.toString());
-  //
-  // let expected = Tensor.create([
-  //   [0.5 / Math.sqrt(1), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(3)],
-  //   [0.5 / Math.sqrt(0), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(4)]
-  // ]);
-  //
-  // expect(gradA.value).toEqual(expected);
+  let expected = Tensor.create([
+    [sigmoid(1), sigmoid(2), sigmoid(3)],
+    [sigmoid(4), sigmoid(5), sigmoid(6)]
+  ]);
+
+  expect(gradA.value).toEqual(expected);
+  console.log(gradA.value.toString());
 });
+
+function sigmoid(x: number): number {
+  return 1 / (1 + Math.exp(-x));
+}

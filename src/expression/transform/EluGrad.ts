@@ -4,23 +4,20 @@ import Expression from "../Expression";
 import TransformExpression from "./TransformExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
 
-export default class Elu extends TransformExpression {
+export default class EluGrad extends TransformExpression {
 
   get type() {
-    return ExpressionTypes.Elu;
+    return ExpressionTypes.EluGrad;
   }
 
   constructor(base: Expression, graph: Graph, name?: string) {
     super(base, graph, name);
   }
 
-  static evaluate(node: Elu): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as EluGrad;
     let base = node.base.value;
-    return TensorMath.elu(base);
+    return TensorMath.eluGrad(base);
   }
 
-  static gradients(node: Elu, grad: Expression): Expression[] {
-    let baseGrad = node.base.eluGrad().multiply(grad);
-    return [baseGrad];
-  }
 }

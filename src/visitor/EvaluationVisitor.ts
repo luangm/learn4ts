@@ -5,7 +5,7 @@ import Divide from "../expression/binary/Divide";
 import MatMul from "../expression/binary/MatMul";
 import Maximum from "../expression/binary/Maximum";
 import Minimum from "../expression/binary/Minimum";
-import Modulo from "../expression/binary/Modulo";
+import FloorMod from "../expression/binary/FloorMod";
 import Multiply from "../expression/binary/Multiply";
 import Subtract from "../expression/binary/Subtract";
 import Constant from "../expression/core/Constant";
@@ -50,6 +50,17 @@ import Ceil from "../expression/transform/Ceil";
 import Floor from "../expression/transform/Floor";
 import Softplus from "../expression/transform/Softplus";
 import Tile from "../expression/special/Tile";
+import EluGrad from "../expression/transform/EluGrad";
+import Equal from "../expression/comparison/Equal";
+import NotEqual from "../expression/comparison/NotEqual";
+import Greater from "../expression/comparison/Greater";
+import GreaterEqual from "../expression/comparison/GreaterEqual";
+import LessEqual from "../expression/comparison/LessEqual";
+import Less from "../expression/comparison/Less";
+import Conditional from "../expression/special/Conditional";
+import FloorDiv from "../expression/binary/FloorDiv";
+import TruncateMod from "../expression/binary/TruncateMod";
+import TruncateDiv from "../expression/binary/TruncateDiv";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -96,7 +107,10 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.MatMul, MatMul.evaluate);
     this.register(ExpressionTypes.Maximum, Maximum.evaluate);
     this.register(ExpressionTypes.Minimum, Minimum.evaluate);
-    this.register(ExpressionTypes.Modulo, Modulo.evaluate);
+    this.register(ExpressionTypes.FloorMod, FloorMod.evaluate);
+    this.register(ExpressionTypes.FloorDiv, FloorDiv.evaluate);
+    this.register(ExpressionTypes.TruncateMod, TruncateMod.evaluate);
+    this.register(ExpressionTypes.TruncateDiv, TruncateDiv.evaluate);
     this.register(ExpressionTypes.Multiply, Multiply.evaluate);
     this.register(ExpressionTypes.Subtract, Subtract.evaluate);
 
@@ -124,6 +138,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.ReciprocalGrad, ReciprocalGrad.evaluate);
     this.register(ExpressionTypes.Relu, Relu.evaluate);
     this.register(ExpressionTypes.Elu, Elu.evaluate);
+    this.register(ExpressionTypes.EluGrad, EluGrad.evaluate);
     this.register(ExpressionTypes.Round, Round.evaluate);
     this.register(ExpressionTypes.Floor, Floor.evaluate);
     this.register(ExpressionTypes.Ceil, Ceil.evaluate);
@@ -144,6 +159,14 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.TangentGrad, TangentGrad.evaluate);
     this.register(ExpressionTypes.Tanh, Tanh.evaluate);
     this.register(ExpressionTypes.TanhGrad, TanhGrad.evaluate);
+
+    this.register(ExpressionTypes.Equal, Equal.evaluate);
+    this.register(ExpressionTypes.NotEqual, NotEqual.evaluate);
+    this.register(ExpressionTypes.Greater, Greater.evaluate);
+    this.register(ExpressionTypes.GreaterEqual, GreaterEqual.evaluate);
+    this.register(ExpressionTypes.Less, Less.evaluate);
+    this.register(ExpressionTypes.LessEqual, LessEqual.evaluate);
+    this.register(ExpressionTypes.Conditional, Conditional.evaluate);
   }
 
 }

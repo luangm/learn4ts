@@ -5,7 +5,7 @@ import Divide from "./binary/Divide";
 import MatMul from "./binary/MatMul";
 import Maximum from "./binary/Maximum";
 import Minimum from "./binary/Minimum";
-import Modulo from "./binary/Modulo";
+import FloorMod from "./binary/FloorMod";
 import Multiply from "./binary/Multiply";
 import Subtract from "./binary/Subtract";
 import Constant from "./core/Constant";
@@ -52,6 +52,17 @@ import Ceil from "./transform/Ceil";
 import Softplus from "./transform/Softplus";
 import Repeat from "./special/Repeat";
 import Tile from "./special/Tile";
+import EluGrad from "./transform/EluGrad";
+import Conditional from "./special/Conditional";
+import Greater from "./comparison/Greater";
+import GreaterEqual from "./comparison/GreaterEqual";
+import Less from "./comparison/Less";
+import LessEqual from "./comparison/LessEqual";
+import Equal from "./comparison/Equal";
+import NotEqual from "./comparison/NotEqual";
+import FloorDiv from "./binary/FloorDiv";
+import TruncateMod from "./binary/TruncateMod";
+import TruncateDiv from "./binary/TruncateDiv";
 
 export default class ExpressionFactory {
 
@@ -84,6 +95,14 @@ export default class ExpressionFactory {
     return this.addNode(new Assign(ref, source, this.graph, name), source);
   }
 
+  ceil(base: Expression, name?: string): Expression {
+    return this.addNode(new Ceil(base, this.graph, name), base);
+  }
+
+  conditional(condition: Expression, truthy: Expression, falsy: Expression, name?: string): Expression {
+    return this.addNode(new Conditional(condition, truthy, falsy, this.graph, name), condition, truthy, falsy);
+  }
+
   constant(value: Tensor, name?: string): Expression {
     return this.addNode(new Constant(value, this.graph, name));
   }
@@ -100,6 +119,18 @@ export default class ExpressionFactory {
     return this.addNode(new Divide(left, right, this.graph, name), left, right);
   }
 
+  elu(base: Expression, name?: string): Expression {
+    return this.addNode(new Elu(base, this.graph, name), base);
+  }
+
+  eluGrad(base: Expression, name?: string): Expression {
+    return this.addNode(new EluGrad(base, this.graph, name), base);
+  }
+
+  equal(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new Equal(left, right, this.graph, name), left, right);
+  }
+
   exp(base: Expression, name?: string): Expression {
     return this.addNode(new Exponential(base, this.graph, name), base);
   }
@@ -112,8 +143,36 @@ export default class ExpressionFactory {
     return this.addNode(new Fill(scalar, shape, this.graph, name));
   }
 
+  floor(base: Expression, name?: string): Expression {
+    return this.addNode(new Floor(base, this.graph, name), base);
+  }
+
+  floorDiv(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new FloorDiv(left, right, this.graph, name), left, right);
+  }
+
+  floorMod(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new FloorMod(left, right, this.graph, name), left, right);
+  }
+
+  greater(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new Greater(left, right, this.graph, name), left, right);
+  }
+
+  greaterEqual(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new GreaterEqual(left, right, this.graph, name), left, right);
+  }
+
   group(list: Expression[], name?: string): Expression {
     return this.addNode(new Group(list, this.graph, name), ...list);
+  }
+
+  less(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new Less(left, right, this.graph, name), left, right);
+  }
+
+  lessEqual(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new LessEqual(left, right, this.graph, name), left, right);
   }
 
   log(base: Expression, name?: string): Expression {
@@ -136,16 +195,16 @@ export default class ExpressionFactory {
     return this.addNode(new Minimum(left, right, this.graph, name), left, right);
   }
 
-  mod(left: Expression, right: Expression, name?: string): Expression {
-    return this.addNode(new Modulo(left, right, this.graph, name), left, right);
-  }
-
   multiply(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Multiply(left, right, this.graph, name), left, right);
   }
 
   negate(base: Expression, name?: string): Expression {
     return this.addNode(new Negate(base, this.graph, name), base);
+  }
+
+  notEqual(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new NotEqual(left, right, this.graph, name), left, right);
   }
 
   parameter(value: Tensor, name?: string): Expression {
@@ -164,20 +223,12 @@ export default class ExpressionFactory {
     return dims == null ? base : this.addNode(new ReduceSum(base, dims, this.graph, name), base);
   }
 
-  elu(base: Expression, name?: string): Expression {
-    return this.addNode(new Elu(base, this.graph, name), base);
-  }
-
-  tile(base: Expression, repeats: number[], name?: string): Expression {
-    return this.addNode(new Tile(base, repeats, this.graph, name), base);
+  relu(base: Expression, name?: string): Expression {
+    return this.addNode(new Relu(base, this.graph, name), base);
   }
 
   repeat(base: Expression, multiple: number, dimension: number = -1, name?: string): Expression {
     return this.addNode(new Repeat(base, multiple, dimension, this.graph, name), base);
-  }
-
-  relu(base: Expression, name?: string): Expression {
-    return this.addNode(new Relu(base, this.graph, name), base);
   }
 
   reshape(base: Expression, shape: number[], name?: string): Expression {
@@ -185,14 +236,6 @@ export default class ExpressionFactory {
       return base;
     }
     return this.addNode(new Reshape(base, shape, this.graph, name), base);
-  }
-
-  floor(base: Expression, name?: string): Expression {
-    return this.addNode(new Floor(base, this.graph, name), base);
-  }
-
-  ceil(base: Expression, name?: string): Expression {
-    return this.addNode(new Ceil(base, this.graph, name), base);
   }
 
   round(base: Expression, name?: string): Expression {
@@ -223,16 +266,16 @@ export default class ExpressionFactory {
     return this.addNode(new Sinh(base, this.graph, name), base);
   }
 
-  softplus(base: Expression, name?: string): Expression {
-    return this.addNode(new Softplus(base, this.graph, name), base);
-  }
-
   softmax(base: Expression, name?: string): Expression {
     return this.addNode(new Softmax(base, this.graph, name), base);
   }
 
   softmaxGrad(base: Expression, name?: string): Expression {
     return this.addNode(new SoftmaxGrad(base, this.graph, name), base);
+  }
+
+  softplus(base: Expression, name?: string): Expression {
+    return this.addNode(new Softplus(base, this.graph, name), base);
   }
 
   sqrt(base: Expression, name?: string): Expression {
@@ -269,6 +312,18 @@ export default class ExpressionFactory {
 
   tanhGrad(base: Expression, name?: string): Expression {
     return this.addNode(new TanhGrad(base, this.graph, name), base);
+  }
+
+  tile(base: Expression, repeats: number[], name?: string): Expression {
+    return this.addNode(new Tile(base, repeats, this.graph, name), base);
+  }
+
+  truncDiv(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new TruncateDiv(left, right, this.graph, name), left, right);
+  }
+
+  truncMod(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new TruncateMod(left, right, this.graph, name), left, right);
   }
 
   variable(shape: number[], name?: string): Expression {

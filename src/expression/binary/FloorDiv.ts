@@ -4,7 +4,7 @@ import Expression from "../Expression";
 import BinaryExpression from "./BinaryExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
 
-export default class Add extends BinaryExpression {
+export default class FloorDiv extends BinaryExpression {
 
   private readonly _shape: number[];
 
@@ -13,7 +13,7 @@ export default class Add extends BinaryExpression {
   }
 
   get type() {
-    return ExpressionTypes.Add;
+    return ExpressionTypes.FloorDiv;
   }
 
   constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
@@ -22,17 +22,10 @@ export default class Add extends BinaryExpression {
   }
 
   static evaluate(expression: Expression): Tensor {
-    let node = expression as Add;
+    let node = expression as FloorDiv;
     let left = node.left.value;
     let right = node.right.value;
-    return TensorMath.add(left, right);
+    return TensorMath.floorDiv(left, right);
   }
 
-  static gradients(expression: Expression, grad: Expression): Expression[] {
-    let node = expression as Add;
-    let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = grad.reduceSum(pair.left).reshape(node.left.shape);
-    let rightGrad = grad.reduceSum(pair.right).reshape(node.right.shape);
-    return [leftGrad, rightGrad];
-  }
 }

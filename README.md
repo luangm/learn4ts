@@ -11,9 +11,12 @@ This will replace learn4js.
 | Subtract          | Arithmetic    | Y     | Y     | Y     |
 | Multiply          | Arithmetic    | Y     | Y     | Y     |
 | Divide            | Arithmetic    | Y     | Y     | Y     |
-| Maximum           | Arithmetic    | Y     |       |       |
-| Minimum           | Arithmetic    | Y     |       |       |
-| Modulo            | Arithmetic    | Y     |       |       |
+| Maximum           | Arithmetic    | Y     | Y     | Y     |
+| Minimum           | Arithmetic    | Y     | Y     | Y     |
+| FloorMod          | Arithmetic    | Y     | Y     | Y     |
+| FloorDiv          | Arithmetic    | Y     |       |       |
+| TruncateMod       | Arithmetic    | Y     |       |       |
+| TruncateDiv       | Arithmetic    | Y     |       |       |
 | MatMul            | Arithmetic    | Y     | Y     | Y     |
 | Constant          | Core          | Y     |       |       |
 | Parameter         | Core          | Y     |       |       |
@@ -47,7 +50,7 @@ This will replace learn4js.
 | Reciprocal        | Transform     | Y     | Y     | Y     |
 | ReciprocalGrad    | Transform     | Y     |       |       |
 | Relu              | Transform     | Y     | Y     | Y     |
-| Elu               | Transform     | Y     |       | E     |
+| Elu               | Transform     | Y     | Y     | Y     |
 | Round             | Transform     | Y     |       | E     |
 | Floor             | Transform     | Y     |       | E     |
 | Ceil              | Transform     | Y     |       | E     |
@@ -58,7 +61,7 @@ This will replace learn4js.
 | Sign              | Transform     | Y     |       |       |
 | Softmax           | Transform     | Y     |       |       |
 | SoftmaxGrad       | Transform     | Y     |       |       |
-| Softplus          | Transform     | Y     |       | E     |
+| Softplus          | Transform     | Y     | Y     | Y     |
 | Sqrt              | Transform     | Y     | Y     | Y     |
 | SqrtGrad          | Transform     | Y     |       |       |
 | Square            | Transform     | Y     | Y     | Y     |
@@ -86,5 +89,12 @@ This will replace learn4js.
 | ArgMax            | Index         |       |       |       |
 | CumSum            |               |       |       |       |
 | CumProd           |               |       |       |       |
-
+| Equal             | Comparison    | Y     |       |       |
+| NotEqual          | Comparison    | Y     |       |       |
+| NotEqual          | Comparison    | Y     |       |       |
+| Greater           | Comparison    | Y     |       |       |
+| GreaterEqual      | Comparison    | Y     |       |       |
+| Less              | Comparison    | Y     |       |       |
+| LessEqual         | Comparison    | Y     |       |       |
+| Conditional       | Ternary       | Y     |       |       |
 

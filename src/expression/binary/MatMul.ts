@@ -36,13 +36,15 @@ export default class MatMul extends BinaryExpression {
     this._shape[1] = transposeRight ? right.shape[0] : right.shape[1];
   }
 
-  static evaluate(node: MatMul): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as MatMul;
     let left = node.left.value;
     let right = node.right.value;
     return TensorMath.matmul(left, right, node.transposeLeft, node.transposeRight);
   }
 
-  static gradients(node: MatMul, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as MatMul;
     let leftGrad = grad.matmul(node.right, false, true);
     let rightGrad = node.left.matmul(grad, true, false);
     return [leftGrad, rightGrad];

@@ -5,7 +5,10 @@ export const enum ExpressionTypes {
   MatMul = "MatMul",
   Maximum = "Maximum",
   Minimum = "Minimum",
-  Modulo = "Modulo",
+  FloorMod = "FloorMod",
+  FloorDiv = "FloorDiv",
+  TruncateMod = "TruncateMod",
+  TruncateDiv = "TruncateDiv",
   Multiply = "Multiply",
   Subtract = "Subtract",
 
@@ -29,6 +32,7 @@ export const enum ExpressionTypes {
   Reciprocal = "Reciprocal",
   ReciprocalGrad = "ReciprocalGrad",
   Elu = "Elu",
+  EluGrad = "EluGrad",
   Relu = "Relu",
   Round = "Round",
   Floor = "Floor",
@@ -59,6 +63,13 @@ export const enum ExpressionTypes {
   Reshape = "Reshape",
   Repeat = "Repeat",
   Tile = "Tile",
-  Slice = "Slice"
+  Slice = "Slice",
 
+  Conditional = "Conditional",
+  Equal = "Equal",
+  NotEqual = "NotEqual",
+  Greater = "Greater",
+  GreaterEqual = "GreaterEqual",
+  Less = "Less",
+  LessEqual = "LessEqual"
 }

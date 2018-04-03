@@ -1,10 +1,10 @@
 import {ShapeUtils, Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import BinaryExpression from "./BinaryExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
+import ComparisonExpression from "./ComparisonExpression";
 
-export default class Modulo extends BinaryExpression {
+export default class Greater extends ComparisonExpression {
 
   private readonly _shape: number[];
 
@@ -13,7 +13,7 @@ export default class Modulo extends BinaryExpression {
   }
 
   get type() {
-    return ExpressionTypes.Modulo;
+    return ExpressionTypes.Greater;
   }
 
   constructor(left: Expression, right: Expression, graph: Graph, name?: string) {
@@ -21,10 +21,11 @@ export default class Modulo extends BinaryExpression {
     this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
-  static evaluate(node: Modulo): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Greater;
     let left = node.left.value;
     let right = node.right.value;
-    return TensorMath.mod(left, right);
+    return TensorMath.greater(left, right);
   }
 
 }

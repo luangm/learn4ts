@@ -76,6 +76,14 @@ export default abstract class Expression {
     this._observers.push(observer);
   }
 
+  ceil(): Expression {
+    return this.factory.ceil(this);
+  }
+
+  conditional(truthy: Expression, falsy: Expression): Expression {
+    return this.factory.conditional(this, truthy, falsy);
+  }
+
   cos(): Expression {
     return this.factory.cos(this);
   }
@@ -86,6 +94,18 @@ export default abstract class Expression {
 
   divide(other: Expression): Expression {
     return this.factory.divide(this, other);
+  }
+
+  elu(): Expression {
+    return this.factory.elu(this);
+  }
+
+  eluGrad(): Expression {
+    return this.factory.eluGrad(this);
+  }
+
+  equal(other: Expression): Expression {
+    return this.factory.equal(this, other);
   }
 
   eval(): Tensor {
@@ -100,31 +120,47 @@ export default abstract class Expression {
     return this.factory.expm1(this);
   }
 
+  floor(): Expression {
+    return this.factory.floor(this);
+  }
+
+  floorDiv(other: Expression): Expression {
+    return this.factory.floorDiv(this, other);
+  }
+
+  floorMod(other: Expression): Expression {
+    return this.factory.floorMod(this, other);
+  }
+
   getGradient(target: Expression): Expression | undefined {
     return this._gradMap.get(target.id);
   }
 
-  softplus(): Expression {
-    return this.factory.softplus(this);
+  greater(other: Expression): Expression {
+    return this.factory.greater(this, other);
+  }
+
+  greaterEqual(other: Expression): Expression {
+    return this.factory.greaterEqual(this, other);
+  }
+
+  less(other: Expression): Expression {
+    return this.factory.less(this, other);
+  }
+
+  lessEqual(other: Expression): Expression {
+    return this.factory.lessEqual(this, other);
   }
 
   log(): Expression {
     return this.factory.log(this);
   }
 
-  tile(repeats: number[]): Expression {
-    return this.factory.tile(this, repeats);
-  }
-
-  repeat(multiple: number, dimension: number = -1) {
-    return this.factory.repeat(this, multiple, dimension);
-  }
-
   log1p(): Expression {
     return this.factory.log1p(this);
   }
 
-  matmul(other: Expression, transposeLeft: boolean, transposeRight: boolean): Expression {
+  matmul(other: Expression, transposeLeft: boolean = false, transposeRight: boolean = false): Expression {
     return this.factory.matmul(this, other, transposeLeft, transposeRight);
   }
 
@@ -136,16 +172,16 @@ export default abstract class Expression {
     return this.factory.min(this, other);
   }
 
-  mod(other: Expression): Expression {
-    return this.factory.mod(this, other);
-  }
-
   multiply(other: Expression): Expression {
     return this.factory.multiply(this, other);
   }
 
   negate(): Expression {
     return this.factory.negate(this);
+  }
+
+  notEqual(other: Expression): Expression {
+    return this.factory.notEqual(this, other);
   }
 
   reciprocal(): Expression {
@@ -164,20 +200,12 @@ export default abstract class Expression {
     return this.factory.relu(this);
   }
 
-  elu(): Expression {
-    return this.factory.elu(this);
+  repeat(multiple: number, dimension: number = -1) {
+    return this.factory.repeat(this, multiple, dimension);
   }
 
   reshape(shape: number[]): Expression {
     return this.factory.reshape(this, shape);
-  }
-
-  floor(): Expression {
-    return this.factory.floor(this);
-  }
-
-  ceil(): Expression {
-    return this.factory.ceil(this);
   }
 
   round(): Expression {
@@ -210,6 +238,10 @@ export default abstract class Expression {
 
   sinh(): Expression {
     return this.factory.sinh(this);
+  }
+
+  softplus(): Expression {
+    return this.factory.softplus(this);
   }
 
   sqrt(): Expression {
@@ -246,5 +278,17 @@ export default abstract class Expression {
 
   tanhGrad(): Expression {
     return this.factory.tanhGrad(this);
+  }
+
+  tile(repeats: number[]): Expression {
+    return this.factory.tile(this, repeats);
+  }
+
+  truncDiv(other: Expression): Expression {
+    return this.factory.truncDiv(this, other);
+  }
+
+  truncMod(other: Expression): Expression {
+    return this.factory.truncMod(this, other);
   }
 }
