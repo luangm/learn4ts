@@ -21,7 +21,7 @@ This will replace learn4js.
 | Constant          | Core          | Y     |       |       |
 | Parameter         | Core          | Y     |       |       |
 | Variable          | Core          | Y     |       |       |
-| ReduceSum         | Reduction     | Y     |       |       |
+| ReduceSum         | Reduction     | Y     | Y     | Y     |
 | ReduceMean        | Reduction     |       |       |       |
 | ReduceMax         | Reduction     |       |       |       |
 | ReduceMin         | Reduction     |       |       |       |

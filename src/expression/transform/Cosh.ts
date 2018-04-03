@@ -14,12 +14,14 @@ export default class Cosh extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Cosh): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Cosh;
     let base = node.base.value;
     return TensorMath.cosh(base);
   }
 
-  static gradients(node: Cosh, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Cosh;
     let baseGrad = node.base.sinh().multiply(grad);
     return [baseGrad];
   }

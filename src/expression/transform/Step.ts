@@ -14,7 +14,8 @@ export default class Step extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Step): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Step;
     let base = node.base.value;
     return TensorMath.step(base);
   }

@@ -48,7 +48,8 @@ export default class Tile extends Expression {
     // }
   }
 
-  static evaluate(node: Tile): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Tile;
     let base = node.base.value;
     return base.tile(node.repeats);
   }

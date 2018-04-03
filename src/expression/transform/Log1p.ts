@@ -14,12 +14,14 @@ export default class Log1p extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Log1p): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Log1p;
     let base = node.base.value;
     return TensorMath.log1p(base);
   }
 
-  static gradients(node: Log1p, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Log1p;
     let one = node.factory.constant(Tensor.scalar(1), "ONE");
     let baseGrad = node.base.add(one).reciprocal().multiply(grad);
     return [baseGrad];

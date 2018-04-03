@@ -14,7 +14,8 @@ export default class Floor extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Floor): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Floor;
     let base = node.base.value;
     return TensorMath.floor(base);
   }

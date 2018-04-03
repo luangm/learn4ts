@@ -28,8 +28,8 @@ export default class Constant extends Expression {
     this._value = value;
   }
 
-  static evaluate(node: Constant): Tensor {
-    return node.value;
+  static evaluate(expression: Expression): Tensor {
+    return expression.value;
   }
 
 }

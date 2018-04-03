@@ -31,9 +31,16 @@ export default class Divide extends BinaryExpression {
   static gradients(expression: Expression, grad: Expression): Expression[] {
     let node = expression as Divide;
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = grad.divide(node.right).reduceSum(pair.left).reshape(node.left.shape);
-    let rightDiv2 = node.left.negate().divide(node.right).divide(node.right);
-    let rightGrad = grad.multiply(rightDiv2).reduceSum(pair.right).reshape(node.right.shape);
+    let leftGrad = grad.divide(node.right);
+    let rightGrad = grad.multiply(node.left.negate().divide(node.right).divide(node.right));
+    if (pair.left) {
+      leftGrad = leftGrad.reduceSum(pair.left);
+    }
+    if (pair.right) {
+      rightGrad = rightGrad.reduceSum(pair.right);
+    }
+    leftGrad = leftGrad.reshape(node.left.shape);
+    rightGrad = rightGrad.reshape(node.right.shape);
     return [leftGrad, rightGrad];
   }
 }

@@ -14,12 +14,14 @@ export default class Sigmoid extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Sigmoid): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Sigmoid;
     let base = node.base.value;
     return TensorMath.sigmoid(base);
   }
 
-  static gradients(node: Sigmoid, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Sigmoid;
     let baseGrad = node.base.sigmoidGrad().multiply(grad);
     return [baseGrad];
   }

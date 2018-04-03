@@ -14,7 +14,8 @@ export default class Softmax extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Softmax): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Softmax;
     let base = node.base.value;
     return TensorMath.softmax(base);
   }

@@ -220,7 +220,7 @@ export default class ExpressionFactory {
   }
 
   reduceSum(base: Expression, dims: number | number[], name?: string) {
-    return dims == null ? base : this.addNode(new ReduceSum(base, dims, this.graph, name), base);
+    return this.addNode(new ReduceSum(base, dims, this.graph, name), base);
   }
 
   relu(base: Expression, name?: string): Expression {

@@ -30,12 +30,14 @@ export default class Reshape extends Expression {
     this._shape = shape;
   }
 
-  static evaluate(node: Reshape): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Reshape;
     let base = node.base.value;
     return base.reshape(node.shape);
   }
 
-  static gradients(node: Reshape, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Reshape;
     let baseGrad = grad.reshape(node.base.shape);
     return [baseGrad];
   }

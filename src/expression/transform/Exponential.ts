@@ -14,12 +14,14 @@ export default class Exponential extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Exponential): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Exponential;
     let base = node.base.value;
     return TensorMath.exp(base);
   }
 
-  static gradients(node: Exponential, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Exponential;
     let baseGrad = node.multiply(grad);
     return [baseGrad];
   }

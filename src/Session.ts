@@ -21,12 +21,13 @@ export default class Session {
     this._visitor = new EvaluationVisitor(this);
   }
 
+  // TODO: If somehow cannot find value, should return Tensor.Empty or something.
   eval(node: Expression): Tensor {
     this._visitor.visit(node);
-    return this.getValue(node);
+    return this.getValue(node) || Tensor.create(0);
   }
 
-  getValue(node: Expression): Tensor {
+  getValue(node: Expression): Tensor | undefined {
     return this._valueMap.get(node.id);
   }
 

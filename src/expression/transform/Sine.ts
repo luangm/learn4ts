@@ -14,12 +14,14 @@ export default class Sine extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Sine): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Sine;
     let base = node.base.value;
     return TensorMath.sin(base);
   }
 
-  static gradients(node: Sine, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Sine;
     let baseGrad = node.base.cos().multiply(grad);
     return [baseGrad];
   }

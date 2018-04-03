@@ -14,7 +14,8 @@ export default class Round extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Round): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Round;
     let base = node.base.value;
     return TensorMath.round(base);
   }

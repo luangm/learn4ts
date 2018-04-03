@@ -14,7 +14,8 @@ export default class ReciprocalGrad extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: ReciprocalGrad): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as ReciprocalGrad;
     let base = node.base.value;
     return TensorMath.reciprocalGrad(base);
   }

@@ -14,12 +14,14 @@ export default class Absolute extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Absolute): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Absolute;
     let base = node.base.value;
     return TensorMath.abs(base);
   }
 
-  static gradients(node: Absolute, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Absolute;
     let baseGrad = node.base.sign().multiply(grad);
     return [baseGrad];
   }

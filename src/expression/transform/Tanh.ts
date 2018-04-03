@@ -14,12 +14,14 @@ export default class Tanh extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Tanh): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Tanh;
     let base = node.base.value;
     return TensorMath.tanh(base);
   }
 
-  static gradients(node: Tanh, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Tanh;
     let baseGrad = node.base.tanhGrad().multiply(grad);
     return [baseGrad];
   }

@@ -14,7 +14,8 @@ export default class TangentGrad extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: TangentGrad): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as TangentGrad;
     let base = node.base.value;
     return TensorMath.tanGrad(base);
   }

@@ -35,8 +35,14 @@ export default class Minimum extends BinaryExpression {
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
     let leftGrad = node.factory.conditional(mask, grad, zeros);
     let rightGrad = node.factory.conditional(mask, zeros, grad);
-    leftGrad = leftGrad.reduceSum(pair.left).reshape(node.left.shape);
-    rightGrad = rightGrad.reduceSum(pair.right).reshape(node.right.shape);
+    if (pair.left) {
+      leftGrad = leftGrad.reduceSum(pair.left);
+    }
+    if (pair.right) {
+      rightGrad = rightGrad.reduceSum(pair.right);
+    }
+    leftGrad = leftGrad.reshape(node.left.shape);
+    rightGrad = rightGrad.reshape(node.right.shape);
     return [leftGrad, rightGrad];
   }
 }

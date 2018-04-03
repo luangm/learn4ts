@@ -14,12 +14,14 @@ export default class Relu extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Relu): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Relu;
     let base = node.base.value;
     return TensorMath.relu(base);
   }
 
-  static gradients(node: Relu, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Relu;
     let baseGrad = node.base.step().multiply(grad);
     return [baseGrad];
   }

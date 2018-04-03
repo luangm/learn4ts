@@ -52,7 +52,8 @@ export default class Repeat extends Expression {
     }
   }
 
-  static evaluate(node: Repeat): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Repeat;
     let base = node.base.value;
     return base.repeat(node.multiple, node.dimension);
   }

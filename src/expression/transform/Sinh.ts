@@ -14,12 +14,14 @@ export default class Sinh extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Sinh): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Sinh;
     let base = node.base.value;
     return TensorMath.sinh(base);
   }
 
-  static gradients(node: Sinh, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Sinh;
     let baseGrad = node.base.cosh().multiply(grad);
     return [baseGrad];
   }

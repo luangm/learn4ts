@@ -14,7 +14,8 @@ export default class TanhGrad extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: TanhGrad): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as TanhGrad;
     let base = node.base.value;
     return TensorMath.tanhGrad(base);
   }

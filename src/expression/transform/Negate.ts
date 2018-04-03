@@ -14,12 +14,14 @@ export default class Negate extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Negate): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Negate;
     let base = node.base.value;
     return TensorMath.negate(base);
   }
 
-  static gradients(node: Negate, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Negate;
     let baseGrad = grad.negate();
     return [baseGrad];
   }

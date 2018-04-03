@@ -32,9 +32,18 @@ export default class FloorMod extends BinaryExpression {
   static gradients(expression: Expression, grad: Expression): Expression[] {
     let node = expression as FloorMod;
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = grad.reduceSum(pair.left).reshape(node.left.shape);
-    let floor = node.factory.floor(node.left.floorDiv(node.right));
-    let rightGrad = grad.multiply(floor.negate()).reduceSum(pair.right).reshape(node.right.shape);
+
+    let leftGrad = grad;
+    let rightGrad = grad.multiply(node.factory.floor(node.left.floorDiv(node.right)).negate());
+    if (pair.left) {
+      leftGrad = leftGrad.reduceSum(pair.left);
+    }
+    if (pair.right) {
+      rightGrad = rightGrad.reduceSum(pair.right);
+    }
+    leftGrad = leftGrad.reshape(node.left.shape);
+    rightGrad = rightGrad.reshape(node.right.shape);
+
     return [leftGrad, rightGrad];
   }
 }

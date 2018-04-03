@@ -34,7 +34,8 @@ export default class Assign extends Expression {
     this._source = source;
   }
 
-  static evaluate(node: Assign): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Assign;
     node.ref.value = node.source.value;
     return node.source.value;
   }

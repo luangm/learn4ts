@@ -14,12 +14,14 @@ export default class Reciprocal extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Reciprocal): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Reciprocal;
     let base = node.base.value;
     return TensorMath.reciprocal(base);
   }
 
-  static gradients(node: Reciprocal, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Reciprocal;
     let baseGrad = node.base.reciprocalGrad().multiply(grad);
     return [baseGrad];
   }

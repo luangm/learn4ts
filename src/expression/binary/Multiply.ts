@@ -21,16 +21,26 @@ export default class Multiply extends BinaryExpression {
     this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
-  static evaluate(node: Multiply): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Multiply;
     let left = node.left.value;
     let right = node.right.value;
     return TensorMath.multiply(left, right);
   }
 
-  static gradients(node: Multiply, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Multiply;
     let pair = ShapeUtils.getReductionIndices(node.left.shape, node.right.shape);
-    let leftGrad = grad.multiply(node.right).reduceSum(pair.left).reshape(node.left.shape);
-    let rightGrad = node.left.multiply(grad).reduceSum(pair.right).reshape(node.right.shape);
+    let leftGrad = grad.multiply(node.right);
+    let rightGrad = node.left.multiply(grad);
+    if (pair.left) {
+      leftGrad = leftGrad.reduceSum(pair.left);
+    }
+    if (pair.right) {
+      rightGrad = rightGrad.reduceSum(pair.right);
+    }
+    leftGrad = leftGrad.reshape(node.left.shape);
+    rightGrad = rightGrad.reshape(node.right.shape);
     return [leftGrad, rightGrad];
   }
 }

@@ -24,7 +24,8 @@ export default class Parameter extends Expression {
     this._initialValue = initialValue;
   }
 
-  static evaluate(node: Parameter): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Parameter;
     return node.initialValue;
   }
 

@@ -14,7 +14,8 @@ export default class RSqrt extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: RSqrt): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as RSqrt;
     let base = node.base.value;
     return TensorMath.rsqrt(base);
   }

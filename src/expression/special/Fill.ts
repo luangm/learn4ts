@@ -26,7 +26,8 @@ export default class Fill extends Expression {
     this._shape = shape;
   }
 
-  static evaluate(node: Fill): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Fill;
     return Tensor.zeros(node.shape).filli(node.scalar);
   }
 }

@@ -14,7 +14,8 @@ export default class Ceil extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Ceil): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Ceil;
     let base = node.base.value;
     return TensorMath.ceil(base);
   }

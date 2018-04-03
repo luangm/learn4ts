@@ -29,6 +29,7 @@ export default class Graph {
     this._name = name;
     this._nodes = new Map<number, Expression>();
     this._factory = new ExpressionFactory(this);
+    this._session = new Session(this);
   }
 
   addNode(node: Expression): Expression {

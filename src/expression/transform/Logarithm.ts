@@ -14,12 +14,14 @@ export default class Logarithm extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Logarithm): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Logarithm;
     let base = node.base.value;
     return TensorMath.log(base);
   }
 
-  static gradients(node: Logarithm, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Logarithm;
     let baseGrad = grad.divide(node.base);
     return [baseGrad];
   }

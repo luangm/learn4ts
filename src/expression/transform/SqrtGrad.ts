@@ -3,6 +3,7 @@ import Graph from "../../Graph";
 import Expression from "../Expression";
 import TransformExpression from "./TransformExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
+import Sqrt from "./Sqrt";
 
 export default class SqrtGrad extends TransformExpression {
 
@@ -14,7 +15,8 @@ export default class SqrtGrad extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: SqrtGrad): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as SqrtGrad;
     let base = node.base.value;
     return TensorMath.sqrtGrad(base);
   }

@@ -14,12 +14,14 @@ export default class Cosine extends TransformExpression {
     super(base, graph, name);
   }
 
-  static evaluate(node: Cosine): Tensor {
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as Cosine;
     let base = node.base.value;
     return TensorMath.cos(base);
   }
 
-  static gradients(node: Cosine, grad: Expression): Expression[] {
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Cosine;
     let baseGrad = node.base.sin().negate().multiply(grad);
     return [baseGrad];
   }

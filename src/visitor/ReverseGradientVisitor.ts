@@ -30,6 +30,7 @@ import Softplus from "../expression/transform/Softplus";
 import Maximum from "../expression/binary/Maximum";
 import Minimum from "../expression/binary/Minimum";
 import FloorMod from "../expression/binary/FloorMod";
+import ReduceSum from "../expression/reduction/ReduceSum";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -115,7 +116,7 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Constant, Constant.gradients);
     // this.register(ExpressionTypes.Parameter, Parameter.gradients);
 
-    // this.register(ExpressionTypes.ReduceSum, ReduceSum.gradients);
+    this.register(ExpressionTypes.ReduceSum, ReduceSum.gradients);
 
     // this.register(ExpressionTypes.Assign, Assign.gradients);
     // this.register(ExpressionTypes.Fill, Fill.gradients);
