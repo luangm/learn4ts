@@ -20,4 +20,7 @@ export default class Ceil extends TransformExpression {
     return TensorMath.ceil(base);
   }
 
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    return [expression.zeros()];
+  }
 }

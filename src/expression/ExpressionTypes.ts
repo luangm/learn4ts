@@ -15,6 +15,7 @@ export const enum ExpressionTypes {
   Constant = "Constant",
   Parameter = "Parameter",
   Variable = "Variable",
+  Zeros = "Zeros",
 
   ReduceSum = "ReduceSum",
   ReduceMax = "ReduceMax",
@@ -55,6 +56,13 @@ export const enum ExpressionTypes {
   TanhGrad = "TanhGrad",
   Cosh = "Cosh",
   Sinh = "Sinh",
+
+  Asin = "Asin",
+  Asinh = "Asinh",
+  Acos = "Acos",
+  Acosh = "Acosh",
+  Atan = "Atan",
+  Atanh = "Atanh",
 
   Fill = "Fill",
   Assign = "Assign",

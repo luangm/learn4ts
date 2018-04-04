@@ -111,6 +111,10 @@ class Learn4js {
   zeros(shape: number[]): Tensor {
     return Tensor.zeros(shape);
   }
+
+  sparseZeros(shape: number[]): Tensor {
+    return Tensor.sparseZeros(shape);
+  }
 }
 
 export default new Learn4js();

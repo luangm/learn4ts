@@ -20,4 +20,7 @@ export default class Round extends TransformExpression {
     return TensorMath.round(base);
   }
 
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    return [expression.zeros()];
+  }
 }

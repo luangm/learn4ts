@@ -63,6 +63,13 @@ import NotEqual from "./comparison/NotEqual";
 import FloorDiv from "./binary/FloorDiv";
 import TruncateMod from "./binary/TruncateMod";
 import TruncateDiv from "./binary/TruncateDiv";
+import Zeros from "./core/Zeros";
+import Asin from "./transform/Asin";
+import Asinh from "./transform/Asinh";
+import Acos from "./transform/Acos";
+import Acosh from "./transform/Acosh";
+import Atan from "./transform/Atan";
+import Atanh from "./transform/Atanh";
 
 export default class ExpressionFactory {
 
@@ -219,6 +226,10 @@ export default class ExpressionFactory {
     return this.addNode(new ReciprocalGrad(base, this.graph, name), base);
   }
 
+  zeros(shape: number[], name?: string) {
+    return this.addNode(new Zeros(shape, this.graph, name));
+  }
+
   reduceSum(base: Expression, dims: number | number[], name?: string) {
     return this.addNode(new ReduceSum(base, dims, this.graph, name), base);
   }
@@ -256,6 +267,30 @@ export default class ExpressionFactory {
 
   sign(base: Expression, name?: string): Expression {
     return this.addNode(new Sign(base, this.graph, name), base);
+  }
+
+  asinh(base: Expression, name?: string): Expression {
+    return this.addNode(new Asinh(base, this.graph, name), base);
+  }
+
+  acos(base: Expression, name?: string): Expression {
+    return this.addNode(new Acos(base, this.graph, name), base);
+  }
+
+  acosh(base: Expression, name?: string): Expression {
+    return this.addNode(new Acosh(base, this.graph, name), base);
+  }
+
+  atan(base: Expression, name?: string): Expression {
+    return this.addNode(new Atan(base, this.graph, name), base);
+  }
+
+  atanh(base: Expression, name?: string): Expression {
+    return this.addNode(new Atanh(base, this.graph, name), base);
+  }
+
+  asin(base: Expression, name?: string): Expression {
+    return this.addNode(new Asin(base, this.graph, name), base);
   }
 
   sin(base: Expression, name?: string): Expression {

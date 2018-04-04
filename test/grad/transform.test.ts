@@ -173,13 +173,11 @@ test("round", function () {
   ]);
   expect(result.value).toEqual(expectedVal);
 
-  //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
-  //
-  // let expectedGrad = Tensor.create([[0, 0, 1],
-  //     [1, 0, 0]]);
-  // expect(gradA.value).toEqual(expectedGrad);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGrad = Tensor.sparseZeros([2, 3]);
+  expect(gradA.value).toEqual(expectedGrad);
 });
 
 test("floor", function () {
@@ -193,13 +191,47 @@ test("floor", function () {
   ]);
   expect(result.value).toEqual(expectedVal);
 
-  //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
-  //
-  // let expectedGrad = Tensor.create([[0, 0, 1],
-  //     [1, 0, 0]]);
-  // expect(gradA.value).toEqual(expectedGrad);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGrad = Tensor.sparseZeros([2, 3]);
+  expect(gradA.value).toEqual(expectedGrad);
+});
+
+test("step", function () {
+
+  let tensorA = Learn4js.create([[-1.1, -2.1, 2.2], [0, -3.3, 0.8]]);
+  let a = Learn4js.constant(tensorA);
+  let result = a.step();
+
+  let expectedVal = Learn4js.create([
+    [0, 0, 1], [0, 0, 1]
+  ]);
+  expect(result.value).toEqual(expectedVal);
+
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGrad = Tensor.sparseZeros([2, 3]);
+  expect(gradA.value).toEqual(expectedGrad);
+});
+
+test("sign", function () {
+
+  let tensorA = Learn4js.create([[-1.1, -2.1, 2.2], [0, -3.3, 0.8]]);
+  let a = Learn4js.constant(tensorA);
+  let result = a.sign();
+
+  let expectedVal = Learn4js.create([
+    [-1, -1, 1], [0, -1, 1]
+  ]);
+  expect(result.value).toEqual(expectedVal);
+
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGrad = Tensor.sparseZeros([2, 3]);
+  expect(gradA.value).toEqual(expectedGrad);
 });
 
 test("ceil", function () {
@@ -213,13 +245,11 @@ test("ceil", function () {
   ]);
   expect(result.value).toEqual(expectedVal);
 
-  //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
-  //
-  // let expectedGrad = Tensor.create([[0, 0, 1],
-  //     [1, 0, 0]]);
-  // expect(gradA.value).toEqual(expectedGrad);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGrad = Tensor.sparseZeros([2, 3]);
+  expect(gradA.value).toEqual(expectedGrad);
 });
 
 test("sigmoid", function () {

@@ -232,6 +232,30 @@ export default abstract class Expression {
     return this.factory.sign(this);
   }
 
+  atanh(): Expression {
+    return this.factory.atanh(this);
+  }
+
+  atan(): Expression {
+    return this.factory.atan(this);
+  }
+
+  acosh(): Expression {
+    return this.factory.acosh(this);
+  }
+
+  acos(): Expression {
+    return this.factory.acos(this);
+  }
+
+  asinh(): Expression {
+    return this.factory.asinh(this);
+  }
+
+  asin(): Expression {
+    return this.factory.asin(this);
+  }
+
   sin(): Expression {
     return this.factory.sin(this);
   }
@@ -242,6 +266,10 @@ export default abstract class Expression {
 
   softplus(): Expression {
     return this.factory.softplus(this);
+  }
+
+  zeros(): Expression {
+    return this.factory.zeros(this.shape);
   }
 
   sqrt(): Expression {

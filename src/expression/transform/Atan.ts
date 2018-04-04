@@ -3,12 +3,11 @@ import Graph from "../../Graph";
 import Expression from "../Expression";
 import TransformExpression from "./TransformExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
-import Absolute from "./Absolute";
 
-export default class Floor extends TransformExpression {
+export default class Atan extends TransformExpression {
 
   get type() {
-    return ExpressionTypes.Floor;
+    return ExpressionTypes.Atan;
   }
 
   constructor(base: Expression, graph: Graph, name?: string) {
@@ -16,12 +15,15 @@ export default class Floor extends TransformExpression {
   }
 
   static evaluate(expression: Expression): Tensor {
-    let node = expression as Floor;
+    let node = expression as Atan;
     let base = node.base.value;
-    return TensorMath.floor(base);
+    return TensorMath.atan(base);
   }
 
   static gradients(expression: Expression, grad: Expression): Expression[] {
-    return [expression.zeros()];
+    let node = expression as Atan;
+    let one = node.factory.constant(Tensor.create(1), "ONE");
+    let baseGrad = grad.divide(node.base.square().add(one));
+    return [baseGrad];
   }
 }

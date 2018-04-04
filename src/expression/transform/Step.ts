@@ -20,4 +20,7 @@ export default class Step extends TransformExpression {
     return TensorMath.step(base);
   }
 
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    return [expression.zeros()];
+  }
 }

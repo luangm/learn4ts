@@ -20,4 +20,7 @@ export default class Sign extends TransformExpression {
     return TensorMath.sign(base);
   }
 
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    return [expression.zeros()];
+  }
 }

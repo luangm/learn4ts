@@ -21,6 +21,7 @@ This will replace learn4js.
 | Constant          | Core          | Y     |       |       |
 | Parameter         | Core          | Y     |       |       |
 | Variable          | Core          | Y     |       |       |
+| Zeros             | Core          | Y     |       |       |
 | ReduceSum         | Reduction     | Y     | Y     | Y     |
 | ReduceMean        | Reduction     |       |       |       |
 | ReduceMax         | Reduction     |       |       |       |
@@ -51,21 +52,21 @@ This will replace learn4js.
 | ReciprocalGrad    | Transform     | Y     |       |       |
 | Relu              | Transform     | Y     | Y     | Y     |
 | Elu               | Transform     | Y     | Y     | Y     |
-| Round             | Transform     | Y     |       | E     |
-| Floor             | Transform     | Y     |       | E     |
-| Ceil              | Transform     | Y     |       | E     |
+| Round             | Transform     | Y     | Y     | Y     |
+| Floor             | Transform     | Y     | Y     | Y     |
+| Ceil              | Transform     | Y     | Y     | Y     |
 | Power             | Transform     |       |       |       |
 | RSqrt             | Transform     | Y     |       |       |
 | Sigmoid           | Transform     | Y     | Y     | Y     |
 | SigmoidGrad       | Transform     | Y     |       |       |
-| Sign              | Transform     | Y     |       |       |
+| Sign              | Transform     | Y     | Y     | Y     |
 | Softmax           | Transform     | Y     |       |       |
 | SoftmaxGrad       | Transform     | Y     |       |       |
 | Softplus          | Transform     | Y     | Y     | Y     |
 | Sqrt              | Transform     | Y     | Y     | Y     |
 | SqrtGrad          | Transform     | Y     |       |       |
 | Square            | Transform     | Y     | Y     | Y     |
-| Step              | Transform     | Y     |       |       |
+| Step              | Transform     | Y     | Y     | Y     |
 | Sine              | Trigonometry  | Y     | Y     | Y     |
 | Cosine            | Trigonometry  | Y     | Y     | Y     |
 | Tangent           | Trigonometry  | Y     | Y     | Y     |
@@ -74,12 +75,12 @@ This will replace learn4js.
 | Tanh              | Trigonometry  | Y     | Y     | Y     |
 | TangentGrad       | Trigonometry  | Y     |       |       |
 | TanhGrad          | Trigonometry  | Y     |       |       |
-| Asin              | Trigonometry  |       |       |       |
-| Acos              | Trigonometry  |       |       |       |
-| Atan              | Trigonometry  |       |       |       |
-| Asinh             | Trigonometry  |       |       |       |
-| Acosh             | Trigonometry  |       |       |       |
-| Atanh             | Trigonometry  |       |       |       |
+| Asin              | Trigonometry  | Y     | Y     | Y     |
+| Acos              | Trigonometry  | Y     | Y     | Y     |
+| Atan              | Trigonometry  | Y     | Y     | Y     |
+| Asinh             | Trigonometry  | Y     | Y     | Y     |
+| Acosh             | Trigonometry  | Y     | Y     | Y     |
+| Atanh             | Trigonometry  | Y     | Y     | Y     |
 | Im2Col            | CNN           |       |       |       |
 | Col2Im            | CNN           |       |       |       |
 | Conv2d            | CNN           |       |       |       |

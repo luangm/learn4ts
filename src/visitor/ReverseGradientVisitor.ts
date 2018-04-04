@@ -31,6 +31,17 @@ import Maximum from "../expression/binary/Maximum";
 import Minimum from "../expression/binary/Minimum";
 import FloorMod from "../expression/binary/FloorMod";
 import ReduceSum from "../expression/reduction/ReduceSum";
+import Floor from "../expression/transform/Floor";
+import Ceil from "../expression/transform/Ceil";
+import Round from "../expression/transform/Round";
+import Sign from "../expression/transform/Sign";
+import Step from "../expression/transform/Step";
+import Asin from "../expression/transform/Asin";
+import Asinh from "../expression/transform/Asinh";
+import Acos from "../expression/transform/Acos";
+import Acosh from "../expression/transform/Acosh";
+import Atan from "../expression/transform/Atan";
+import Atanh from "../expression/transform/Atanh";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -122,8 +133,7 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Fill, Fill.gradients);
 
     this.register(ExpressionTypes.Absolute, Absolute.gradients);
-    this.register(ExpressionTypes.Cosine, Cosine.gradients);
-    this.register(ExpressionTypes.Cosh, Cosh.gradients);
+
     this.register(ExpressionTypes.Expm1, Expm1.gradients);
     this.register(ExpressionTypes.Exponential, Exponential.gradients);
     this.register(ExpressionTypes.Log1p, Log1p.gradients);
@@ -136,21 +146,37 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.RSqrt, RSqrt.gradients);
     this.register(ExpressionTypes.Sigmoid, Sigmoid.gradients);
     // this.register(ExpressionTypes.SigmoidGrad, SigmoidGrad.gradients);
-    // this.register(ExpressionTypes.Sign, Sign.gradients);
-    this.register(ExpressionTypes.Sine, Sine.gradients);
-    this.register(ExpressionTypes.Sinh, Sinh.gradients);
+    this.register(ExpressionTypes.Sign, Sign.gradients);
+
     this.register(ExpressionTypes.Softplus, Softplus.gradients);
     // this.register(ExpressionTypes.Softmax, Softmax.gradients);
     // this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.gradients);
     this.register(ExpressionTypes.Sqrt, Sqrt.gradients);
     // this.register(ExpressionTypes.SqrtGrad, SqrtGrad.gradients);
     this.register(ExpressionTypes.Square, Square.gradients);
-    // this.register(ExpressionTypes.Step, Step.gradients);
-    this.register(ExpressionTypes.Tangent, Tangent.gradients);
+    this.register(ExpressionTypes.Step, Step.gradients);
+
     // this.register(ExpressionTypes.TangentGrad, TangentGrad.gradients);
-    this.register(ExpressionTypes.Tanh, Tanh.gradients);
+
 
     this.register(ExpressionTypes.Reshape, Reshape.gradients);
+    this.register(ExpressionTypes.Floor, Floor.gradients);
+    this.register(ExpressionTypes.Ceil, Ceil.gradients);
+    this.register(ExpressionTypes.Round, Round.gradients);
+
+
+    this.register(ExpressionTypes.Sine, Sine.gradients);
+    this.register(ExpressionTypes.Sinh, Sinh.gradients);
+    this.register(ExpressionTypes.Asin, Asin.gradients);
+    this.register(ExpressionTypes.Asinh, Asinh.gradients);
+    this.register(ExpressionTypes.Cosine, Cosine.gradients);
+    this.register(ExpressionTypes.Cosh, Cosh.gradients);
+    this.register(ExpressionTypes.Acos, Acos.gradients);
+    this.register(ExpressionTypes.Acosh, Acosh.gradients);
+    this.register(ExpressionTypes.Tangent, Tangent.gradients);
+    this.register(ExpressionTypes.Tanh, Tanh.gradients);
+    this.register(ExpressionTypes.Atan, Atan.gradients);
+    this.register(ExpressionTypes.Atanh, Atanh.gradients);
   }
 
 }

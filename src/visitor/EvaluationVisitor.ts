@@ -61,6 +61,13 @@ import Conditional from "../expression/special/Conditional";
 import FloorDiv from "../expression/binary/FloorDiv";
 import TruncateMod from "../expression/binary/TruncateMod";
 import TruncateDiv from "../expression/binary/TruncateDiv";
+import Zeros from "../expression/core/Zeros";
+import Asin from "../expression/transform/Asin";
+import Asinh from "../expression/transform/Asinh";
+import Acos from "../expression/transform/Acos";
+import Acosh from "../expression/transform/Acosh";
+import Atan from "../expression/transform/Atan";
+import Atanh from "../expression/transform/Atanh";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -116,6 +123,7 @@ export default class EvaluationVisitor implements Visitor {
 
     this.register(ExpressionTypes.Constant, Constant.evaluate);
     this.register(ExpressionTypes.Parameter, Parameter.evaluate);
+    this.register(ExpressionTypes.Zeros, Zeros.evaluate);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.evaluate);
 
@@ -167,6 +175,13 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Less, Less.evaluate);
     this.register(ExpressionTypes.LessEqual, LessEqual.evaluate);
     this.register(ExpressionTypes.Conditional, Conditional.evaluate);
+
+    this.register(ExpressionTypes.Asin, Asin.evaluate);
+    this.register(ExpressionTypes.Asinh, Asinh.evaluate);
+    this.register(ExpressionTypes.Acos, Acos.evaluate);
+    this.register(ExpressionTypes.Acosh, Acosh.evaluate);
+    this.register(ExpressionTypes.Atan, Atan.evaluate);
+    this.register(ExpressionTypes.Atanh, Atanh.evaluate);
   }
 
 }
