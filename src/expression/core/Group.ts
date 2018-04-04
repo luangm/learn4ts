@@ -1,6 +1,7 @@
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import {ExpressionTypes} from "../ExpressionTypes";
+import {Tensor} from "tensor4js";
 
 export default class Group extends Expression {
 

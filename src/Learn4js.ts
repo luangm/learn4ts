@@ -3,6 +3,7 @@ import Graph from "./Graph";
 import Session from "./Session";
 import Expression from "./expression/Expression";
 import ReverseGradientVisitor from "./visitor/ReverseGradientVisitor";
+import GradientDescentOptimizer from "./optimizer/GradientDescentOptimizer";
 
 class Learn4js {
 
@@ -53,6 +54,10 @@ class Learn4js {
 
   create(array: any): Tensor {
     return Tensor.create(array);
+  }
+
+  gradientDescent(learnRate: number = 0.001) {
+    return new GradientDescentOptimizer(this.activeGraph, {learnRate});
   }
 
   gradients(target: Expression, nodes: Expression[]): Expression[] {
@@ -108,12 +113,16 @@ class Learn4js {
     return this.factory.sign(base, name);
   }
 
-  zeros(shape: number[]): Tensor {
-    return Tensor.zeros(shape);
-  }
-
   sparseZeros(shape: number[]): Tensor {
     return Tensor.sparseZeros(shape);
+  }
+
+  variable(shape: number[], name?: string): Expression {
+    return this.factory.variable(shape, name);
+  }
+
+  zeros(shape: number[]): Tensor {
+    return Tensor.zeros(shape);
   }
 }
 

@@ -1,6 +1,7 @@
 import Tensor from "tensor4js/dist/types/Tensor";
 import Graph from "../Graph";
 import Visitor from "../visitor/Visitor";
+import {ShapeUtils} from "tensor4js";
 
 export default abstract class Expression {
 
@@ -22,6 +23,10 @@ export default abstract class Expression {
 
   get graph() {
     return this._graph;
+  }
+
+  get hasGradients(): boolean {
+    return this._gradMap.size > 0;
   }
 
   get id() {
@@ -49,6 +54,9 @@ export default abstract class Expression {
   }
 
   set value(val: Tensor) {
+    if (!ShapeUtils.shapeEquals(val.shape, this.shape)) {
+      throw new Error("Cannot assign value with a different shape.");
+    }
     this.graph.session.setValue(this, val);
   }
 
@@ -90,6 +98,10 @@ export default abstract class Expression {
 
   asinh(): Expression {
     return this.factory.asinh(this);
+  }
+
+  assign(newValue: Expression): Expression {
+    return this.factory.assign(this, newValue);
   }
 
   atan(): Expression {

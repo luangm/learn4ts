@@ -12,7 +12,7 @@ import Constant from "../expression/core/Constant";
 import Parameter from "../expression/core/Parameter";
 import Expression from "../expression/Expression";
 import ReduceSum from "../expression/reduction/ReduceSum";
-import Assign from "../expression/special/Assign";
+import Assign from "../expression/core/Assign";
 import Fill from "../expression/special/Fill";
 import Reshape from "../expression/special/Reshape";
 import Absolute from "../expression/transform/Absolute";
@@ -74,6 +74,7 @@ import ReduceMin from "../expression/reduction/ReduceMin";
 import ReduceProd from "../expression/reduction/ReduceProd";
 import ArgMax from "../expression/index/ArgMax";
 import ArgMin from "../expression/index/ArgMin";
+import Group from "../expression/core/Group";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -103,14 +104,21 @@ export default class EvaluationVisitor implements Visitor {
       return;
     }
 
+    // console.log("Visit", node.type, node.id);
+
+    for (let dependency of node.dependencies) {
+      dependency.accept(this, params);
+    }
+
     let method = this.registry.get(node.type);
     if (method) {
-      for (let dependency of node.dependencies) {
-        dependency.accept(this, params);
-      }
-
       let result = method(node, params);
-      this.session.setValue(node, result);
+      if (result) {
+        // console.log(node.type, result.toString());
+        this.session.setValue(node, result);
+      }
+    } else {
+      // console.warn("No evaluate method for node: " + node.type);
     }
   }
 
@@ -130,6 +138,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Constant, Constant.evaluate);
     this.register(ExpressionTypes.Parameter, Parameter.evaluate);
     this.register(ExpressionTypes.Zeros, Zeros.evaluate);
+    // this.register(ExpressionTypes.Group, Group.evaluate);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.evaluate);
     this.register(ExpressionTypes.ReduceMean, ReduceMean.evaluate);
