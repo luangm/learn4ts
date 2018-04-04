@@ -70,6 +70,10 @@ import Acos from "./transform/Acos";
 import Acosh from "./transform/Acosh";
 import Atan from "./transform/Atan";
 import Atanh from "./transform/Atanh";
+import ReduceMean from "./reduction/ReduceMean";
+import ReduceMax from "./reduction/ReduceMax";
+import ReduceMin from "./reduction/ReduceMin";
+import ReduceProd from "./reduction/ReduceProd";
 
 export default class ExpressionFactory {
 
@@ -87,6 +91,14 @@ export default class ExpressionFactory {
     return this.addNode(new Absolute(base, this.graph, name), base);
   }
 
+  acos(base: Expression, name?: string): Expression {
+    return this.addNode(new Acos(base, this.graph, name), base);
+  }
+
+  acosh(base: Expression, name?: string): Expression {
+    return this.addNode(new Acosh(base, this.graph, name), base);
+  }
+
   add(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Add(left, right, this.graph, name), left, right);
   }
@@ -98,8 +110,24 @@ export default class ExpressionFactory {
     return this.addNode(new AddN(list, this.graph, name), ...list);
   }
 
+  asin(base: Expression, name?: string): Expression {
+    return this.addNode(new Asin(base, this.graph, name), base);
+  }
+
+  asinh(base: Expression, name?: string): Expression {
+    return this.addNode(new Asinh(base, this.graph, name), base);
+  }
+
   assign(ref: Expression, source: Expression, name?: string): Expression {
     return this.addNode(new Assign(ref, source, this.graph, name), source);
+  }
+
+  atan(base: Expression, name?: string): Expression {
+    return this.addNode(new Atan(base, this.graph, name), base);
+  }
+
+  atanh(base: Expression, name?: string): Expression {
+    return this.addNode(new Atanh(base, this.graph, name), base);
   }
 
   ceil(base: Expression, name?: string): Expression {
@@ -226,8 +254,20 @@ export default class ExpressionFactory {
     return this.addNode(new ReciprocalGrad(base, this.graph, name), base);
   }
 
-  zeros(shape: number[], name?: string) {
-    return this.addNode(new Zeros(shape, this.graph, name));
+  reduceMax(base: Expression, dims: number | number[], name?: string) {
+    return this.addNode(new ReduceMax(base, dims, this.graph, name), base);
+  }
+
+  reduceMean(base: Expression, dims: number | number[], name?: string) {
+    return this.addNode(new ReduceMean(base, dims, this.graph, name), base);
+  }
+
+  reduceMin(base: Expression, dims: number | number[], name?: string) {
+    return this.addNode(new ReduceMin(base, dims, this.graph, name), base);
+  }
+
+  reduceProd(base: Expression, dims: number | number[], name?: string) {
+    return this.addNode(new ReduceProd(base, dims, this.graph, name), base);
   }
 
   reduceSum(base: Expression, dims: number | number[], name?: string) {
@@ -267,30 +307,6 @@ export default class ExpressionFactory {
 
   sign(base: Expression, name?: string): Expression {
     return this.addNode(new Sign(base, this.graph, name), base);
-  }
-
-  asinh(base: Expression, name?: string): Expression {
-    return this.addNode(new Asinh(base, this.graph, name), base);
-  }
-
-  acos(base: Expression, name?: string): Expression {
-    return this.addNode(new Acos(base, this.graph, name), base);
-  }
-
-  acosh(base: Expression, name?: string): Expression {
-    return this.addNode(new Acosh(base, this.graph, name), base);
-  }
-
-  atan(base: Expression, name?: string): Expression {
-    return this.addNode(new Atan(base, this.graph, name), base);
-  }
-
-  atanh(base: Expression, name?: string): Expression {
-    return this.addNode(new Atanh(base, this.graph, name), base);
-  }
-
-  asin(base: Expression, name?: string): Expression {
-    return this.addNode(new Asin(base, this.graph, name), base);
   }
 
   sin(base: Expression, name?: string): Expression {
@@ -363,6 +379,10 @@ export default class ExpressionFactory {
 
   variable(shape: number[], name?: string): Expression {
     return this.addNode(new Variable(shape, this.graph, name));
+  }
+
+  zeros(shape: number[], name?: string) {
+    return this.addNode(new Zeros(shape, this.graph, name));
   }
 
   private addNode(node: Expression, ...dependencies: Expression[]): Expression {

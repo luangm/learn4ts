@@ -124,12 +124,12 @@ test("asin", function () {
     [Math.asin(0), Math.asin(0.5), Math.asin(1)]]);
 
   expect(result.value).toEqual(expVal);
-  // console.log(result.value.toString());
+  console.log(result.value.toString());
 
   let grads = Learn4js.gradients(result, [a]);
   let gradA = grads[0];
   //
-  // console.log(gradA.value.toString());
+  console.log(gradA.value.toString());
   //
   let expected = Tensor.create([
     [1 / Math.sqrt(1 - (-1) ** 2), 1 / Math.sqrt(1 - 0.5 ** 2), 1 / Math.sqrt(1 - 0 ** 2)],
@@ -243,12 +243,12 @@ test("atan", function () {
 
 test("atanh", function () {
 
-  let tensorA = Learn4js.create([[-0.8, -0.5, 0], [0, 0.5, 0.8]]);
+  let tensorA = Learn4js.create([[-1, -0.5, 0], [0, 0.5, 1]]);
   let a = Learn4js.constant(tensorA);
   let result = a.atanh();
 
-  let expVal = Tensor.create([[Math.atanh(-0.8), Math.atanh(-0.5), Math.atanh(0)],
-    [Math.atanh(0), Math.atanh(0.5), Math.atanh(0.8)]]);
+  let expVal = Tensor.create([[Math.atanh(-1), Math.atanh(-0.5), Math.atanh(0)],
+    [Math.atanh(0), Math.atanh(0.5), Math.atanh(1)]]);
 
   expect(result.value).toEqual(expVal);
   console.log(result.value.toString());
@@ -260,8 +260,8 @@ test("atanh", function () {
 
   let k = 2.777778148651123;
   let expected = Tensor.create([
-    [k, 1 / (1-(-0.5) ** 2 ), 1 / (1-0 ** 2 )],
-    [1 / (1-0 ** 2 ), 1 / (1-0.5 ** 2 ),k]
+    [ 1 / (1-(1) ** 2 ), 1 / (1-(-0.5) ** 2 ), 1 / (1-0 ** 2 )],
+    [1 / (1-0 ** 2 ), 1 / (1-0.5 ** 2 ), 1 / (1-(1) ** 2 )]
   ]);
 
   expect(gradA.value).toEqual(expected);

@@ -68,12 +68,36 @@ export default abstract class Expression {
     visitor.visit(this, params);
   }
 
+  acos(): Expression {
+    return this.factory.acos(this);
+  }
+
+  acosh(): Expression {
+    return this.factory.acosh(this);
+  }
+
   add(other: Expression): Expression {
     return this.factory.add(this, other);
   }
 
   addObserver(observer: Expression): void {
     this._observers.push(observer);
+  }
+
+  asin(): Expression {
+    return this.factory.asin(this);
+  }
+
+  asinh(): Expression {
+    return this.factory.asinh(this);
+  }
+
+  atan(): Expression {
+    return this.factory.atan(this);
+  }
+
+  atanh(): Expression {
+    return this.factory.atanh(this);
   }
 
   ceil(): Expression {
@@ -192,6 +216,22 @@ export default abstract class Expression {
     return this.factory.reciprocalGrad(this);
   }
 
+  reduceMax(dims: number | number[] = -1): Expression {
+    return this.factory.reduceMax(this, dims);
+  }
+
+  reduceMean(dims: number | number[] = -1): Expression {
+    return this.factory.reduceMean(this, dims);
+  }
+
+  reduceMin(dims: number | number[] = -1): Expression {
+    return this.factory.reduceMin(this, dims);
+  }
+
+  reduceProd(dims: number | number[] = -1): Expression {
+    return this.factory.reduceProd(this, dims);
+  }
+
   reduceSum(dims: number | number[] = -1): Expression {
     return this.factory.reduceSum(this, dims);
   }
@@ -232,30 +272,6 @@ export default abstract class Expression {
     return this.factory.sign(this);
   }
 
-  atanh(): Expression {
-    return this.factory.atanh(this);
-  }
-
-  atan(): Expression {
-    return this.factory.atan(this);
-  }
-
-  acosh(): Expression {
-    return this.factory.acosh(this);
-  }
-
-  acos(): Expression {
-    return this.factory.acos(this);
-  }
-
-  asinh(): Expression {
-    return this.factory.asinh(this);
-  }
-
-  asin(): Expression {
-    return this.factory.asin(this);
-  }
-
   sin(): Expression {
     return this.factory.sin(this);
   }
@@ -266,10 +282,6 @@ export default abstract class Expression {
 
   softplus(): Expression {
     return this.factory.softplus(this);
-  }
-
-  zeros(): Expression {
-    return this.factory.zeros(this.shape);
   }
 
   sqrt(): Expression {
@@ -318,5 +330,9 @@ export default abstract class Expression {
 
   truncMod(other: Expression): Expression {
     return this.factory.truncMod(this, other);
+  }
+
+  zeros(): Expression {
+    return this.factory.zeros(this.shape);
   }
 }

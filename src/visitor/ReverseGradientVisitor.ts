@@ -42,6 +42,9 @@ import Acos from "../expression/transform/Acos";
 import Acosh from "../expression/transform/Acosh";
 import Atan from "../expression/transform/Atan";
 import Atanh from "../expression/transform/Atanh";
+import ReduceMean from "../expression/reduction/ReduceMean";
+import ReduceMax from "../expression/reduction/ReduceMax";
+import ReduceMin from "../expression/reduction/ReduceMin";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -128,6 +131,9 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Parameter, Parameter.gradients);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.gradients);
+    this.register(ExpressionTypes.ReduceMean, ReduceMean.gradients);
+    this.register(ExpressionTypes.ReduceMax, ReduceMax.gradients);
+    this.register(ExpressionTypes.ReduceMin, ReduceMin.gradients);
 
     // this.register(ExpressionTypes.Assign, Assign.gradients);
     // this.register(ExpressionTypes.Fill, Fill.gradients);
@@ -158,12 +164,10 @@ export default class ReverseGradientVisitor implements Visitor {
 
     // this.register(ExpressionTypes.TangentGrad, TangentGrad.gradients);
 
-
     this.register(ExpressionTypes.Reshape, Reshape.gradients);
     this.register(ExpressionTypes.Floor, Floor.gradients);
     this.register(ExpressionTypes.Ceil, Ceil.gradients);
     this.register(ExpressionTypes.Round, Round.gradients);
-
 
     this.register(ExpressionTypes.Sine, Sine.gradients);
     this.register(ExpressionTypes.Sinh, Sinh.gradients);

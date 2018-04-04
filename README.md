@@ -23,10 +23,10 @@ This will replace learn4js.
 | Variable          | Core          | Y     |       |       |
 | Zeros             | Core          | Y     |       |       |
 | ReduceSum         | Reduction     | Y     | Y     | Y     |
-| ReduceMean        | Reduction     |       |       |       |
-| ReduceMax         | Reduction     |       |       |       |
-| ReduceMin         | Reduction     |       |       |       |
-| ReduceProd        | Reduction     |       |       |       |
+| ReduceMean        | Reduction     | Y     | Y     | Y     |
+| ReduceMax         | Reduction     | Y     | Y     | Y     |
+| ReduceMin         | Reduction     | Y     | Y     | Y     |
+| ReduceProd        | Reduction     | Y     |       |       |
 | ReduceLogSumExp   | Reduction     |       |       |       |
 | L1Norm            | Reduction     |       |       |       |
 | L2Norm            | Reduction     |       |       |       |
@@ -86,8 +86,8 @@ This will replace learn4js.
 | Conv2d            | CNN           |       |       |       |
 | MaxPool           | CNN           |       |       |       |
 | AvgPool           | CNN           |       |       |       |
-| ArgMin            | Index         |       |       |       |
-| ArgMax            | Index         |       |       |       |
+| ArgMin            | Index         | Y     |       |       |
+| ArgMax            | Index         | Y     |       |       |
 | CumSum            |               |       |       |       |
 | CumProd           |               |       |       |       |
 | Equal             | Comparison    | Y     |       |       |

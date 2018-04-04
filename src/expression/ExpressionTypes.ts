@@ -79,5 +79,8 @@ export const enum ExpressionTypes {
   Greater = "Greater",
   GreaterEqual = "GreaterEqual",
   Less = "Less",
-  LessEqual = "LessEqual"
+  LessEqual = "LessEqual",
+
+  ArgMin = "ArgMin",
+  ArgMax = "ArgMax"
 }

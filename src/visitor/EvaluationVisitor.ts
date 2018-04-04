@@ -68,6 +68,12 @@ import Acos from "../expression/transform/Acos";
 import Acosh from "../expression/transform/Acosh";
 import Atan from "../expression/transform/Atan";
 import Atanh from "../expression/transform/Atanh";
+import ReduceMean from "../expression/reduction/ReduceMean";
+import ReduceMax from "../expression/reduction/ReduceMax";
+import ReduceMin from "../expression/reduction/ReduceMin";
+import ReduceProd from "../expression/reduction/ReduceProd";
+import ArgMax from "../expression/index/ArgMax";
+import ArgMin from "../expression/index/ArgMin";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -126,6 +132,10 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Zeros, Zeros.evaluate);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.evaluate);
+    this.register(ExpressionTypes.ReduceMean, ReduceMean.evaluate);
+    this.register(ExpressionTypes.ReduceMax, ReduceMax.evaluate);
+    this.register(ExpressionTypes.ReduceMin, ReduceMin.evaluate);
+    this.register(ExpressionTypes.ReduceProd, ReduceProd.evaluate);
 
     this.register(ExpressionTypes.Assign, Assign.evaluate);
     this.register(ExpressionTypes.Fill, Fill.evaluate);
@@ -182,6 +192,9 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Acosh, Acosh.evaluate);
     this.register(ExpressionTypes.Atan, Atan.evaluate);
     this.register(ExpressionTypes.Atanh, Atanh.evaluate);
+
+    this.register(ExpressionTypes.ArgMax, ArgMax.evaluate);
+    this.register(ExpressionTypes.ArgMin, ArgMin.evaluate);
   }
 
 }
