@@ -1,4 +1,5 @@
 export const enum ExpressionTypes {
+  WhileLoop = "WhileLoop",
 
   Add = "Add",
   Divide = "Divide",
@@ -82,5 +83,7 @@ export const enum ExpressionTypes {
   LessEqual = "LessEqual",
 
   ArgMin = "ArgMin",
-  ArgMax = "ArgMax"
+  ArgMax = "ArgMax",
+
+  IfElse = "IfElse"
 }

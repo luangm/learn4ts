@@ -81,6 +81,11 @@ class Learn4js {
     return this.factory.group(list, name);
   }
 
+  ifElse(condition: Expression, truthy: Expression, falsy: Expression, name?: string): Expression {
+    console.log("if");
+    return this.factory.ifElse(condition, truthy, falsy, name);
+  }
+
   linspace(start: number, stop: number, num: number): Tensor {
     return Tensor.linspace(start, stop, num);
   }

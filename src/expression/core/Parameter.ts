@@ -19,6 +19,25 @@ export default class Parameter extends Expression {
     return ExpressionTypes.Parameter;
   }
 
+  /**
+   * Note: because parameters' value should not be part of the params. The only way to distinguish is through name and id.
+   * Assume if name is present, use name. Otherwise use id.
+   * Which means every parameter when declared is unique, unless a name is specified.
+   */
+  get params() {
+    if (this.name) {
+      return {
+        type: this.type,
+        name: this.name
+      };
+    } else {
+      return {
+        type: this.type,
+        id: this.id
+      };
+    }
+  }
+
   constructor(initialValue: Tensor, graph: Graph, name?: string) {
     super(graph, name);
     this._initialValue = initialValue;

@@ -74,6 +74,7 @@ import ReduceMean from "./reduction/ReduceMean";
 import ReduceMax from "./reduction/ReduceMax";
 import ReduceMin from "./reduction/ReduceMin";
 import ReduceProd from "./reduction/ReduceProd";
+import IfElse from "./control/IfElse";
 
 export default class ExpressionFactory {
 
@@ -200,6 +201,10 @@ export default class ExpressionFactory {
 
   group(list: Expression[], name?: string): Expression {
     return this.addNode(new Group(list, this.graph, name), ...list);
+  }
+
+  ifElse(condition: Expression, truthy: Expression, falsy: Expression, name?: string) {
+    return this.addNode(new IfElse(condition, truthy, falsy, this.graph, name));
   }
 
   less(left: Expression, right: Expression, name?: string): Expression {

@@ -98,4 +98,7 @@ This will replace learn4js.
 | Less              | Comparison    | Y     |       |       |
 | LessEqual         | Comparison    | Y     |       |       |
 | Conditional       | Ternary       | Y     |       |       |
-
+| IfElse            | Control       | Y     |       |       |
+| WhileLoop         | Control       |       |       |       |
+| ForLoop           | Control       |       |       |       |
+| Switch            | Control       |       |       |       |

@@ -74,7 +74,7 @@ import ReduceMin from "../expression/reduction/ReduceMin";
 import ReduceProd from "../expression/reduction/ReduceProd";
 import ArgMax from "../expression/index/ArgMax";
 import ArgMin from "../expression/index/ArgMin";
-import Group from "../expression/core/Group";
+import IfElse from "../expression/control/IfElse";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -103,8 +103,6 @@ export default class EvaluationVisitor implements Visitor {
     if (this.session.isValid(node)) {
       return;
     }
-
-    // console.log("Visit", node.type, node.id);
 
     for (let dependency of node.dependencies) {
       dependency.accept(this, params);
@@ -204,6 +202,8 @@ export default class EvaluationVisitor implements Visitor {
 
     this.register(ExpressionTypes.ArgMax, ArgMax.evaluate);
     this.register(ExpressionTypes.ArgMin, ArgMin.evaluate);
+
+    this.register(ExpressionTypes.IfElse, IfElse.evaluate);
   }
 
 }
