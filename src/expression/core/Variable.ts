@@ -6,6 +6,14 @@ export default class Variable extends Expression {
 
   private readonly _shape: number[];
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      shape: this.shape
+    };
+  }
+
   get shape() {
     return this._shape;
   }

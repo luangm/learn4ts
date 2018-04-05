@@ -1,7 +1,6 @@
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import {ExpressionTypes} from "../ExpressionTypes";
-import {Tensor} from "tensor4js";
 
 export default class Group extends Expression {
 
@@ -9,6 +8,18 @@ export default class Group extends Expression {
 
   get dependencies(): Expression[] {
     return this._list;
+  }
+
+  get list() {
+    return this._list;
+  }
+
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      list: this.list.map(item => item.id) // Note: Order matters
+    };
   }
 
   get shape(): number[] {

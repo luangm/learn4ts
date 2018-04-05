@@ -3,7 +3,6 @@ import Graph from "../../Graph";
 import Expression from "../Expression";
 import BinaryExpression from "./BinaryExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
-import Multiply from "./Multiply";
 
 export default class Subtract extends BinaryExpression {
 

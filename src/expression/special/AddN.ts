@@ -19,6 +19,14 @@ export default class AddN extends Expression {
     return this._list;
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      list: this.list.map(item => item.id).sort() // Note: Order DOES NOT matter
+    };
+  }
+
   get shape() {
     return this._list[0].shape;
   }

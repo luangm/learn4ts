@@ -26,6 +26,16 @@ export default class Repeat extends Expression {
     return this._multiple;
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      base: this.base.id,
+      dimension: this.dimension,
+      multiple: this.multiple
+    };
+  }
+
   get shape() {
     return this._shape;
   }

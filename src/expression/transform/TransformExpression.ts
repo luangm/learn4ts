@@ -13,6 +13,14 @@ export default abstract class TransformExpression extends Expression {
     return [this._base];
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      base: this.base.id
+    };
+  }
+
   get shape() {
     return this._base.shape;
   }

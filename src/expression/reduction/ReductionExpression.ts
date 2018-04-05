@@ -20,6 +20,14 @@ export default abstract class ReductionExpression extends Expression {
     return this._dims;
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      dims: this.dims
+    };
+  }
+
   get shape() {
     return this._shape;
   }

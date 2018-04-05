@@ -16,6 +16,15 @@ export default class Reshape extends Expression {
     return [this._base];
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      base: this.base.id,
+      shape: this.shape
+    };
+  }
+
   get shape() {
     return this._shape;
   }

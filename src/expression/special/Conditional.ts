@@ -21,6 +21,16 @@ export default class Conditional extends Expression {
     return this._falsy;
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      condition: this.condition.id,
+      truthy: this.truthy.id,
+      falsy: this.falsy.id
+    };
+  }
+
   get shape(): number[] {
     return this._condition.shape;
   }

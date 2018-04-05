@@ -6,7 +6,8 @@ export default class Graph {
 
   private readonly _factory: ExpressionFactory;
   private readonly _name: string;
-  private readonly _nodes: Map<number, Expression>;
+  private readonly _nodeMap: Map<number, Expression>;
+  private readonly _paramMap: Map<string, Expression>;
   private _session: Session;
 
   get factory() {
@@ -15,6 +16,10 @@ export default class Graph {
 
   get name() {
     return this._name;
+  }
+
+  get nodes() {
+    return this._nodeMap;
   }
 
   get session() {
@@ -27,17 +32,35 @@ export default class Graph {
 
   constructor(name: string) {
     this._name = name;
-    this._nodes = new Map<number, Expression>();
+    this._nodeMap = new Map<number, Expression>();
+    this._paramMap = new Map<string, Expression>();
     this._factory = new ExpressionFactory(this);
     this._session = new Session(this);
   }
 
   addNode(node: Expression): Expression {
-    this._nodes.set(node.id, node);
+    // find existing
+    let existing = this.findNode(node);
+    if (existing) {
+      return existing;
+    }
+
+    // not found, add to node map and param map
+    this._nodeMap.set(node.id, node);
+    let paramJson = JSON.stringify(node.params);
+    this._paramMap.set(paramJson, node);
     return node;
   }
 
-  getNode(id: number) {
-    return this._nodes.get(id);
+  /**
+   * given a node, try to find if this node (or equivalent) already exists in graph.
+   */
+  findNode(node: Expression): Expression | undefined {
+    let params = JSON.stringify(node.params);
+    return this._paramMap.get(params);
+  }
+
+  getNode(id: number): Expression | undefined {
+    return this._nodeMap.get(id);
   }
 }

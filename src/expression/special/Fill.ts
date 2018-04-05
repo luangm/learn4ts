@@ -8,6 +8,15 @@ export default class Fill extends Expression {
   private readonly _scalar: number;
   private readonly _shape: number[];
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      scalar: this.scalar,
+      shape: this.shape
+    };
+  }
+
   get scalar() {
     return this._scalar;
   }

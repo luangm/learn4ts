@@ -41,6 +41,17 @@ export default abstract class Expression {
     return this._observers;
   }
 
+  /**
+   * The .params property SHOULD return a ONE-LEVEL object.
+   * The property will be turned into JSON string at the graph for comparison.
+   */
+  get params(): object {
+    return {
+      type: this.type,
+      name: this.name
+    };
+  }
+
   abstract get shape(): number[];
 
   abstract get type(): string;

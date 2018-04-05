@@ -1,4 +1,3 @@
-import {Tensor} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import {ExpressionTypes} from "../ExpressionTypes";
@@ -10,6 +9,15 @@ export default class Assign extends Expression {
 
   get dependencies() {
     return [this._source];
+  }
+
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      ref: this.ref.id,
+      source: this.source.id
+    };
   }
 
   get ref() {

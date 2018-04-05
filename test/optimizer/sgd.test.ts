@@ -2,13 +2,13 @@ import Learn from "../../src/index";
 import {Tensor} from "tensor4js";
 
 test("Linear Regression", function () {
-  let train_X = Tensor.create([[3.3, 4.4, 5.5, 6.71, 6.93, 4.168, 9.779, 6.182, 7.59, 2.167, 7.042, 10.791, 5.313, 7.997, 5.654, 9.27, 3.1]]);
-  let train_Y = Tensor.create([[1.7, 2.76, 2.09, 3.19, 1.694, 1.573, 3.366, 2.596, 2.53, 1.221, 2.827, 3.465, 1.65, 2.904, 2.42, 2.94, 1.3]]);
-  let W_init = Tensor.create([[0.5]]);
-  let b_init = Tensor.create([[0.5]]);
+  let train_X = Tensor.create([3.3, 4.4, 5.5, 6.71, 6.93, 4.168, 9.779, 6.182, 7.59, 2.167, 7.042, 10.791, 5.313, 7.997, 5.654, 9.27, 3.1]);
+  let train_Y = Tensor.create([1.7, 2.76, 2.09, 3.19, 1.694, 1.573, 3.366, 2.596, 2.53, 1.221, 2.827, 3.465, 1.65, 2.904, 2.42, 2.94, 1.3]);
+  let W_init = Tensor.create(0.5);
+  let b_init = Tensor.create(0.5);
 
-  let X = Learn.variable([1, train_X.length], "X");
-  let Y = Learn.variable([1, train_Y.length], "Y");
+  let X = Learn.variable([train_X.length], "X");
+  let Y = Learn.variable([train_Y.length], "Y");
   X.value = train_X;
   Y.value = train_Y;
 

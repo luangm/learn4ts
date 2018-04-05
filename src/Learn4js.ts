@@ -77,6 +77,10 @@ class Learn4js {
     return grads;
   }
 
+  group(list: Expression[], name?: string): Expression {
+    return this.factory.group(list, name);
+  }
+
   linspace(start: number, stop: number, num: number): Tensor {
     return Tensor.linspace(start, stop, num);
   }

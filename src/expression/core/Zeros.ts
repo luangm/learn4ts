@@ -7,6 +7,14 @@ export default class Zeros extends Expression {
 
   private readonly _value: Tensor;
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      shape: this.shape
+    };
+  }
+
   get shape() {
     return this._value.shape;
   }

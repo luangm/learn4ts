@@ -17,6 +17,14 @@ export default class Tile extends Expression {
     return [this._base];
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      base: this.base.id,
+      repeats: this.repeats
+    };
+  }
 
   get repeats() {
     return this._repeats;

@@ -14,6 +14,15 @@ export default abstract class ComparisonExpression extends Expression {
     return this._left;
   }
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      left: this.left.id,
+      right: this.right.id
+    };
+  }
+
   get right() {
     return this._right;
   }

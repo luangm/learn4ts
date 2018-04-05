@@ -26,6 +26,18 @@ export default class MatMul extends BinaryExpression {
     return ExpressionTypes.MatMul;
   }
 
+
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      left: this.left.id,
+      right: this.right.id,
+      transposeLeft: this.transposeLeft,
+      transposeRight: this.transposeRight
+    }
+  }
+
   constructor(left: Expression, right: Expression, transposeLeft: boolean, transposeRight: boolean, graph: Graph, name?: string) {
     super(left, right, graph, name);
     this._transposeLeft = transposeLeft || false;
