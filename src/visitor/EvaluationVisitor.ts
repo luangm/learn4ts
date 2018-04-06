@@ -75,6 +75,9 @@ import ReduceProd from "../expression/reduction/ReduceProd";
 import ArgMax from "../expression/index/ArgMax";
 import ArgMin from "../expression/index/ArgMin";
 import IfElse from "../expression/control/IfElse";
+import Im2Col from "../expression/nn/Im2Col";
+import Col2Im from "../expression/nn/Col2Im";
+import Dropout from "../expression/nn/Dropout";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -204,6 +207,10 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.ArgMin, ArgMin.evaluate);
 
     this.register(ExpressionTypes.IfElse, IfElse.evaluate);
+
+    this.register(ExpressionTypes.Im2Col, Im2Col.evaluate);
+    this.register(ExpressionTypes.Col2Im, Col2Im.evaluate);
+    this.register(ExpressionTypes.Dropout, Dropout.evaluate);
   }
 
 }

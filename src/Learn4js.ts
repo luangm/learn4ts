@@ -4,6 +4,8 @@ import Session from "./Session";
 import Expression from "./expression/Expression";
 import ReverseGradientVisitor from "./visitor/ReverseGradientVisitor";
 import GradientDescentOptimizer from "./optimizer/GradientDescentOptimizer";
+import {Im2ColOptions} from "./expression/nn/Im2Col";
+import {Col2ImOptions} from "./expression/nn/Col2Im";
 
 class Learn4js {
 
@@ -38,6 +40,10 @@ class Learn4js {
     return this.factory.add(left, right, name);
   }
 
+  col2im(col: Expression, options: Col2ImOptions, name?: string): Expression {
+    return this.factory.col2im(col, options, name);
+  }
+
   constant(value: Tensor, name?: string): Expression {
     return this.factory.constant(value, name);
   }
@@ -54,6 +60,10 @@ class Learn4js {
 
   create(array: any): Tensor {
     return Tensor.create(array);
+  }
+
+  dropout(base: Expression, probability: number = 0.5, name?: string): Expression {
+    return this.factory.dropout(base, probability, name);
   }
 
   gradientDescent(learnRate: number = 0.001) {
@@ -84,6 +94,10 @@ class Learn4js {
   ifElse(condition: Expression, truthy: Expression, falsy: Expression, name?: string): Expression {
     console.log("if");
     return this.factory.ifElse(condition, truthy, falsy, name);
+  }
+
+  im2col(image: Expression, options: Im2ColOptions, name?: string): Expression {
+    return this.factory.im2col(image, options, name);
   }
 
   linspace(start: number, stop: number, num: number): Tensor {

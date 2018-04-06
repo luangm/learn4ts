@@ -75,6 +75,9 @@ import ReduceMax from "./reduction/ReduceMax";
 import ReduceMin from "./reduction/ReduceMin";
 import ReduceProd from "./reduction/ReduceProd";
 import IfElse from "./control/IfElse";
+import Im2Col, {Im2ColOptions} from "./nn/Im2Col";
+import Col2Im, {Col2ImOptions} from "./nn/Col2Im";
+import Dropout from "./nn/Dropout";
 
 export default class ExpressionFactory {
 
@@ -135,6 +138,10 @@ export default class ExpressionFactory {
     return this.addNode(new Ceil(base, this.graph, name), base);
   }
 
+  col2im(image: Expression, options: Col2ImOptions, name?: string): Expression {
+    return this.addNode(new Col2Im(image, options, this.graph, name), image);
+  }
+
   conditional(condition: Expression, truthy: Expression, falsy: Expression, name?: string): Expression {
     return this.addNode(new Conditional(condition, truthy, falsy, this.graph, name), condition, truthy, falsy);
   }
@@ -153,6 +160,10 @@ export default class ExpressionFactory {
 
   divide(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Divide(left, right, this.graph, name), left, right);
+  }
+
+  dropout(base: Expression, probability: number, name?: string): Expression {
+    return this.addNode(new Dropout(base, probability, this.graph, name), base);
   }
 
   elu(base: Expression, name?: string): Expression {
@@ -205,6 +216,10 @@ export default class ExpressionFactory {
 
   ifElse(condition: Expression, truthy: Expression, falsy: Expression, name?: string) {
     return this.addNode(new IfElse(condition, truthy, falsy, this.graph, name));
+  }
+
+  im2col(image: Expression, options: Im2ColOptions, name?: string): Expression {
+    return this.addNode(new Im2Col(image, options, this.graph, name), image);
   }
 
   less(left: Expression, right: Expression, name?: string): Expression {

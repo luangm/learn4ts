@@ -81,11 +81,12 @@ This will replace learn4js.
 | Asinh             | Trigonometry  | Y     | Y     | Y     |
 | Acosh             | Trigonometry  | Y     | Y     | Y     |
 | Atanh             | Trigonometry  | Y     | Y     | Y     |
-| Im2Col            | CNN           |       |       |       |
-| Col2Im            | CNN           |       |       |       |
+| Im2Col            | CNN           | Y     |       |       |
+| Col2Im            | CNN           | Y     |       |       |
 | Conv2d            | CNN           |       |       |       |
 | MaxPool           | CNN           |       |       |       |
 | AvgPool           | CNN           |       |       |       |
+| Dropout           | NN            | Y     |       |       |
 | ArgMin            | Index         | Y     |       |       |
 | ArgMax            | Index         | Y     |       |       |
 | CumSum            |               |       |       |       |

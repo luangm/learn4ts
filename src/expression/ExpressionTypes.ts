@@ -1,4 +1,7 @@
 export const enum ExpressionTypes {
+  Im2Col = "Im2Col",
+  Col2Im = "Col2Im",
+  Dropout = "Dropout",
   WhileLoop = "WhileLoop",
 
   Add = "Add",

@@ -143,6 +143,10 @@ export default abstract class Expression {
     return this.factory.divide(this, other);
   }
 
+  dropout(probability: number = 0.5): Expression {
+    return this.factory.dropout(this, probability);
+  }
+
   elu(): Expression {
     return this.factory.elu(this);
   }
