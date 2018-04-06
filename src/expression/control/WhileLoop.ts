@@ -47,11 +47,12 @@ export default class WhileLoop extends Expression {
   static evaluate(expression: Expression): Tensor {
     let node = expression as WhileLoop;
     let condVal = node.condition.value;
-    if (condVal.data[0]) {
-      console.log("tru");
-      return node.body.value;
+    let bodyVal: Tensor;
+    while (condVal.data[0]) {
+      bodyVal = node.body.value;
+      condVal = node.condition.eval();
     }
-    return Tensor.sparseZeros([]);
+    return Tensor.scalar(0);
   }
 
 }

@@ -92,7 +92,6 @@ class Learn4js {
   }
 
   ifElse(condition: Expression, truthy: Expression, falsy: Expression, name?: string): Expression {
-    console.log("if");
     return this.factory.ifElse(condition, truthy, falsy, name);
   }
 
@@ -142,6 +141,10 @@ class Learn4js {
 
   variable(shape: number[], name?: string): Expression {
     return this.factory.variable(shape, name);
+  }
+
+  while(condition: Expression, body: Expression, name?: string): Expression {
+    return this.factory.while(condition, body, name);
   }
 
   zeros(shape: number[]): Tensor {

@@ -78,6 +78,7 @@ import IfElse from "./control/IfElse";
 import Im2Col, {Im2ColOptions} from "./nn/Im2Col";
 import Col2Im, {Col2ImOptions} from "./nn/Col2Im";
 import Dropout from "./nn/Dropout";
+import WhileLoop from "./control/WhileLoop";
 
 export default class ExpressionFactory {
 
@@ -399,6 +400,10 @@ export default class ExpressionFactory {
 
   variable(shape: number[], name?: string): Expression {
     return this.addNode(new Variable(shape, this.graph, name));
+  }
+
+  while(condition: Expression, body: Expression, name?: string) {
+    return this.addNode(new WhileLoop(condition, body, this.graph, name));
   }
 
   zeros(shape: number[], name?: string) {
