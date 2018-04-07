@@ -24,6 +24,7 @@ export default abstract class ReductionExpression extends Expression {
     return {
       type: this.type,
       name: this.name,
+      base: this.base.id,
       dims: this.dims
     };
   }
