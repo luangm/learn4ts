@@ -100,6 +100,12 @@ This will replace learn4js.
 | LessEqual         | Comparison    | Y     |       |       |
 | Conditional       | Ternary       | Y     |       |       |
 | IfElse            | Control       | Y     |       |       |
-| WhileLoop         | Control       |       |       |       |
+| WhileLoop         | Control       | Y     |       |       |
 | ForLoop           | Control       |       |       |       |
 | Switch            | Control       |       |       |       |
+| Erf               | Math          |       |       |       |
+| ErfGrad           | Math          |       |       |       |
+| Erfc              | Math          |       |       |       |
+| ErfcGrad          | Math          |       |       |       |
+| Gamma             | Math          |       |       |       |
+| LGamma            | Math          |       |       |       |

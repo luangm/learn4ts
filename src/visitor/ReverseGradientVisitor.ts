@@ -45,6 +45,8 @@ import Atanh from "../expression/transform/Atanh";
 import ReduceMean from "../expression/reduction/ReduceMean";
 import ReduceMax from "../expression/reduction/ReduceMax";
 import ReduceMin from "../expression/reduction/ReduceMin";
+import Erf from "../expression/transform/Erf";
+import Erfc from "../expression/transform/Erfc";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -181,6 +183,9 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.Tanh, Tanh.gradients);
     this.register(ExpressionTypes.Atan, Atan.gradients);
     this.register(ExpressionTypes.Atanh, Atanh.gradients);
+
+    this.register(ExpressionTypes.Erf, Erf.gradients);
+    this.register(ExpressionTypes.Erfc, Erfc.gradients);
   }
 
 }

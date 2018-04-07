@@ -79,6 +79,13 @@ import Im2Col, {Im2ColOptions} from "./nn/Im2Col";
 import Col2Im, {Col2ImOptions} from "./nn/Col2Im";
 import Dropout from "./nn/Dropout";
 import WhileLoop from "./control/WhileLoop";
+import Power from "./binary/Power";
+import Erf from "./transform/Erf";
+import ErfGrad from "./transform/ErfGrad";
+import Erfc from "./transform/Erfc";
+import ErfcGrad from "./transform/ErfcGrad";
+import Gamma from "./transform/Gamma";
+import LGamma from "./transform/LGamma";
 
 export default class ExpressionFactory {
 
@@ -179,6 +186,22 @@ export default class ExpressionFactory {
     return this.addNode(new Equal(left, right, this.graph, name), left, right);
   }
 
+  erf(base: Expression, name?: string): Expression {
+    return this.addNode(new Erf(base, this.graph, name), base);
+  }
+
+  erfGrad(base: Expression, name?: string): Expression {
+    return this.addNode(new ErfGrad(base, this.graph, name), base);
+  }
+
+  erfc(base: Expression, name?: string): Expression {
+    return this.addNode(new Erfc(base, this.graph, name), base);
+  }
+
+  erfcGrad(base: Expression, name?: string): Expression {
+    return this.addNode(new ErfcGrad(base, this.graph, name), base);
+  }
+
   exp(base: Expression, name?: string): Expression {
     return this.addNode(new Exponential(base, this.graph, name), base);
   }
@@ -201,6 +224,10 @@ export default class ExpressionFactory {
 
   floorMod(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new FloorMod(left, right, this.graph, name), left, right);
+  }
+
+  gamma(base: Expression, name?: string): Expression {
+    return this.addNode(new Gamma(base, this.graph, name), base);
   }
 
   greater(left: Expression, right: Expression, name?: string): Expression {
@@ -229,6 +256,10 @@ export default class ExpressionFactory {
 
   lessEqual(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new LessEqual(left, right, this.graph, name), left, right);
+  }
+
+  lgamma(base: Expression, name?: string): Expression {
+    return this.addNode(new LGamma(base, this.graph, name), base);
   }
 
   log(base: Expression, name?: string): Expression {
@@ -265,6 +296,10 @@ export default class ExpressionFactory {
 
   parameter(value: Tensor, name?: string): Expression {
     return this.addNode(new Parameter(value, this.graph, name));
+  }
+
+  pow(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new Power(left, right, this.graph, name), left, right);
   }
 
   reciprocal(base: Expression, name?: string): Expression {

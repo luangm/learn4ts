@@ -159,6 +159,22 @@ export default abstract class Expression {
     return this.factory.equal(this, other);
   }
 
+  erf(): Expression {
+    return this.factory.erf(this);
+  }
+
+  erfGrad(): Expression {
+    return this.factory.erfGrad(this);
+  }
+
+  erfc(): Expression {
+    return this.factory.erfc(this);
+  }
+
+  erfcGrad(): Expression {
+    return this.factory.erfcGrad(this);
+  }
+
   eval(): Tensor {
     return this.graph.session.eval(this);
   }
@@ -183,6 +199,10 @@ export default abstract class Expression {
     return this.factory.floorMod(this, other);
   }
 
+  gamma(): Expression {
+    return this.factory.gamma(this);
+  }
+
   getGradient(target: Expression): Expression | undefined {
     return this._gradMap.get(target.id);
   }
@@ -201,6 +221,10 @@ export default abstract class Expression {
 
   lessEqual(other: Expression): Expression {
     return this.factory.lessEqual(this, other);
+  }
+
+  lgamma(): Expression {
+    return this.factory.lgamma(this);
   }
 
   log(): Expression {
@@ -233,6 +257,10 @@ export default abstract class Expression {
 
   notEqual(other: Expression): Expression {
     return this.factory.notEqual(this, other);
+  }
+
+  pow(other: Expression): Expression {
+    return this.factory.pow(this, other);
   }
 
   reciprocal(): Expression {

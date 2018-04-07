@@ -1,4 +1,5 @@
 export const enum ExpressionTypes {
+  Power = "Power",
   Im2Col = "Im2Col",
   Col2Im = "Col2Im",
   Dropout = "Dropout",
@@ -88,5 +89,11 @@ export const enum ExpressionTypes {
   ArgMin = "ArgMin",
   ArgMax = "ArgMax",
 
-  IfElse = "IfElse"
+  IfElse = "IfElse",
+  Erf = "Erf",
+  Erfc = "Erfc",
+  ErfGrad = "ErfGrad",
+  ErfcGrad = "ErfcGrad",
+  Gamma = "Gamma",
+  LGamma = "LGamma"
 }

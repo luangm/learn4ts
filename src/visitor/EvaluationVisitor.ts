@@ -79,6 +79,13 @@ import Im2Col from "../expression/nn/Im2Col";
 import Col2Im from "../expression/nn/Col2Im";
 import Dropout from "../expression/nn/Dropout";
 import WhileLoop from "../expression/control/WhileLoop";
+import Power from "../expression/binary/Power";
+import Erf from "../expression/transform/Erf";
+import Erfc from "../expression/transform/Erfc";
+import ErfGrad from "../expression/transform/ErfGrad";
+import ErfcGrad from "../expression/transform/ErfcGrad";
+import Gamma from "../expression/transform/Gamma";
+import LGamma from "../expression/transform/LGamma";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -136,6 +143,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.TruncateDiv, TruncateDiv.evaluate);
     this.register(ExpressionTypes.Multiply, Multiply.evaluate);
     this.register(ExpressionTypes.Subtract, Subtract.evaluate);
+    this.register(ExpressionTypes.Power, Power.evaluate);
 
     this.register(ExpressionTypes.Constant, Constant.evaluate);
     this.register(ExpressionTypes.Parameter, Parameter.evaluate);
@@ -156,8 +164,6 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Tile, Tile.evaluate);
 
     this.register(ExpressionTypes.Absolute, Absolute.evaluate);
-    this.register(ExpressionTypes.Cosine, Cosine.evaluate);
-    this.register(ExpressionTypes.Cosh, Cosh.evaluate);
     this.register(ExpressionTypes.Expm1, Expm1.evaluate);
     this.register(ExpressionTypes.Exponential, Exponential.evaluate);
     this.register(ExpressionTypes.Log1p, Log1p.evaluate);
@@ -175,8 +181,6 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Sigmoid, Sigmoid.evaluate);
     this.register(ExpressionTypes.SigmoidGrad, SigmoidGrad.evaluate);
     this.register(ExpressionTypes.Sign, Sign.evaluate);
-    this.register(ExpressionTypes.Sine, Sine.evaluate);
-    this.register(ExpressionTypes.Sinh, Sinh.evaluate);
     this.register(ExpressionTypes.Softplus, Softplus.evaluate);
     this.register(ExpressionTypes.Softmax, Softmax.evaluate);
     this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.evaluate);
@@ -184,10 +188,6 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.SqrtGrad, SqrtGrad.evaluate);
     this.register(ExpressionTypes.Square, Square.evaluate);
     this.register(ExpressionTypes.Step, Step.evaluate);
-    this.register(ExpressionTypes.Tangent, Tangent.evaluate);
-    this.register(ExpressionTypes.TangentGrad, TangentGrad.evaluate);
-    this.register(ExpressionTypes.Tanh, Tanh.evaluate);
-    this.register(ExpressionTypes.TanhGrad, TanhGrad.evaluate);
 
     this.register(ExpressionTypes.Equal, Equal.evaluate);
     this.register(ExpressionTypes.NotEqual, NotEqual.evaluate);
@@ -197,6 +197,14 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.LessEqual, LessEqual.evaluate);
     this.register(ExpressionTypes.Conditional, Conditional.evaluate);
 
+    this.register(ExpressionTypes.Sine, Sine.evaluate);
+    this.register(ExpressionTypes.Sinh, Sinh.evaluate);
+    this.register(ExpressionTypes.Cosine, Cosine.evaluate);
+    this.register(ExpressionTypes.Cosh, Cosh.evaluate);
+    this.register(ExpressionTypes.Tangent, Tangent.evaluate);
+    this.register(ExpressionTypes.TangentGrad, TangentGrad.evaluate);
+    this.register(ExpressionTypes.Tanh, Tanh.evaluate);
+    this.register(ExpressionTypes.TanhGrad, TanhGrad.evaluate);
     this.register(ExpressionTypes.Asin, Asin.evaluate);
     this.register(ExpressionTypes.Asinh, Asinh.evaluate);
     this.register(ExpressionTypes.Acos, Acos.evaluate);
@@ -213,6 +221,13 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Im2Col, Im2Col.evaluate);
     this.register(ExpressionTypes.Col2Im, Col2Im.evaluate);
     this.register(ExpressionTypes.Dropout, Dropout.evaluate);
+
+    this.register(ExpressionTypes.Erf, Erf.evaluate);
+    this.register(ExpressionTypes.Erfc, Erfc.evaluate);
+    this.register(ExpressionTypes.ErfGrad, ErfGrad.evaluate);
+    this.register(ExpressionTypes.ErfcGrad, ErfcGrad.evaluate);
+    this.register(ExpressionTypes.Gamma, Gamma.evaluate);
+    this.register(ExpressionTypes.LGamma, LGamma.evaluate);
   }
 
 }
