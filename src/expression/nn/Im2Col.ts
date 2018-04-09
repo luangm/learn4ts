@@ -20,12 +20,25 @@ export default class Im2Col extends Expression {
   private readonly _options: Im2ColOptions;
   private readonly _shape: number[];
 
+  get dependencies() {
+    return [this.image];
+  }
+
   get image() {
     return this._image;
   }
 
   get options() {
     return this._options;
+  }
+
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      image: this.image.id,
+      options: this.options
+    };
   }
 
   get shape(): number[] {

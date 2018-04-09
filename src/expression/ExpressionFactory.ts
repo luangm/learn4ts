@@ -86,6 +86,12 @@ import Erfc from "./transform/Erfc";
 import ErfcGrad from "./transform/ErfcGrad";
 import Gamma from "./transform/Gamma";
 import LGamma from "./transform/LGamma";
+import {Conv2dOptions, default as Conv2d} from "./nn/Conv2d";
+import Test from "./special/Test";
+import Transpose from "./special/Transpose";
+import Conv2dImageGrad from "./nn/Conv2dImageGrad";
+import Conv2dKernelGrad from "./nn/Conv2dKernelGrad";
+import ReduceLogSumExp from "./reduction/ReduceLogSumExp";
 
 export default class ExpressionFactory {
 
@@ -156,6 +162,18 @@ export default class ExpressionFactory {
 
   constant(value: Tensor, name?: string): Expression {
     return this.addNode(new Constant(value, this.graph, name));
+  }
+
+  conv2d(image: Expression, kernel: Expression, options: Conv2dOptions, name?: string): Expression {
+    return this.addNode(new Conv2d(image, kernel, options, this.graph, name), image, kernel);
+  }
+
+  conv2dImageGrad(image: Expression, kernel: Expression, grad: Expression, options: Conv2dOptions, name?: string): Expression {
+    return this.addNode(new Conv2dImageGrad(image, kernel, grad, options, this.graph, name), image, kernel, grad);
+  }
+
+  conv2dKernelGrad(image: Expression, kernel: Expression, grad: Expression, options: Conv2dOptions, name?: string): Expression {
+    return this.addNode(new Conv2dKernelGrad(image, kernel, grad, options, this.graph, name), image, kernel, grad);
   }
 
   cos(base: Expression, name?: string): Expression {
@@ -310,6 +328,10 @@ export default class ExpressionFactory {
     return this.addNode(new ReciprocalGrad(base, this.graph, name), base);
   }
 
+  reduceLogSumExp(base: Expression, dims: number | number[], name?: string) {
+    return this.addNode(new ReduceLogSumExp(base, dims, this.graph, name), base);
+  }
+
   reduceMax(base: Expression, dims: number | number[], name?: string) {
     return this.addNode(new ReduceMax(base, dims, this.graph, name), base);
   }
@@ -421,8 +443,16 @@ export default class ExpressionFactory {
     return this.addNode(new TanhGrad(base, this.graph, name), base);
   }
 
+  test(left: Expression, right: Expression, name?: string): Expression {
+    return this.addNode(new Test(left, right, this.graph, name), left, right);
+  }
+
   tile(base: Expression, repeats: number[], name?: string): Expression {
     return this.addNode(new Tile(base, repeats, this.graph, name), base);
+  }
+
+  transpose(base: Expression, newAxis: number[] = [], name?: string): Expression {
+    return this.addNode(new Transpose(base, newAxis, this.graph, name), base);
   }
 
   truncDiv(left: Expression, right: Expression, name?: string): Expression {

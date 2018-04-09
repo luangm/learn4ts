@@ -27,7 +27,7 @@ This will replace learn4js.
 | ReduceMax         | Reduction     | Y     | Y     | Y     |
 | ReduceMin         | Reduction     | Y     | Y     | Y     |
 | ReduceProd        | Reduction     | Y     |       |       |
-| ReduceLogSumExp   | Reduction     |       |       |       |
+| ReduceLogSumExp   | Reduction     | Y     | Y     | Y     |
 | L1Norm            | Reduction     |       |       |       |
 | L2Norm            | Reduction     |       |       |       |
 | InfNorm           | Reduction     |       |       |       |
@@ -39,6 +39,7 @@ This will replace learn4js.
 | Repeat            | Special       | Y     |       | E     |
 | Reshape           | Special       | Y     | Y     | Y     |
 | Tile              | Special       | Y     |       | E     |
+| Transpose         | Special       | Y     | Y     | Y     |
 | Slice             | Special       |       |       |       |
 | Concat            | Special       |       |       |       |
 | Stack             | Special       |       |       |       |
@@ -55,7 +56,7 @@ This will replace learn4js.
 | Round             | Transform     | Y     | Y     | Y     |
 | Floor             | Transform     | Y     | Y     | Y     |
 | Ceil              | Transform     | Y     | Y     | Y     |
-| Power             | Transform     |       |       |       |
+| Power             | Transform     | Y     |       |       |
 | RSqrt             | Transform     | Y     |       |       |
 | Sigmoid           | Transform     | Y     | Y     | Y     |
 | SigmoidGrad       | Transform     | Y     |       |       |
@@ -83,7 +84,9 @@ This will replace learn4js.
 | Atanh             | Trigonometry  | Y     | Y     | Y     |
 | Im2Col            | CNN           | Y     |       |       |
 | Col2Im            | CNN           | Y     |       |       |
-| Conv2d            | CNN           |       |       |       |
+| Conv2d            | CNN           | Y     | Y     | Y     |
+| Conv2dImageGrad   | CNN           | Y     |       |       |
+| Conv2dKernelGrad  | CNN           | Y     |       |       |
 | MaxPool           | CNN           |       |       |       |
 | AvgPool           | CNN           |       |       |       |
 | Dropout           | NN            | Y     |       |       |
@@ -103,9 +106,9 @@ This will replace learn4js.
 | WhileLoop         | Control       | Y     |       |       |
 | ForLoop           | Control       |       |       |       |
 | Switch            | Control       |       |       |       |
-| Erf               | Math          |       |       |       |
-| ErfGrad           | Math          |       |       |       |
-| Erfc              | Math          |       |       |       |
-| ErfcGrad          | Math          |       |       |       |
-| Gamma             | Math          |       |       |       |
-| LGamma            | Math          |       |       |       |
+| Erf               | Math          | Y     | Y     | Y     |
+| ErfGrad           | Math          | Y     |       |       |
+| Erfc              | Math          | Y     | Y     | Y     |
+| ErfcGrad          | Math          | Y     |       |       |
+| Gamma             | Math          | Y     |       |       |
+| LGamma            | Math          | Y     |       |       |

@@ -13,7 +13,7 @@ export default class Reshape extends Expression {
   }
 
   get dependencies(): Expression[] {
-    return [this._base];
+    return [this.base];
   }
 
   get params() {

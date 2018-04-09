@@ -9,6 +9,10 @@ export default class Dropout extends TransformExpression {
   private _mask?: Tensor;
   private readonly _probability: number;
 
+  get dependencies() {
+    return [this.base];
+  }
+
   get mask() {
     return this._mask;
   }

@@ -218,3 +218,54 @@ test("reduce prod", function () {
   // expect(gradA.value).toEqual(expectedGradA);
 
 });
+
+test("reduce logsumexp", function () {
+
+  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
+  let a = Learn4js.parameter(tensorA);
+  let result = a.reduceLogSumExp();
+
+  // console.log(result.value.toString());
+  let expectedValue = Tensor.create(6.45619345);
+  expect(result.value).toEqual(expectedValue);
+
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  let expectedGradA = Tensor.create([
+    [Math.exp(1 - 6.45619345), Math.exp(2 - 6.45619345), Math.exp(3 - 6.45619345)],
+    [Math.exp(4 - 6.45619345), Math.exp(5 - 6.45619345), Math.exp(6 - 6.45619345)]
+  ]);
+
+  expect(gradA.value).toEqual(expectedGradA);
+
+  console.log(gradA.value.toString());
+
+});
+
+test("reduce logsumexp expanded ", function () {
+
+  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.parameter(tensorA);
+  let result = a.reduceLogSumExp().multiply(b);
+
+  // console.log(result.value.toString());
+  // let expectedValue = Tensor.create(6.45619345);
+  // expect(result.value).toEqual(expectedValue);
+
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+  //
+  // let expectedGradA = Tensor.create([
+  //   [Math.exp(1 - 6.45619345), Math.exp(2 - 6.45619345), Math.exp(3 - 6.45619345)],
+  //   [Math.exp(4 - 6.45619345), Math.exp(5 - 6.45619345), Math.exp(6 - 6.45619345)]
+  // ]);
+  //
+  // expect(gradA.value).toEqual(expectedGradA);
+
+  console.log(gradA.value.toString());
+  console.log(gradB.value.toString());
+
+});

@@ -1,4 +1,10 @@
 export const enum ExpressionTypes {
+  ReduceLogSumExp = "ReduceLogSumExp",
+  Test = "Test",
+  Transpose = "Transpose",
+  Conv2dImageGrad = "Conv2dImageGrad",
+  Conv2dKernelGrad = "Conv2dKernelGrad",
+  Conv2d = "Conv2d",
   Power = "Power",
   Im2Col = "Im2Col",
   Col2Im = "Col2Im",

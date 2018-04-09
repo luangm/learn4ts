@@ -26,8 +26,21 @@ export default class Col2Im extends Expression {
     return this._col;
   }
 
+  get dependencies() {
+    return [this.col];
+  }
+
   get options() {
     return this._options;
+  }
+
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      col: this.col.id,
+      options: this.options
+    };
   }
 
   get shape(): number[] {

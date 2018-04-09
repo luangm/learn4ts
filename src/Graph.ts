@@ -39,9 +39,14 @@ export default class Graph {
   }
 
   addNode(node: Expression): Expression {
+
+    console.log("addNode: ", node.id, node.type);
+
     // find existing
     let existing = this.findNode(node);
     if (existing) {
+
+      console.log("existing: ", node.id, node.type);
       return existing;
     }
 
@@ -49,6 +54,7 @@ export default class Graph {
     this._nodeMap.set(node.id, node);
     let paramJson = JSON.stringify(node.params);
     this._paramMap.set(paramJson, node);
+    node.finalize();
     return node;
   }
 

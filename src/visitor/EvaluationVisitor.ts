@@ -86,6 +86,8 @@ import ErfGrad from "../expression/transform/ErfGrad";
 import ErfcGrad from "../expression/transform/ErfcGrad";
 import Gamma from "../expression/transform/Gamma";
 import LGamma from "../expression/transform/LGamma";
+import Transpose from "../expression/special/Transpose";
+import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -115,6 +117,15 @@ export default class EvaluationVisitor implements Visitor {
       return;
     }
 
+    if (node.subExpression) {
+      node.subExpression.accept(this, params);
+      let result = this.session.getValue(node.subExpression);
+      if (result) {
+        this.session.setValue(node, result);
+      }
+      return;
+    }
+
     for (let dependency of node.dependencies) {
       dependency.accept(this, params);
     }
@@ -129,6 +140,7 @@ export default class EvaluationVisitor implements Visitor {
     } else {
       // console.warn("No evaluate method for node: " + node.type);
     }
+
   }
 
   private init() {
@@ -155,6 +167,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.ReduceMax, ReduceMax.evaluate);
     this.register(ExpressionTypes.ReduceMin, ReduceMin.evaluate);
     this.register(ExpressionTypes.ReduceProd, ReduceProd.evaluate);
+    this.register(ExpressionTypes.ReduceLogSumExp, ReduceLogSumExp.evaluate);
 
     this.register(ExpressionTypes.Assign, Assign.evaluate);
     this.register(ExpressionTypes.Fill, Fill.evaluate);
@@ -162,6 +175,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Reshape, Reshape.evaluate);
     this.register(ExpressionTypes.Repeat, Repeat.evaluate);
     this.register(ExpressionTypes.Tile, Tile.evaluate);
+    this.register(ExpressionTypes.Transpose, Transpose.evaluate);
 
     this.register(ExpressionTypes.Absolute, Absolute.evaluate);
     this.register(ExpressionTypes.Expm1, Expm1.evaluate);
@@ -221,6 +235,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Im2Col, Im2Col.evaluate);
     this.register(ExpressionTypes.Col2Im, Col2Im.evaluate);
     this.register(ExpressionTypes.Dropout, Dropout.evaluate);
+    // this.register(ExpressionTypes.Conv2d, Conv2d.evaluate);
 
     this.register(ExpressionTypes.Erf, Erf.evaluate);
     this.register(ExpressionTypes.Erfc, Erfc.evaluate);
@@ -228,6 +243,7 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.ErfcGrad, ErfcGrad.evaluate);
     this.register(ExpressionTypes.Gamma, Gamma.evaluate);
     this.register(ExpressionTypes.LGamma, LGamma.evaluate);
+
   }
 
 }

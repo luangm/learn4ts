@@ -47,6 +47,9 @@ import ReduceMax from "../expression/reduction/ReduceMax";
 import ReduceMin from "../expression/reduction/ReduceMin";
 import Erf from "../expression/transform/Erf";
 import Erfc from "../expression/transform/Erfc";
+import Transpose from "../expression/special/Transpose";
+import Conv2d from "../expression/nn/Conv2d";
+import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -136,6 +139,7 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.ReduceMean, ReduceMean.gradients);
     this.register(ExpressionTypes.ReduceMax, ReduceMax.gradients);
     this.register(ExpressionTypes.ReduceMin, ReduceMin.gradients);
+    this.register(ExpressionTypes.ReduceLogSumExp, ReduceLogSumExp.gradients);
 
     // this.register(ExpressionTypes.Assign, Assign.gradients);
     // this.register(ExpressionTypes.Fill, Fill.gradients);
@@ -170,6 +174,7 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.Floor, Floor.gradients);
     this.register(ExpressionTypes.Ceil, Ceil.gradients);
     this.register(ExpressionTypes.Round, Round.gradients);
+    this.register(ExpressionTypes.Transpose, Transpose.gradients);
 
     this.register(ExpressionTypes.Sine, Sine.gradients);
     this.register(ExpressionTypes.Sinh, Sinh.gradients);
@@ -186,6 +191,8 @@ export default class ReverseGradientVisitor implements Visitor {
 
     this.register(ExpressionTypes.Erf, Erf.gradients);
     this.register(ExpressionTypes.Erfc, Erfc.gradients);
+
+    this.register(ExpressionTypes.Conv2d, Conv2d.gradients);
   }
 
 }

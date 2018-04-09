@@ -10,7 +10,7 @@ export default abstract class TransformExpression extends Expression {
   }
 
   get dependencies() {
-    return [this._base];
+    return [this.base];
   }
 
   get params() {
@@ -22,7 +22,7 @@ export default abstract class TransformExpression extends Expression {
   }
 
   get shape() {
-    return this._base.shape;
+    return this.base.shape;
   }
 
   protected constructor(base: Expression, graph: Graph, name?: string) {

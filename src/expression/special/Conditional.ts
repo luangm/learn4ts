@@ -14,7 +14,7 @@ export default class Conditional extends Expression {
   }
 
   get dependencies(): Expression[] {
-    return [this._condition, this._truthy, this._falsy];
+    return [this.condition, this.truthy, this.falsy];
   }
 
   get falsy() {

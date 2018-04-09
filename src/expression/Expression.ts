@@ -2,6 +2,9 @@ import Tensor from "tensor4js/dist/types/Tensor";
 import Graph from "../Graph";
 import Visitor from "../visitor/Visitor";
 import {ShapeUtils} from "tensor4js";
+import {Conv2dOptions} from "./nn/Conv2d";
+import {Im2ColOptions} from "./nn/Im2Col";
+import {Col2ImOptions} from "./nn/Col2Im";
 
 export default abstract class Expression {
 
@@ -12,6 +15,7 @@ export default abstract class Expression {
   private readonly _id: number;
   private readonly _name?: string;
   private readonly _observers: Expression[];
+  private _subExpression: Expression | undefined;
 
   get dependencies(): Expression[] {
     return [];
@@ -53,6 +57,10 @@ export default abstract class Expression {
   }
 
   abstract get shape(): number[];
+
+  get subExpression(): Expression | undefined {
+    return this._subExpression;
+  }
 
   abstract get type(): string;
 
@@ -127,8 +135,16 @@ export default abstract class Expression {
     return this.factory.ceil(this);
   }
 
+  col2im(options: Col2ImOptions) {
+    return this.factory.col2im(this, options);
+  }
+
   conditional(truthy: Expression, falsy: Expression): Expression {
     return this.factory.conditional(this, truthy, falsy);
+  }
+
+  conv2d(kernel: Expression, options: Conv2dOptions): Expression {
+    return this.factory.conv2d(this, kernel, options);
   }
 
   cos(): Expression {
@@ -187,6 +203,13 @@ export default abstract class Expression {
     return this.factory.expm1(this);
   }
 
+  finalize() {
+    let sub = this.buildSubExpression();
+    if (sub) {
+      this._subExpression = sub;
+    }
+  }
+
   floor(): Expression {
     return this.factory.floor(this);
   }
@@ -213,6 +236,10 @@ export default abstract class Expression {
 
   greaterEqual(other: Expression): Expression {
     return this.factory.greaterEqual(this, other);
+  }
+
+  im2col(options: Im2ColOptions) {
+    return this.factory.im2col(this, options);
   }
 
   less(other: Expression): Expression {
@@ -269,6 +296,10 @@ export default abstract class Expression {
 
   reciprocalGrad(): Expression {
     return this.factory.reciprocalGrad(this);
+  }
+
+  reduceLogSumExp(dims: number | number[] = -1): Expression {
+    return this.factory.reduceLogSumExp(this, dims);
   }
 
   reduceMax(dims: number | number[] = -1): Expression {
@@ -379,6 +410,10 @@ export default abstract class Expression {
     return this.factory.tile(this, repeats);
   }
 
+  transpose(newAxis: number[] = []): Expression {
+    return this.factory.transpose(this, newAxis);
+  }
+
   truncDiv(other: Expression): Expression {
     return this.factory.truncDiv(this, other);
   }
@@ -389,5 +424,14 @@ export default abstract class Expression {
 
   zeros(): Expression {
     return this.factory.zeros(this.shape);
+  }
+
+  /**
+   * If child class override this and return an Expression,
+   * Then the subExpression is assumed to be equivalent to this.
+   * Evaluation visitor will use the subExpression
+   */
+  protected buildSubExpression(): Expression | undefined {
+    return undefined;
   }
 }
