@@ -7,7 +7,7 @@ export default class Group extends Expression {
   private readonly _list: Expression[];
 
   get dependencies(): Expression[] {
-    return this._list;
+    return this.list;
   }
 
   get list() {

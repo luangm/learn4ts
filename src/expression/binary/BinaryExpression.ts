@@ -14,17 +14,17 @@ export default abstract class BinaryExpression extends Expression {
     return this._left;
   }
 
-  get right() {
-    return this._right;
-  }
-
   get params() {
     return {
       type: this.type,
       name: this.name,
       left: this.left.id,
       right: this.right.id
-    }
+    };
+  }
+
+  get right() {
+    return this._right;
   }
 
   protected constructor(left: Expression, right: Expression, graph: Graph, name?: string) {

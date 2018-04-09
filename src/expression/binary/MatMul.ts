@@ -10,6 +10,17 @@ export default class MatMul extends BinaryExpression {
   private readonly _transposeLeft: boolean;
   private readonly _transposeRight: boolean;
 
+  get params() {
+    return {
+      type: this.type,
+      name: this.name,
+      left: this.left.id,
+      right: this.right.id,
+      transposeLeft: this.transposeLeft,
+      transposeRight: this.transposeRight
+    };
+  }
+
   get shape() {
     return this._shape;
   }
@@ -24,18 +35,6 @@ export default class MatMul extends BinaryExpression {
 
   get type() {
     return ExpressionTypes.MatMul;
-  }
-
-
-  get params() {
-    return {
-      type: this.type,
-      name: this.name,
-      left: this.left.id,
-      right: this.right.id,
-      transposeLeft: this.transposeLeft,
-      transposeRight: this.transposeRight
-    }
   }
 
   constructor(left: Expression, right: Expression, transposeLeft: boolean, transposeRight: boolean, graph: Graph, name?: string) {

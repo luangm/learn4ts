@@ -17,7 +17,7 @@ export default class IfElse extends Expression {
    * Note: the IfElse depends on condition node.
    */
   get dependencies() {
-    return [this._condition];
+    return [this.condition];
   }
 
   get falsy() {

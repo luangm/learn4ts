@@ -20,7 +20,7 @@ export default class WhileLoop extends Expression {
    * Note: the WhileLoop depends on condition node only.
    */
   get dependencies() {
-    return [this._condition];
+    return [this.condition];
   }
 
   get params() {

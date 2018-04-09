@@ -8,7 +8,7 @@ export default class Assign extends Expression {
   private readonly _source: Expression;
 
   get dependencies() {
-    return [this._source];
+    return [this.source];
   }
 
   get params() {
