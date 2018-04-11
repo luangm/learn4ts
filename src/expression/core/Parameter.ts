@@ -11,12 +11,8 @@ export default class Parameter extends Expression {
     return this._initialValue;
   }
 
-  get shape() {
-    return this._initialValue.shape;
-  }
-
-  get type() {
-    return ExpressionTypes.Parameter;
+  get notDifferentiable() {
+    return true;
   }
 
   /**
@@ -36,6 +32,14 @@ export default class Parameter extends Expression {
         id: this.id
       };
     }
+  }
+
+  get shape() {
+    return this._initialValue.shape;
+  }
+
+  get type() {
+    return ExpressionTypes.Parameter;
   }
 
   constructor(initialValue: Tensor, graph: Graph, name?: string) {

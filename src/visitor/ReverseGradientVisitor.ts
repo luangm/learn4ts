@@ -50,6 +50,8 @@ import Erfc from "../expression/transform/Erfc";
 import Transpose from "../expression/special/Transpose";
 import Conv2d from "../expression/nn/Conv2d";
 import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
+import L1Norm from "../expression/reduction/L1Norm";
+import Power from "../expression/binary/Power";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -89,17 +91,27 @@ export default class ReverseGradientVisitor implements Visitor {
     }
 
     // body
-    let grad = this._graph.addNode(params || this.factory.fill(1, node.shape));
+    let grad = params || this.factory.fill(1, node.shape);
     this.addGradient(node, grad);
 
+    // Check if a gradient method is registered for this type of node
     let method = this.registry.get(node.type);
     if (method) {
+      // found a method, use this method
       let grads = method(node, grad);
-
       for (let i = 0; i < node.dependencies.length; i++) {
         let dependency = node.dependencies[i];
         dependency.accept(this, grads[i]);
       }
+    } else if (node.internal) {
+      // Not found a method,
+      // Has an internal node, then only need to build internal node's gradients
+      node.internal.accept(this, grad);
+    } else if (node.notDifferentiable) {
+      // Node is not differentiable, do nothing.
+    } else {
+      console.warn("Gradient is not defined for node type of " + node.type);
+      // throw new Error();
     }
 
     // finalize
@@ -131,16 +143,13 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.FloorMod, FloorMod.gradients);
     this.register(ExpressionTypes.Multiply, Multiply.gradients);
     this.register(ExpressionTypes.Subtract, Subtract.gradients);
-
-    // this.register(ExpressionTypes.Constant, Constant.gradients);
-    // this.register(ExpressionTypes.Parameter, Parameter.gradients);
+    this.register(ExpressionTypes.Power, Power.gradients);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.gradients);
     this.register(ExpressionTypes.ReduceMean, ReduceMean.gradients);
     this.register(ExpressionTypes.ReduceMax, ReduceMax.gradients);
     this.register(ExpressionTypes.ReduceMin, ReduceMin.gradients);
     this.register(ExpressionTypes.ReduceLogSumExp, ReduceLogSumExp.gradients);
-
     // this.register(ExpressionTypes.Assign, Assign.gradients);
     // this.register(ExpressionTypes.Fill, Fill.gradients);
 

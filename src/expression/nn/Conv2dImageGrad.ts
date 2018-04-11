@@ -57,7 +57,7 @@ export default class Conv2dImageGrad extends Expression {
     this._options = options;
   }
 
-  buildSubExpression(): Expression {
+  buildInternal(): Expression {
     let numKernels = this.kernel.shape[0];
     let gradReshaped = this.grad.reshape([numKernels, -1]);
     let kReshaped = this.kernel.reshape([numKernels, -1]);

@@ -43,6 +43,10 @@ export default class Tile extends Expression {
     this._base = base;
     this._repeats = repeats;
     this._shape = [];
+
+    for (let i = 0; i < base.shape.length; i++) {
+      this._shape[i] = base.shape[i] * repeats[i];
+    }
     // if (dimension === -1) {
     //   let length = multiple;
     //   let baseShape = base.shape;

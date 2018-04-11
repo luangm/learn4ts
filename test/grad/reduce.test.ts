@@ -269,3 +269,171 @@ test("reduce logsumexp expanded ", function () {
   console.log(gradB.value.toString());
 
 });
+
+test("l1norm", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.l1Norm().multiply(b);
+
+  // console.log(result.value.toString());
+  let expectedValue = Tensor.create([[36, 72, 108], [144, 180, 216]]);
+  expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+
+  // console.log(gradA.value.toString());
+  // console.log(grads[1].value.toString());
+
+  let expectedGradA = Tensor.create([[[-21, -21, 21], [21, 21, 21]], [[21, 21, 21], [21, 21, 21]]]);
+  expect(gradA.value).toEqual(expectedGradA);
+
+  let expectedGradB = Tensor.create([[36, 36, 36], [36, 36, 36]]);
+  expect(gradB.value).toEqual(expectedGradB);
+});
+
+test("l1norm axis 0", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.l1Norm(0).multiply(b);
+
+  console.log(result.value.toString());
+  let expectedValue = Tensor.create([[2, 8, 18], [24, 40, 60]]);
+  expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+
+  // console.log(gradA.value.toString());
+  // console.log(grads[1].value.toString());
+
+  let expectedGradA = Tensor.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]]);
+  expect(gradA.value).toEqual(expectedGradA);
+
+  let expectedGradB = Tensor.create([[2, 4, 6], [6, 8, 10]]);
+  expect(gradB.value).toEqual(expectedGradB);
+});
+
+test("l1norm axis 1", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.l1Norm(1).multiply(b);
+
+  console.log(result.value.toString());
+  // let expectedValue = Tensor.create([[2, 8, 18], [24, 40, 60]]);
+  // expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+
+  console.log(gradA.value.toString());
+  console.log(grads[1].value.toString());
+
+  // let expectedGradA = Tensor.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]]);
+  // expect(gradA.value).toEqual(expectedGradA);
+
+  // let expectedGradB = Tensor.create([[2, 4, 6], [6, 8, 10]]);
+  // expect(gradB.value).toEqual(expectedGradB);
+});
+
+test("l2norm", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.l2Norm().multiply(b);
+
+  // console.log(result.value.toString());
+  let expectedValue = Tensor.create([[11.575837, 23.151674, 34.727512],
+    [46.30335 , 57.879185, 69.455025]]);
+  expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+  //
+  console.log(gradA.value.toString());
+  console.log(gradB.value.toString());
+  //
+  // let expectedGradA = Tensor.create([[[-1.8141237, -3.6282475,  5.442371 ],
+  //   [ 7.2564945,  9.070618 , 10.884742 ]],
+  //
+  //   [[ 1.8141236,  3.6282473,  5.442371 ],
+  //     [ 3.6282473,  5.442371 ,  7.2564945]]]);
+  // expect(gradA.value).toEqual(expectedGradA);
+  //
+  // let expectedGradB = Tensor.create([[11.575837, 11.575837, 11.575837],
+  //   [11.575837, 11.575837, 11.575837]]);
+  // expect(gradB.value).toEqual(expectedGradB);
+});
+
+test("infNorm", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.infNorm().multiply(b);
+
+  console.log(result.value.toString());
+  // let expectedValue = Tensor.create([[11.575837, 23.151674, 34.727512],
+  //   [46.30335 , 57.879185, 69.455025]]);
+  // expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+  //
+  console.log(gradA.value.toString());
+  console.log(gradB.value.toString());
+  //
+  // let expectedGradA = Tensor.create([[[-1.8141237, -3.6282475,  5.442371 ],
+  //   [ 7.2564945,  9.070618 , 10.884742 ]],
+  //
+  //   [[ 1.8141236,  3.6282473,  5.442371 ],
+  //     [ 3.6282473,  5.442371 ,  7.2564945]]]);
+  // expect(gradA.value).toEqual(expectedGradA);
+  //
+  // let expectedGradB = Tensor.create([[11.575837, 11.575837, 11.575837],
+  //   [11.575837, 11.575837, 11.575837]]);
+  // expect(gradB.value).toEqual(expectedGradB);
+});
+
+test("pNorm", function () {
+
+  let tensorA = Learn4js.create([[[-1, -2, 3], [4, 5, 6]], [[1, 2, 3], [2, 3, 4]]]);
+  let a = Learn4js.parameter(tensorA);
+  let b = Learn4js.constant(Tensor.create([[1, 2, 3], [4, 5, 6]]));
+  let result = a.pNorm(5).multiply(b);
+
+  console.log(result.value.toString());
+  // let expectedValue = Tensor.create([[11.575837, 23.151674, 34.727512],
+  //   [46.30335 , 57.879185, 69.455025]]);
+  // expect(result.value).toEqual(expectedValue);
+  //
+  let grads = Learn4js.gradients(result, [a, b]);
+  let gradA = grads[0];
+  let gradB = grads[1];
+  //
+  console.log(gradA.value.toString());
+  console.log(gradB.value.toString());
+  //
+  // let expectedGradA = Tensor.create([[[-1.8141237, -3.6282475,  5.442371 ],
+  //   [ 7.2564945,  9.070618 , 10.884742 ]],
+  //
+  //   [[ 1.8141236,  3.6282473,  5.442371 ],
+  //     [ 3.6282473,  5.442371 ,  7.2564945]]]);
+  // expect(gradA.value).toEqual(expectedGradA);
+  //
+  // let expectedGradB = Tensor.create([[11.575837, 11.575837, 11.575837],
+  //   [11.575837, 11.575837, 11.575837]]);
+  // expect(gradB.value).toEqual(expectedGradB);
+});

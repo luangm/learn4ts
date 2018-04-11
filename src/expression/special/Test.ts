@@ -30,7 +30,7 @@ export default class Test extends BinaryExpression {
     this._shape = ShapeUtils.broadcastShapes(left.shape, right.shape);
   }
 
-  protected buildSubExpression(): Expression | undefined {
+  protected buildInternal(): Expression | undefined {
     let add = this.left.add(this.right);
     let subtract = this.left.subtract(this.right);
     return add.multiply(subtract);

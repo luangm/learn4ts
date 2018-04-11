@@ -10,14 +10,14 @@ test("reciprocal", function () {
   let expectedVal = Tensor.create([[1 / 1, 1 / 2, 1 / 3], [1 / 4, 1 / 5, 1 / 6]]);
   expect(result.value).toEqual(expectedVal);
   //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
-  //
-  // // console.log(gradA.value.toString());
-  //
-  // let expected = Tensor.create([[-1, -1 / 4, -1 / 9], [-1 / 16, -1 / 25, -1 / 36]]);
-  //
-  // expect(gradA.value).toEqual(expected);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  console.log(gradA.value.toString());
+
+  let expected = Tensor.create([[-1, -1 / 4, -1 / 9], [-1 / 16, -1 / 25, -1 / 36]]);
+
+  expect(gradA.value).toEqual(expected);
 });
 
 test("square", function () {
@@ -33,17 +33,17 @@ test("square", function () {
   ]);
   expect(result.value).toEqual(expectedVal);
   //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
-  //
-  // // console.log(gradA.value.toString());
-  //
-  // let expected = Tensor.create([
-  //   [2, 4, 6],
-  //   [0, -2, -4]
-  // ]);
-  //
-  // expect(gradA.value).toEqual(expected);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  // console.log(gradA.value.toString());
+
+  let expected = Tensor.create([
+    [2, 4, 6],
+    [0, -2, -4]
+  ]);
+
+  expect(gradA.value).toEqual(expected);
 });
 
 test("sqrt", function () {
@@ -60,15 +60,42 @@ test("sqrt", function () {
   ]);
   expect(result.value).toEqual(expectedVal);
   //
-  // let grads = Learn4js.gradients(result, [a]);
-  // let gradA = grads[0];
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
   //
-  // // console.log(gradA.value.toString());
+  console.log(gradA.value.toString());
   //
-  // let expected = Tensor.create([
-  //   [0.5 / Math.sqrt(1), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(3)],
-  //   [0.5 / Math.sqrt(0), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(4)]
-  // ]);
+  let expected = Tensor.create([
+    [0.5 / Math.sqrt(1), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(3)],
+    [0.5 / Math.sqrt(0), 0.5 / Math.sqrt(2), 0.5 / Math.sqrt(4)]
+  ]);
+
+  expect(gradA.value).toEqual(expected);
+});
+
+test("cube", function () {
+
+  let tensorA = Learn4js.create([[1, 2, 3], [4,5,6]]);
+  let a = Learn4js.constant(tensorA);
+  let y = Learn4js.constant(Tensor.scalar(3));
+  let result = a.pow(y);
+
+  // console.log(result.value.toString());
+
+  let expectedVal = Learn4js.create([
+    [1, 2*2*2, 3*3*3], [4*4*4, 5*5*5, 6*6*6]
+  ]);
+  expect(result.value).toEqual(expectedVal);
   //
-  // expect(gradA.value).toEqual(expected);
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+  //
+  console.log(gradA.value.toString());
+  //
+  let expected = Tensor.create([
+    [3, 12, 27],
+    [48, 75, 108]
+  ]);
+
+  expect(gradA.value).toEqual(expected);
 });

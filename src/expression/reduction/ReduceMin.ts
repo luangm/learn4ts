@@ -3,8 +3,6 @@ import ReductionExpression from "./ReductionExpression";
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import {ExpressionTypes} from "../ExpressionTypes";
-import Subtract from "../binary/Subtract";
-import ReduceSum from "./ReduceSum";
 
 export default class ReduceMin extends ReductionExpression {
 
@@ -12,14 +10,14 @@ export default class ReduceMin extends ReductionExpression {
     return ExpressionTypes.ReduceMin;
   }
 
-  constructor(base: Expression, dims: number | number[] = -1, graph: Graph, name?: string) {
-    super(base, dims, graph, name);
+  constructor(base: Expression, dims: number | number[] = -1, keepDims = false, graph: Graph, name?: string) {
+    super(base, dims, keepDims, graph, name);
   }
 
   static evaluate(expression: Expression): Tensor {
     let node = expression as ReduceMin;
     let base = node.base.value;
-    return TensorMath.reduceMin(base, node.dims);
+    return TensorMath.reduceMin(base, node.dims, node.keepDims);
   }
 
   static gradients(expression: Expression, grad: Expression): Expression[] {

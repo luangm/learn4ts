@@ -40,13 +40,12 @@ export default class Graph {
 
   addNode(node: Expression): Expression {
 
-    console.log("addNode: ", node.id, node.type);
+    console.log("addNode: ", node);
 
     // find existing
     let existing = this.findNode(node);
     if (existing) {
-
-      console.log("existing: ", node.id, node.type);
+      console.warn("Got Existing Node: ", node, existing);
       return existing;
     }
 

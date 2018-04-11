@@ -44,6 +44,6 @@
     ]
   },
   "dependencies": {
-    "tensor4js": "^0.1.30"
+    "tensor4js": "^0.1.31"
   }
 }

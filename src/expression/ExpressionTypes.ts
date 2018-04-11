@@ -1,4 +1,8 @@
 export const enum ExpressionTypes {
+  PNorm = "PNorm",
+  InfNorm = "InfNorm",
+  L2Norm = "L2Norm",
+  L1Norm = "L1Norm",
   ReduceLogSumExp = "ReduceLogSumExp",
   Test = "Test",
   Transpose = "Transpose",

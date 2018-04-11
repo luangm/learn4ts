@@ -70,18 +70,18 @@ class Learn4js {
     return new GradientDescentOptimizer(this.activeGraph, {learnRate});
   }
 
-  gradients(target: Expression, nodes: Expression[]): Expression[] {
+  gradients(target: Expression, nodes: Expression[], grad?: Expression): Expression[] {
     let visitor = new ReverseGradientVisitor(this.activeGraph);
-    visitor.visit(target);
+    visitor.visit(target, grad);
 
     let grads: Expression[] = [];
     for (let node of nodes) {
-      let grad = target.getGradient(node);
-      if (grad) {
+      let nodeGrad = target.getGradient(node);
+      if (nodeGrad) {
         // if (this.interactive) {
         //   grad.eval();
         // }
-        grads.push(grad);
+        grads.push(nodeGrad);
       }
     }
     return grads;

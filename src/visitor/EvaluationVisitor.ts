@@ -88,6 +88,7 @@ import Gamma from "../expression/transform/Gamma";
 import LGamma from "../expression/transform/LGamma";
 import Transpose from "../expression/special/Transpose";
 import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
+import L1Norm from "../expression/reduction/L1Norm";
 
 export default class EvaluationVisitor implements Visitor {
 
@@ -117,9 +118,9 @@ export default class EvaluationVisitor implements Visitor {
       return;
     }
 
-    if (node.subExpression) {
-      node.subExpression.accept(this, params);
-      let result = this.session.getValue(node.subExpression);
+    if (node.internal) {
+      node.internal.accept(this, params);
+      let result = this.session.getValue(node.internal);
       if (result) {
         this.session.setValue(node, result);
       }

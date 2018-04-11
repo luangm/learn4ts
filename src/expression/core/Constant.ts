@@ -7,6 +7,10 @@ export default class Constant extends Expression {
 
   private readonly _value: Tensor;
 
+  get notDifferentiable() {
+    return true;
+  }
+
   /**
    * Note: because constants' value should not be part of the params. The only way to distinguish is through name and id.
    * Assume if name is present, use name. Otherwise use id.

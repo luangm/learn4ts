@@ -57,7 +57,7 @@ export default class Conv2dKernelGrad extends Expression {
     this._options = options;
   }
 
-  buildSubExpression(): Expression {
+  buildInternal(): Expression {
     let xCol = this.image.im2col({
       kernelNum: this.kernel.shape[0],
       kernelChannel: this.kernel.shape[1],

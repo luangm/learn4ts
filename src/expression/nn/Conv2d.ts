@@ -66,7 +66,7 @@ export default class Conv2d extends Expression {
     return [imageGrad, kernelGrad];
   }
 
-  buildSubExpression(): Expression {
+  buildInternal(): Expression {
     let imageShape = this.image.shape;
     let kernelShape = this.kernel.shape;
     let outputShape = ShapeUtils.computeConv2dShape(imageShape, kernelShape, this.options);

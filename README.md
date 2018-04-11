@@ -18,6 +18,7 @@ This will replace learn4js.
 | TruncateMod       | Arithmetic    | Y     |       |       |
 | TruncateDiv       | Arithmetic    | Y     |       |       |
 | MatMul            | Arithmetic    | Y     | Y     | Y     |
+| Power             | Arithmetic    | Y     | Y     | Y     |
 | Constant          | Core          | Y     |       |       |
 | Parameter         | Core          | Y     |       |       |
 | Variable          | Core          | Y     |       |       |
@@ -28,10 +29,10 @@ This will replace learn4js.
 | ReduceMin         | Reduction     | Y     | Y     | Y     |
 | ReduceProd        | Reduction     | Y     |       |       |
 | ReduceLogSumExp   | Reduction     | Y     | Y     | Y     |
-| L1Norm            | Reduction     |       |       |       |
-| L2Norm            | Reduction     |       |       |       |
-| InfNorm           | Reduction     |       |       |       |
-| PNorm             | Reduction     |       |       |       |
+| L1Norm            | Reduction     | Y     | Y     | Y     |
+| L2Norm            | Reduction     | Y     | Y     | Y     |
+| InfNorm           | Reduction     | Y     | Y     | Y     |
+| PNorm             | Reduction     | Y     | Y     | Y     |
 | AddN              | Special       |       |       |       |
 | Assign            | Special       | Y     |       |       |
 | Fill              | Special       | Y     |       |       |
@@ -56,7 +57,6 @@ This will replace learn4js.
 | Round             | Transform     | Y     | Y     | Y     |
 | Floor             | Transform     | Y     | Y     | Y     |
 | Ceil              | Transform     | Y     | Y     | Y     |
-| Power             | Transform     | Y     |       |       |
 | RSqrt             | Transform     | Y     |       |       |
 | Sigmoid           | Transform     | Y     | Y     | Y     |
 | SigmoidGrad       | Transform     | Y     |       |       |

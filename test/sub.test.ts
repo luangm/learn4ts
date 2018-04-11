@@ -11,3 +11,19 @@ test("AA", function () {
 
   console.log(z.value);
 });
+
+test("l2norm", function () {
+  let tensorA = Learn4js.create([1, 2, 3]);
+  let a = Learn4js.constant(tensorA);
+  let result = a.l2Norm();
+
+  console.log(result);
+
+  let grad = Learn4js.gradients(result,[a]);
+
+  console.log(grad[0].value);
+  // for (let [key, node] of Learn4js.activeGraph.nodes) {
+  //   console.log(key, node.type);
+  // }
+
+});

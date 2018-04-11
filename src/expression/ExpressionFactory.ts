@@ -92,6 +92,10 @@ import Transpose from "./special/Transpose";
 import Conv2dImageGrad from "./nn/Conv2dImageGrad";
 import Conv2dKernelGrad from "./nn/Conv2dKernelGrad";
 import ReduceLogSumExp from "./reduction/ReduceLogSumExp";
+import L1Norm from "./reduction/L1Norm";
+import L2Norm from "./reduction/L2Norm";
+import InfNorm from "./reduction/InfNorm";
+import PNorm from "./reduction/PNorm";
 
 export default class ExpressionFactory {
 
@@ -268,6 +272,18 @@ export default class ExpressionFactory {
     return this.addNode(new Im2Col(image, options, this.graph, name), image);
   }
 
+  infNorm(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new InfNorm(base, dims, keepDims, this.graph, name), base);
+  }
+
+  l1Norm(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new L1Norm(base, dims, keepDims, this.graph, name), base);
+  }
+
+  l2Norm(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new L2Norm(base, dims, keepDims, this.graph, name), base);
+  }
+
   less(left: Expression, right: Expression, name?: string): Expression {
     return this.addNode(new Less(left, right, this.graph, name), left, right);
   }
@@ -312,6 +328,10 @@ export default class ExpressionFactory {
     return this.addNode(new NotEqual(left, right, this.graph, name), left, right);
   }
 
+  pNorm(base: Expression, p: number = 2, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new PNorm(base, p, dims, keepDims, this.graph, name), base);
+  }
+
   parameter(value: Tensor, name?: string): Expression {
     return this.addNode(new Parameter(value, this.graph, name));
   }
@@ -328,28 +348,28 @@ export default class ExpressionFactory {
     return this.addNode(new ReciprocalGrad(base, this.graph, name), base);
   }
 
-  reduceLogSumExp(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceLogSumExp(base, dims, this.graph, name), base);
+  reduceLogSumExp(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceLogSumExp(base, dims, keepDims, this.graph, name), base);
   }
 
-  reduceMax(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceMax(base, dims, this.graph, name), base);
+  reduceMax(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceMax(base, dims, keepDims, this.graph, name), base);
   }
 
-  reduceMean(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceMean(base, dims, this.graph, name), base);
+  reduceMean(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceMean(base, dims, keepDims, this.graph, name), base);
   }
 
-  reduceMin(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceMin(base, dims, this.graph, name), base);
+  reduceMin(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceMin(base, dims, keepDims, this.graph, name), base);
   }
 
-  reduceProd(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceProd(base, dims, this.graph, name), base);
+  reduceProd(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceProd(base, dims, keepDims, this.graph, name), base);
   }
 
-  reduceSum(base: Expression, dims: number | number[], name?: string) {
-    return this.addNode(new ReduceSum(base, dims, this.graph, name), base);
+  reduceSum(base: Expression, dims: number | number[], keepDims = false, name?: string) {
+    return this.addNode(new ReduceSum(base, dims, keepDims, this.graph, name), base);
   }
 
   relu(base: Expression, name?: string): Expression {

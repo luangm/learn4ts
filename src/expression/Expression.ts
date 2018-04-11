@@ -13,9 +13,9 @@ export default abstract class Expression {
   private readonly _gradMap: Map<number, Expression>;
   private readonly _graph: Graph;
   private readonly _id: number;
+  private _internal: Expression | undefined;
   private readonly _name?: string;
   private readonly _observers: Expression[];
-  private _subExpression: Expression | undefined;
 
   get dependencies(): Expression[] {
     return [];
@@ -37,8 +37,16 @@ export default abstract class Expression {
     return this._id;
   }
 
+  get internal(): Expression | undefined {
+    return this._internal;
+  }
+
   get name() {
     return this._name;
+  }
+
+  get notDifferentiable() {
+    return false;
   }
 
   get observers(): Expression[] {
@@ -57,10 +65,6 @@ export default abstract class Expression {
   }
 
   abstract get shape(): number[];
-
-  get subExpression(): Expression | undefined {
-    return this._subExpression;
-  }
 
   abstract get type(): string;
 
@@ -204,9 +208,9 @@ export default abstract class Expression {
   }
 
   finalize() {
-    let sub = this.buildSubExpression();
+    let sub = this.buildInternal();
     if (sub) {
-      this._subExpression = sub;
+      this._internal = sub;
     }
   }
 
@@ -240,6 +244,22 @@ export default abstract class Expression {
 
   im2col(options: Im2ColOptions) {
     return this.factory.im2col(this, options);
+  }
+
+  infNorm(dims: number | number[] = -1): Expression {
+    return this.factory.infNorm(this, dims);
+  }
+
+  inspect(): string {
+    return this.toString();
+  }
+
+  l1Norm(dims: number | number[] = -1): Expression {
+    return this.factory.l1Norm(this, dims);
+  }
+
+  l2Norm(dims: number | number[] = -1): Expression {
+    return this.factory.l2Norm(this, dims);
   }
 
   less(other: Expression): Expression {
@@ -286,6 +306,10 @@ export default abstract class Expression {
     return this.factory.notEqual(this, other);
   }
 
+  pNorm(p: number = 2, dims: number | number[] = -1): Expression {
+    return this.factory.pNorm(this, p, dims);
+  }
+
   pow(other: Expression): Expression {
     return this.factory.pow(this, other);
   }
@@ -298,28 +322,28 @@ export default abstract class Expression {
     return this.factory.reciprocalGrad(this);
   }
 
-  reduceLogSumExp(dims: number | number[] = -1): Expression {
-    return this.factory.reduceLogSumExp(this, dims);
+  reduceLogSumExp(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceLogSumExp(this, dims, keepDims);
   }
 
-  reduceMax(dims: number | number[] = -1): Expression {
-    return this.factory.reduceMax(this, dims);
+  reduceMax(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceMax(this, dims, keepDims);
   }
 
-  reduceMean(dims: number | number[] = -1): Expression {
-    return this.factory.reduceMean(this, dims);
+  reduceMean(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceMean(this, dims, keepDims);
   }
 
-  reduceMin(dims: number | number[] = -1): Expression {
-    return this.factory.reduceMin(this, dims);
+  reduceMin(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceMin(this, dims, keepDims);
   }
 
-  reduceProd(dims: number | number[] = -1): Expression {
-    return this.factory.reduceProd(this, dims);
+  reduceProd(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceProd(this, dims, keepDims);
   }
 
-  reduceSum(dims: number | number[] = -1): Expression {
-    return this.factory.reduceSum(this, dims);
+  reduceSum(dims: number | number[] = -1, keepDims = false): Expression {
+    return this.factory.reduceSum(this, dims, keepDims);
   }
 
   relu(): Expression {
@@ -410,6 +434,15 @@ export default abstract class Expression {
     return this.factory.tile(this, repeats);
   }
 
+  toString() {
+    let result = this.type;
+    result += "(" + this.dependencies.map((item) => {
+      return item.id
+    }).join(", ") + ") ";
+    result += "{ id=" + this.id + ", shape=" + JSON.stringify(this.shape) + " }";
+    return result;
+  }
+
   transpose(newAxis: number[] = []): Expression {
     return this.factory.transpose(this, newAxis);
   }
@@ -428,10 +461,10 @@ export default abstract class Expression {
 
   /**
    * If child class override this and return an Expression,
-   * Then the subExpression is assumed to be equivalent to this.
-   * Evaluation visitor will use the subExpression
+   * Then the internal is assumed to be equivalent to this.
+   * Evaluation visitor will use the internal
    */
-  protected buildSubExpression(): Expression | undefined {
+  protected buildInternal(): Expression | undefined {
     return undefined;
   }
 }
