@@ -45,6 +45,7 @@ import Sigmoid from "../expression/transform/Sigmoid";
 import Sign from "../expression/transform/Sign";
 import Sine from "../expression/transform/Sine";
 import Sinh from "../expression/transform/Sinh";
+import Softmax from "../expression/transform/Softmax";
 import Softplus from "../expression/transform/Softplus";
 import Sqrt from "../expression/transform/Sqrt";
 import Square from "../expression/transform/Square";
@@ -145,6 +146,7 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.Multiply, Multiply.gradients);
     this.register(ExpressionTypes.Subtract, Subtract.gradients);
     this.register(ExpressionTypes.Power, Power.gradients);
+    this.register(ExpressionTypes.Softmax, Softmax.gradients);
 
     this.register(ExpressionTypes.ReduceSum, ReduceSum.gradients);
     this.register(ExpressionTypes.ReduceMean, ReduceMean.gradients);

@@ -1,5 +1,6 @@
 
 export const enum ExpressionTypes {
+  MaxPool = "MaxPool",
   Duplicate = "Duplicate",
   PNorm = "PNorm",
   InfNorm = "InfNorm",

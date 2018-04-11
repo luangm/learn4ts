@@ -62,8 +62,7 @@ This will replace learn4js.
 | Sigmoid           | Transform     | Y     | Y     | Y     |
 | SigmoidGrad       | Transform     | Y     |       |       |
 | Sign              | Transform     | Y     | Y     | Y     |
-| Softmax           | Transform     | Y     |       |       |
-| SoftmaxGrad       | Transform     | Y     |       |       |
+| Softmax           | Transform     | Y     | Y     | Y     |
 | Softplus          | Transform     | Y     | Y     | Y     |
 | Sqrt              | Transform     | Y     | Y     | Y     |
 | SqrtGrad          | Transform     | Y     |       |       |

@@ -79,7 +79,6 @@ import Sign from "../expression/transform/Sign";
 import Sine from "../expression/transform/Sine";
 import Sinh from "../expression/transform/Sinh";
 import Softmax from "../expression/transform/Softmax";
-import SoftmaxGrad from "../expression/transform/SoftmaxGrad";
 import Softplus from "../expression/transform/Softplus";
 import Sqrt from "../expression/transform/Sqrt";
 import SqrtGrad from "../expression/transform/SqrtGrad";
@@ -202,7 +201,6 @@ export default class EvaluationVisitor implements Visitor {
     this.register(ExpressionTypes.Sign, Sign.evaluate);
     this.register(ExpressionTypes.Softplus, Softplus.evaluate);
     this.register(ExpressionTypes.Softmax, Softmax.evaluate);
-    this.register(ExpressionTypes.SoftmaxGrad, SoftmaxGrad.evaluate);
     this.register(ExpressionTypes.Sqrt, Sqrt.evaluate);
     this.register(ExpressionTypes.SqrtGrad, SqrtGrad.evaluate);
     this.register(ExpressionTypes.Square, Square.evaluate);

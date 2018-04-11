@@ -1,8 +1,8 @@
 import {Tensor, TensorMath} from "tensor4js";
 import Graph from "../../Graph";
 import Expression from "../Expression";
-import TransformExpression from "./TransformExpression";
 import {ExpressionTypes} from "../ExpressionTypes";
+import TransformExpression from "./TransformExpression";
 
 export default class Softmax extends TransformExpression {
 
@@ -20,4 +20,9 @@ export default class Softmax extends TransformExpression {
     return TensorMath.softmax(base);
   }
 
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as Softmax;
+    let baseGrad = grad.subtract(grad.multiply(node).reduceSum(1).reshape([-1, 1])).multiply(node);
+    return [baseGrad];
+  }
 }

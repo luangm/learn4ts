@@ -1,10 +1,10 @@
+import {ShapeUtils} from "tensor4js";
 import Tensor from "tensor4js/dist/types/Tensor";
 import Graph from "../Graph";
 import Visitor from "../visitor/Visitor";
-import {ShapeUtils} from "tensor4js";
+import {Col2ImOptions} from "./nn/Col2Im";
 import {Conv2dOptions} from "./nn/Conv2d";
 import {Im2ColOptions} from "./nn/Im2Col";
-import {Col2ImOptions} from "./nn/Col2Im";
 
 export default abstract class Expression {
 
@@ -396,6 +396,10 @@ export default abstract class Expression {
 
   slice(begin: number[], size: number[] = []): Expression {
     return this.factory.slice(this, begin, size);
+  }
+
+  softmax(): Expression {
+    return this.factory.softmax(this);
   }
 
   softplus(): Expression {

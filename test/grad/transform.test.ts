@@ -355,3 +355,15 @@ test("softplus", function () {
 function sigmoid(x: number): number {
   return 1 / (1 + Math.exp(-x));
 }
+
+test("softmax", function () {
+
+  let a = Learn4js.constant([[1, 2, 3], [4, 5, 6]]);
+  let result = a.softmax();
+  console.log(result.value);
+
+  let grads = Learn4js.gradients(result, [a]);
+  let gradA = grads[0];
+
+  console.log(gradA.value);
+});
