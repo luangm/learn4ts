@@ -31,7 +31,10 @@ test("Linear Regression", function () {
 
   for (let i = 0; i < 10000; i++) {
     // console.log("--------- LOOP " + (i+1) + " ----------------")
-      console.log("loss: ", loss.eval().toString());
+      let lossVal = loss.eval();
+      if (i % 100 === 0) {
+        console.log(lossVal);
+      }
 
     // console.log("grad_W: ",grad_W.eval().toString());
     // console.log("grad_b: ",grad_b.eval().toString());
