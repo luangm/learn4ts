@@ -140,7 +140,7 @@ export default class EvaluationVisitor implements Visitor {
         this.session.setValue(node, result);
       }
     } else {
-      console.warn("No evaluate method for node: " + node.type);
+      // console.warn("No evaluate method for node: " + node.type);
     }
 
   }

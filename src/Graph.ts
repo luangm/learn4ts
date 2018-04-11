@@ -40,7 +40,7 @@ export default class Graph {
 
   addNode(node: Expression): Expression {
 
-    console.log("addNode: ", node);
+    // console.log("addNode: ", node);
 
     // find existing
     let existing = this.findNode(node);
