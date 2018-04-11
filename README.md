@@ -33,7 +33,7 @@ This will replace learn4js.
 | L2Norm            | Reduction     | Y     | Y     | Y     |
 | InfNorm           | Reduction     | Y     | Y     | Y     |
 | PNorm             | Reduction     | Y     | Y     | Y     |
-| AddN              | Special       |       |       |       |
+| AddN              | Special       | Y     | Y     | Y     |
 | Assign            | Special       | Y     |       |       |
 | Fill              | Special       | Y     |       |       |
 | Group             | Special       | Y     |       |       |
@@ -41,9 +41,10 @@ This will replace learn4js.
 | Reshape           | Special       | Y     | Y     | Y     |
 | Tile              | Special       | Y     |       | E     |
 | Transpose         | Special       | Y     | Y     | Y     |
-| Slice             | Special       |       |       |       |
+| Slice             | Special       | Y     |       | E     |
 | Concat            | Special       |       |       |       |
 | Stack             | Special       |       |       |       |
+| Duplicate         | Transform     | Y     | Y     | Y     |
 | Absolute          | Transform     | Y     | Y     | Y     |
 | Exponential       | Transform     | Y     | Y     | Y     |
 | Expm1             | Transform     | Y     | Y     | Y     |

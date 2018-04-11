@@ -109,3 +109,32 @@ test("transpose with mul", function () {
   console.log(gradA.value);
   console.log(gradB.value);
 });
+
+test("slice", function () {
+
+  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
+  let a = Learn4js.constant(tensorA);
+  let result = a.slice([0, 1]);
+
+  console.log(result.value);
+});
+
+test("slice 2", function () {
+
+  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
+  let a = Learn4js.constant(tensorA);
+  let b = Learn4js.constant([[5, 6], [7, 8]]);
+  let result = a.slice([0, 1]).dup();
+
+  console.log(result.value);
+});
+
+test("slice 3", function () {
+
+  let tensorA = Learn4js.linspace(1, 6, 6).reshape([2, 3]);
+  let a = Learn4js.constant(tensorA);
+  let b = Learn4js.constant([[5, 6], [7, 8]]);
+  let result = a.slice([0, 1]).multiply(b);
+
+  console.log(result.value);
+});

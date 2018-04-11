@@ -96,6 +96,8 @@ import L1Norm from "./reduction/L1Norm";
 import L2Norm from "./reduction/L2Norm";
 import InfNorm from "./reduction/InfNorm";
 import PNorm from "./reduction/PNorm";
+import Slice from "./special/Slice";
+import Duplicate from "./transform/Duplicate";
 
 export default class ExpressionFactory {
 
@@ -194,6 +196,10 @@ export default class ExpressionFactory {
 
   dropout(base: Expression, probability: number, name?: string): Expression {
     return this.addNode(new Dropout(base, probability, this.graph, name), base);
+  }
+
+  dup(base: Expression, name?: string): Expression {
+    return this.addNode(new Duplicate(base, this.graph, name), base);
   }
 
   elu(base: Expression, name?: string): Expression {
@@ -413,6 +419,10 @@ export default class ExpressionFactory {
 
   sinh(base: Expression, name?: string): Expression {
     return this.addNode(new Sinh(base, this.graph, name), base);
+  }
+
+  slice(base: Expression, begin: number[], size: number[] = [], name?: string): Expression {
+    return this.addNode(new Slice(base, begin, size, this.graph, name), base);
   }
 
   softmax(base: Expression, name?: string): Expression {

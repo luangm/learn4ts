@@ -167,6 +167,10 @@ export default abstract class Expression {
     return this.factory.dropout(this, probability);
   }
 
+  dup(): Expression {
+    return this.factory.dup(this);
+  }
+
   elu(): Expression {
     return this.factory.elu(this);
   }
@@ -390,6 +394,10 @@ export default abstract class Expression {
     return this.factory.sinh(this);
   }
 
+  slice(begin: number[], size: number[] = []): Expression {
+    return this.factory.slice(this, begin, size);
+  }
+
   softplus(): Expression {
     return this.factory.softplus(this);
   }
@@ -437,7 +445,7 @@ export default abstract class Expression {
   toString() {
     let result = this.type;
     result += "(" + this.dependencies.map((item) => {
-      return item.id
+      return item.id;
     }).join(", ") + ") ";
     result += "{ id=" + this.id + ", shape=" + JSON.stringify(this.shape) + " }";
     return result;

@@ -40,12 +40,29 @@ class Learn4js {
     return this.factory.add(left, right, name);
   }
 
+  addN(list: Expression[], name?: string): Expression {
+    return this.factory.addN(list, name);
+  }
+
   col2im(col: Expression, options: Col2ImOptions, name?: string): Expression {
     return this.factory.col2im(col, options, name);
   }
 
-  constant(value: Tensor, name?: string): Expression {
-    return this.factory.constant(value, name);
+  constant(array: number): Expression;
+
+  constant(array: number[]): Expression;
+
+  constant(array: number[][]): Expression;
+
+  constant(array: number[][][]): Expression;
+
+  constant(array: number[][][][]): Expression;
+
+  constant(value: Tensor, name?: string): Expression;
+
+  constant(value: any, name?: string): Expression {
+    let tensor = (value instanceof Tensor) ? value : Tensor.create(value);
+    return this.factory.constant(tensor, name);
   }
 
   create(array: number): Tensor;
@@ -111,8 +128,21 @@ class Learn4js {
     return Tensor.ones(shape);
   }
 
-  parameter(value: Tensor, name?: string): Expression {
-    return this.factory.parameter(value, name);
+  parameter(array: number): Expression;
+
+  parameter(array: number[]): Expression;
+
+  parameter(array: number[][]): Expression;
+
+  parameter(array: number[][][]): Expression;
+
+  parameter(array: number[][][][]): Expression;
+
+  parameter(value: Tensor, name?: string): Expression;
+
+  parameter(value: any, name?: string): Expression {
+    let tensor = (value instanceof Tensor) ? value : Tensor.create(value);
+    return this.factory.parameter(tensor, name);
   }
 
   round(base: Expression, name?: string): Expression {

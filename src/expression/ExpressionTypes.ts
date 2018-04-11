@@ -1,4 +1,6 @@
+
 export const enum ExpressionTypes {
+  Duplicate = "Duplicate",
   PNorm = "PNorm",
   InfNorm = "InfNorm",
   L2Norm = "L2Norm",

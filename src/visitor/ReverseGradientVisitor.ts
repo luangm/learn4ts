@@ -1,57 +1,58 @@
-import Graph from "../Graph";
 import Add from "../expression/binary/Add";
 import Divide from "../expression/binary/Divide";
+import FloorMod from "../expression/binary/FloorMod";
 import MatMul from "../expression/binary/MatMul";
+import Maximum from "../expression/binary/Maximum";
+import Minimum from "../expression/binary/Minimum";
 import Multiply from "../expression/binary/Multiply";
+import Power from "../expression/binary/Power";
 import Subtract from "../expression/binary/Subtract";
 import Expression from "../expression/Expression";
+import {ExpressionTypes} from "../expression/ExpressionTypes";
+import Conv2d from "../expression/nn/Conv2d";
+import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
+import ReduceMax from "../expression/reduction/ReduceMax";
+import ReduceMean from "../expression/reduction/ReduceMean";
+import ReduceMin from "../expression/reduction/ReduceMin";
+import ReduceSum from "../expression/reduction/ReduceSum";
+import AddN from "../expression/special/AddN";
 import Reshape from "../expression/special/Reshape";
+import Transpose from "../expression/special/Transpose";
 import Absolute from "../expression/transform/Absolute";
+import Acos from "../expression/transform/Acos";
+import Acosh from "../expression/transform/Acosh";
+import Asin from "../expression/transform/Asin";
+import Asinh from "../expression/transform/Asinh";
+import Atan from "../expression/transform/Atan";
+import Atanh from "../expression/transform/Atanh";
+import Ceil from "../expression/transform/Ceil";
 import Cosh from "../expression/transform/Cosh";
 import Cosine from "../expression/transform/Cosine";
+import Duplicate from "../expression/transform/Duplicate";
+import Elu from "../expression/transform/Elu";
+import Erf from "../expression/transform/Erf";
+import Erfc from "../expression/transform/Erfc";
 import Expm1 from "../expression/transform/Expm1";
 import Exponential from "../expression/transform/Exponential";
+import Floor from "../expression/transform/Floor";
 import Log1p from "../expression/transform/Log1p";
 import Logarithm from "../expression/transform/Logarithm";
 import Negate from "../expression/transform/Negate";
 import Reciprocal from "../expression/transform/Reciprocal";
 import Relu from "../expression/transform/Relu";
+import Round from "../expression/transform/Round";
 import Sigmoid from "../expression/transform/Sigmoid";
+import Sign from "../expression/transform/Sign";
 import Sine from "../expression/transform/Sine";
 import Sinh from "../expression/transform/Sinh";
+import Softplus from "../expression/transform/Softplus";
 import Sqrt from "../expression/transform/Sqrt";
 import Square from "../expression/transform/Square";
+import Step from "../expression/transform/Step";
 import Tangent from "../expression/transform/Tangent";
 import Tanh from "../expression/transform/Tanh";
+import Graph from "../Graph";
 import Visitor, {VisitFunc} from "./Visitor";
-import {ExpressionTypes} from "../expression/ExpressionTypes";
-import Elu from "../expression/transform/Elu";
-import Softplus from "../expression/transform/Softplus";
-import Maximum from "../expression/binary/Maximum";
-import Minimum from "../expression/binary/Minimum";
-import FloorMod from "../expression/binary/FloorMod";
-import ReduceSum from "../expression/reduction/ReduceSum";
-import Floor from "../expression/transform/Floor";
-import Ceil from "../expression/transform/Ceil";
-import Round from "../expression/transform/Round";
-import Sign from "../expression/transform/Sign";
-import Step from "../expression/transform/Step";
-import Asin from "../expression/transform/Asin";
-import Asinh from "../expression/transform/Asinh";
-import Acos from "../expression/transform/Acos";
-import Acosh from "../expression/transform/Acosh";
-import Atan from "../expression/transform/Atan";
-import Atanh from "../expression/transform/Atanh";
-import ReduceMean from "../expression/reduction/ReduceMean";
-import ReduceMax from "../expression/reduction/ReduceMax";
-import ReduceMin from "../expression/reduction/ReduceMin";
-import Erf from "../expression/transform/Erf";
-import Erfc from "../expression/transform/Erfc";
-import Transpose from "../expression/special/Transpose";
-import Conv2d from "../expression/nn/Conv2d";
-import ReduceLogSumExp from "../expression/reduction/ReduceLogSumExp";
-import L1Norm from "../expression/reduction/L1Norm";
-import Power from "../expression/binary/Power";
 
 export default class ReverseGradientVisitor implements Visitor {
 
@@ -154,7 +155,7 @@ export default class ReverseGradientVisitor implements Visitor {
     // this.register(ExpressionTypes.Fill, Fill.gradients);
 
     this.register(ExpressionTypes.Absolute, Absolute.gradients);
-
+    this.register(ExpressionTypes.Duplicate, Duplicate.gradients);
     this.register(ExpressionTypes.Expm1, Expm1.gradients);
     this.register(ExpressionTypes.Exponential, Exponential.gradients);
     this.register(ExpressionTypes.Log1p, Log1p.gradients);
@@ -202,6 +203,8 @@ export default class ReverseGradientVisitor implements Visitor {
     this.register(ExpressionTypes.Erfc, Erfc.gradients);
 
     this.register(ExpressionTypes.Conv2d, Conv2d.gradients);
+
+    this.register(ExpressionTypes.AddN, AddN.gradients);
   }
 
 }

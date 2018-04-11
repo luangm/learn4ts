@@ -1,6 +1,7 @@
 import Graph from "../../Graph";
 import Expression from "../Expression";
 import {ExpressionTypes} from "../ExpressionTypes";
+import {Tensor, TensorMath} from "tensor4js";
 
 /**
  * AddN node is trying to add up multiple nodes at the same time.
@@ -40,4 +41,18 @@ export default class AddN extends Expression {
     this._list = list;
   }
 
+  static evaluate(expression: Expression): Tensor {
+    let node = expression as AddN;
+    let values = node.list.map(item => item.value);
+    return TensorMath.addN(values);
+  }
+
+  static gradients(expression: Expression, grad: Expression): Expression[] {
+    let node = expression as AddN;
+    let grads: Expression[] = [];
+    for (let i = 0; i < node.list.length; i++) {
+      grads.push(grad);
+    }
+    return grads;
+  }
 }
